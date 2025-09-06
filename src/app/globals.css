@@ -1,1 +1,33 @@
 @import 'tailwindcss';
+
+/* react-quill css custom */
+.quill .ql-editor {
+  min-height: 500px;
+  max-height: 500px;
+}
+
+.quill {
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 6px;
+}
+
+.ql-toolbar {
+  border: none !important;
+  border-bottom: 1px solid rgb(204, 204, 204) !important;
+}
+
+.ql-container {
+  border: none !important;
+}
+
+.ql-code-block-container {
+  overflow-x: scroll !important;
+}
+
+.ql-code-block-container > .ql-code-block {
+  white-space: pre;
+}
+
+.content {
+  font-family: Helvetica, Arial, sans-serif;
+}
