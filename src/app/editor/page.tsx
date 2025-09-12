@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import 'react-quill-new/dist/quill.snow.css';
-
 import React, { useState } from 'react';
 
 import axios from 'axios';
@@ -17,7 +15,7 @@ export default function Page() {
 
   const [tempImages, setTempImages] = useState<string[]>([]);
 
-  const [category, setCategory] = useState('');
+  const [board, setBoard] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [thumbnail, setThumbnail] = useState<{
@@ -28,7 +26,7 @@ export default function Page() {
 
   function initializeState() {
     setTempImages([]);
-    setCategory('');
+    setBoard('');
     setTitle('');
     setDescription('');
     setThumbnail(null);
@@ -36,7 +34,7 @@ export default function Page() {
   }
 
   function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
-    setCategory(e.target.value);
+    setBoard(e.target.value);
   }
 
   async function handleClickAddThumbnail() {
@@ -97,7 +95,7 @@ export default function Page() {
       }
     }
     // 서버 저장 로직 추가
-    console.log({ title, description, content, category, images, thumbnail });
+    console.log({ board, title, thumbnail, description, content, images });
 
     initializeState();
   }
@@ -131,7 +129,7 @@ export default function Page() {
             <select
               className="p-2 border border-[rgb(204,204,204)] rounded-[5px]"
               onChange={handleSelect}
-              value={category}
+              value={board}
             >
               <option value="">카테고리</option>
               <option value="Javascript">Javascript</option>
@@ -207,7 +205,7 @@ export default function Page() {
         </div>
       </div>
       <div>
-        <Viewer category={category} title={title} content={content} />
+        <Viewer board={board} title={title} content={content} />
       </div>
     </div>
   );
