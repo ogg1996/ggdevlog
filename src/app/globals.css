@@ -20,8 +20,12 @@
   border: none !important;
 }
 
+.ql-editor > p > img {
+  padding: 10px;
+}
+
 .ql-code-block-container {
-  overflow-x: scroll !important;
+  overflow-x: auto !important;
 }
 
 .ql-code-block-container > .ql-code-block {
