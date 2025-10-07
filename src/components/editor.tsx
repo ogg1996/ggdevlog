@@ -2,17 +2,20 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Instance from '@/axios/instance';
 
-import Viewer from '@/components/viewer';
 import Image from 'next/image';
 import QuillEditor from '@/components/quill-editor';
-import { useRouter } from 'next/navigation';
 
 interface Props {
   boardList: { id: number; name: string }[];
   post?: {
+    board: {
+      id: number;
+      name: string;
+    };
     id: number;
     title: string;
     description: string;
@@ -40,6 +43,18 @@ export default function Editor({ boardList, post }: Props) {
     image_url: string;
   } | null>(null);
   const [content, setContent] = useState('');
+
+  // 수정시 데이터 로드 로직
+  useEffect(() => {
+    if (post) {
+      setTempImages(post.images);
+      setBoard(post.board.id);
+      setTitle(post.title);
+      setDescription(post.description);
+      setThumbnail(post.thumbnail);
+      setContent(post.content);
+    }
+  }, [post]);
 
   function initializeState() {
     setTempImages([]);
@@ -85,7 +100,6 @@ export default function Editor({ boardList, post }: Props) {
       await Instance.delete('/img', {
         data: [thumbnail?.image_name]
       });
-
       setThumbnail(null);
     } catch (error) {
       console.error('error: ', error);
@@ -115,15 +129,32 @@ export default function Editor({ boardList, post }: Props) {
           }
         }
 
-        await Instance.post('/post', {
-          board_id: board,
-          title,
-          thumbnail,
-          description,
-          content,
-          images
-        });
+        let res;
+
+        // 게시글 추가
+        if (!post) {
+          res = await Instance.post('/post', {
+            board_id: board,
+            title,
+            thumbnail,
+            description,
+            content,
+            images
+          });
+          // 게시글 수정
+        } else {
+          res = await Instance.put(`/post/${post.id}`, {
+            board_id: board,
+            title,
+            thumbnail,
+            description,
+            content,
+            images
+          });
+        }
+
         initializeState();
+        router.push(`/post/${res.data.post_id}`);
       } catch (error) {
         alert('작성 실패');
       }
@@ -238,24 +269,23 @@ export default function Editor({ boardList, post }: Props) {
           setTempImages={setTempImages}
         />
         <div className="flex justify-end mt-5 gap-2">
-          <button
-            onClick={handleCancel}
-            className="px-4 py-2 bg-red-400 text-white font-bold 
-            cursor-pointer rounded-lg hover:bg-red-600 transition"
-          >
-            작성취소
-          </button>
+          {!post && (
+            <button
+              onClick={handleCancel}
+              className="px-4 py-2 bg-red-400 text-white font-bold 
+              cursor-pointer rounded-lg hover:bg-red-600 transition"
+            >
+              작성취소
+            </button>
+          )}
           <button
             onClick={handleSave}
             className="px-4 py-2 bg-blue-400 text-white font-bold 
             cursor-pointer rounded-lg hover:bg-blue-600 transition"
           >
-            작성완료
+            {!post ? '작성완료' : '수정완료'}
           </button>
         </div>
-      </div>
-      <div>
-        <Viewer title={title} content={content} />
       </div>
     </div>
   );
