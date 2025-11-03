@@ -1,0 +1,54 @@
+'use client';
+
+import Header from '@/components/header';
+import Menubar from '@/components/menubar';
+import Modal from '@/components/modal';
+import useAdminStore from '@/stores/adminStore';
+import useMenubarStore from '@/stores/menubarStore';
+import useModalStore from '@/stores/modalStore';
+
+import { useEffect } from 'react';
+
+export default function ClientLayout({
+  children
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const { adminState, logout } = useAdminStore();
+  const { modalState, setModalState } = useModalStore();
+  const { isActive } = useMenubarStore();
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (modalState) return;
+      if (e.ctrlKey && e.altKey && e.shiftKey && e.key === '~') {
+        if (adminState) {
+          if (confirm('관리자 권한을 해제 하시겠습니까?')) {
+            logout();
+          }
+        } else {
+          setModalState('login');
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [adminState, modalState]);
+
+  return (
+    <div>
+      {isActive && <Menubar />}
+      <Header />
+      <Modal />
+      <main
+        className={`${
+          modalState && 'overflow-y-hidden'
+        } font-[pretendard] max-w-[700px] mx-auto
+        px-6 pt-15 py-6`}
+      >
+        {children}
+      </main>
+    </div>
+  );
+}
