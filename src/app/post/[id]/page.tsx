@@ -15,9 +15,5 @@ export default async function Page({
   const { id } = await params;
   const post = await getPost(id);
 
-  return (
-    <div className="max-w-[700px] mx-auto p-6">
-      <Viewer title={post.data.title} content={post.data.content} />
-    </div>
-  );
+  return <Viewer title={post.data.title} content={post.data.content} />;
 }

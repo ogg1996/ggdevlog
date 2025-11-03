@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -9,13 +7,15 @@ import Instance from '@/axios/instance';
 import Image from 'next/image';
 import QuillEditor from '@/components/quill-editor';
 
+interface Board {
+  id: number;
+  name: string;
+}
+
 interface Props {
   boardList: { id: number; name: string }[];
   post?: {
-    board: {
-      id: number;
-      name: string;
-    };
+    board: Board;
     id: number;
     title: string;
     description: string;
@@ -33,9 +33,10 @@ interface Props {
 export default function Editor({ boardList, post }: Props) {
   const router = useRouter();
 
-  const [tempImages, setTempImages] = useState<string[]>([]);
+  const [selectActive, setSelectActive] = useState(false);
 
-  const [board, setBoard] = useState(1);
+  const [tempImages, setTempImages] = useState<string[]>([]);
+  const [board, setBoard] = useState<Board>({ id: 1, name: 'Unspecified' });
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [thumbnail, setThumbnail] = useState<{
@@ -48,7 +49,7 @@ export default function Editor({ boardList, post }: Props) {
   useEffect(() => {
     if (post) {
       setTempImages(post.images);
-      setBoard(post.board.id);
+      setBoard({ id: post.board.id, name: post.board.name });
       setTitle(post.title);
       setDescription(post.description);
       setThumbnail(post.thumbnail);
@@ -58,15 +59,11 @@ export default function Editor({ boardList, post }: Props) {
 
   function initializeState() {
     setTempImages([]);
-    setBoard(1);
+    setBoard({ id: 1, name: 'Unspecified' });
     setTitle('');
     setDescription('');
     setThumbnail(null);
     setContent('');
-  }
-
-  function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
-    setBoard(Number(e.target.value));
   }
 
   async function handleClickAddThumbnail() {
@@ -134,7 +131,7 @@ export default function Editor({ boardList, post }: Props) {
         // 게시글 추가
         if (!post) {
           res = await Instance.post('/post', {
-            board_id: board,
+            board_id: board.id,
             title,
             thumbnail,
             description,
@@ -144,7 +141,7 @@ export default function Editor({ boardList, post }: Props) {
           // 게시글 수정
         } else {
           res = await Instance.put(`/post/${post.id}`, {
-            board_id: board,
+            board_id: board.id,
             title,
             thumbnail,
             description,
@@ -187,105 +184,124 @@ export default function Editor({ boardList, post }: Props) {
   }
 
   return (
-    <div className="max-w-[700px] mx-auto p-6">
-      <div>
-        <div className="flex gap-2">
-          <div className="grow mb-4 flex flex-col gap-2">
-            <select
-              className="p-2 border border-[rgb(204,204,204)] rounded-[5px]"
-              onChange={handleSelect}
-              value={board}
+    <div className="neoDuggeun">
+      <div className="flex gap-2 mb-4">
+        <div className="grow flex flex-col gap-2">
+          <div className="w-full relative">
+            <button
+              className={`w-full h-[42px] p-2
+              border border-[rgb(204,204,204)] rounded-[5px]
+              text-start flex items-center 
+              ${selectActive && 'rounded-[5px_5px_0_0]'}`}
+              onClick={() => {
+                setSelectActive(!selectActive);
+              }}
             >
-              {boardList.map(item => (
-                <option key={`board_${item.name}`} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-            <input
-              value={title}
-              onChange={e => {
-                setTitle(e.target.value);
-              }}
-              type="text"
-              placeholder="제목"
-              className="w-full p-2 font-bold border
-              border-[rgb(204,204,204)] rounded-[5px]"
-            />
-            <input
-              value={description}
-              onChange={e => {
-                setDescription(e.target.value);
-              }}
-              type="text"
-              placeholder="설명"
-              className="w-full p-2 font-bold border
-              border-[rgb(204,204,204)] rounded-[5px]"
-            />
+              <span className="grow">{board.name}</span>
+              <span className="text-[rgb(204,204,204)] text-[12px]">▼</span>
+            </button>
+            {selectActive && (
+              <div
+                className="w-full max-h-[169px] p-1 bg-white absolute 
+                border border-[rgb(204,204,204)] border-t-0
+                rounded-[0_0_5px_5px] overflow-y-auto"
+              >
+                {boardList.map(item => (
+                  <button
+                    key={`board_${item.name}`}
+                    className="w-full text-start p-1 hover:bg-gray-200"
+                    onClick={() => {
+                      setBoard({ id: item.id, name: item.name });
+                      setSelectActive(false);
+                    }}
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
-          {thumbnail === null ? (
-            <button
-              className="relative flex justify-center items-center w-[141px] h-[141px] 
-               border border-[rgb(204,204,204)] rounded-[5px] cursor-pointer group overflow-hidden"
-              onClick={handleClickAddThumbnail}
-            >
-              <p className="font-bold text-2xl text-[rgb(204,204,204)]">
-                썸네일
-              </p>
-              <Image
-                src="/icon-plus.png"
-                alt="background"
-                width={96}
-                height={96}
-                className="absolute z-10 opacity-0 group-hover:opacity-100"
-              />
-              <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-60 transition"></div>
-            </button>
-          ) : (
-            <button
-              className="px-1 relative flex justify-center items-center w-[141px] h-[141px] border
-               border-[rgb(204,204,204)] rounded-[5px] cursor-pointer group overflow-hidden"
-              onClick={handleClickRemoveThumbnail}
-            >
-              <img
-                src={thumbnail.image_url}
-                alt="thumbnail"
-                className="w-[100%] relative z-10 opacity-100 group-hover:opacity-60"
-              />
-              <Image
-                src="/icon-minus.png"
-                alt="background"
-                width={96}
-                height={96}
-                className="absolute z-10 opacity-0 group-hover:opacity-100"
-              />
-              <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-60 transition"></div>
-            </button>
-          )}
+          <input
+            value={title}
+            onChange={e => {
+              setTitle(e.target.value);
+            }}
+            type="text"
+            placeholder="제목"
+            className="w-full p-2 font-bold border
+              border-[rgb(204,204,204)] rounded-[5px]"
+          />
+          <input
+            value={description}
+            onChange={e => {
+              setDescription(e.target.value);
+            }}
+            type="text"
+            placeholder="설명"
+            className="w-full p-2 font-bold border
+              border-[rgb(204,204,204)] rounded-[5px]"
+          />
         </div>
-        <QuillEditor
-          content={content}
-          setContent={setContent}
-          setTempImages={setTempImages}
-        />
-        <div className="flex justify-end mt-5 gap-2">
-          {!post && (
-            <button
-              onClick={handleCancel}
-              className="px-4 py-2 bg-red-400 text-white font-bold 
-              cursor-pointer rounded-lg hover:bg-red-600 transition"
-            >
-              작성취소
-            </button>
-          )}
+        {thumbnail === null ? (
           <button
-            onClick={handleSave}
-            className="px-4 py-2 bg-blue-400 text-white font-bold 
-            cursor-pointer rounded-lg hover:bg-blue-600 transition"
+            className="relative flex justify-center items-center w-[142px] h-[142px] 
+               border border-[rgb(204,204,204)] rounded-[5px] cursor-pointer group overflow-hidden"
+            onClick={handleClickAddThumbnail}
           >
-            {!post ? '작성완료' : '수정완료'}
+            <p className="font-bold text-2xl text-[rgb(204,204,204)]">썸네일</p>
+            <Image
+              src="/icon-plus.png"
+              alt="background"
+              width={96}
+              height={96}
+              className="absolute z-10 opacity-0 group-hover:opacity-100"
+            />
+            <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-60 transition"></div>
           </button>
-        </div>
+        ) : (
+          <button
+            className="px-1 relative flex justify-center items-center w-[142px] h-[142px] border
+               border-[rgb(204,204,204)] rounded-[5px] cursor-pointer group overflow-hidden"
+            onClick={handleClickRemoveThumbnail}
+          >
+            <img
+              src={thumbnail.image_url}
+              alt="thumbnail"
+              className="w-[100%] relative z-10 opacity-100 group-hover:opacity-60"
+            />
+            <Image
+              src="/icon-minus.png"
+              alt="background"
+              width={96}
+              height={96}
+              className="absolute z-10 opacity-0 group-hover:opacity-100"
+            />
+            <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-60 transition"></div>
+          </button>
+        )}
+      </div>
+      <QuillEditor
+        content={content}
+        setContent={setContent}
+        setTempImages={setTempImages}
+      />
+      <div className="flex justify-end mt-5 gap-2">
+        {!post && (
+          <button
+            onClick={handleCancel}
+            className="w-24 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
+              cursor-pointer rounded-lg hover:bg-red-500 transition"
+          >
+            작성취소
+          </button>
+        )}
+        <button
+          onClick={handleSave}
+          className="w-24 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
+            cursor-pointer rounded-lg hover:bg-blue-600 transition"
+        >
+          {!post ? '작성완료' : '수정완료'}
+        </button>
       </div>
     </div>
   );

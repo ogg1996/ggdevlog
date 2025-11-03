@@ -1,15 +1,13 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import type { Metadata } from 'next';
+import ClientLayout from '@/app/client-layout';
+import localFont from 'next/font/local';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin']
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin']
+const dungGeunmoMo = localFont({
+  src: '../../public/fonts/DungGeunMo.woff2',
+  display: 'swap',
+  weight: '400 900',
+  variable: '--font-dungGeunMo'
 });
 
 export const metadata: Metadata = {
@@ -24,10 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${dungGeunmoMo.className}`} spellCheck="false">
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
