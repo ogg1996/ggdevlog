@@ -23,7 +23,7 @@ export default async function Page({
   console.log(posts);
 
   return (
-    <div className="max-w-[700px] mx-auto p-6">
+    <>
       {posts.data.length !== 0 ? (
         <>
           <h2 className="text-[24px] font-bold mb-4">{name}</h2>
@@ -32,6 +32,6 @@ export default async function Page({
       ) : (
         <div>데이터가 없습니다</div>
       )}
-    </div>
+    </>
   );
 }
