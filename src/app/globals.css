@@ -1,5 +1,21 @@
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'duggeunmo';
+  src: url('../../public/fonts/DungGeunMo.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'pretendard';
+  src: url('../../public/fonts/PretendardVariable.woff2') format('woff2');
+}
+
+html,
+body {
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
 /* react-quill css custom */
 .quill .ql-editor {
   min-height: 500px;
@@ -17,6 +33,8 @@
 
 .ql-container {
   border: none !important;
+  font-size: 16px !important;
+  font-family: 'pretendard' !important;
 }
 
 .ql-editor > p > img {
@@ -29,8 +47,4 @@
 
 .ql-code-block-container > .ql-code-block {
   white-space: pre;
-}
-
-.content {
-  font-family: Helvetica, Arial, sans-serif;
 }
