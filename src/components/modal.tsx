@@ -2,7 +2,6 @@
 
 import ModalBoardManagement from '@/components/modal-board-management';
 import ModalLogin from '@/components/modal-login';
-import ModalMenubar from '@/components/menubar';
 import useModalStore from '@/stores/modalStore';
 
 export default function Modal() {
@@ -11,7 +10,7 @@ export default function Modal() {
     <>
       {modalState && (
         <div
-          className="fixed w-full h-full bg-black/30 z-60 grid flex"
+          className="fixed w-full h-full bg-black/30 z-60"
           onClick={() => {
             if (modalState === 'login' || modalState === 'boardManagement')
               return;
