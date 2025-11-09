@@ -9,11 +9,11 @@ interface Props {
     };
     title: string;
     description: string;
-    thumbnail: {
+    thumbnail?: {
       image_url: string;
       image_name: string;
     };
-    created_at: Date;
+    created_at: string;
   }[];
 }
 
@@ -23,9 +23,11 @@ export default function PostList({ data }: Props) {
       {data.map(item => (
         <PostItem
           key={`post-${item.id}`}
+          id={item.id}
           title={item.title}
           description={item.description}
-          thumbnail_url={item.thumbnail.image_url}
+          createdAt={item.created_at}
+          thumbnailUrl={item.thumbnail?.image_url}
         />
       ))}
     </div>
