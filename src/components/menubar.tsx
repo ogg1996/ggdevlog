@@ -111,11 +111,11 @@ export default function Menubar() {
               <Link
                 className={`block leading-[40px] text-[18px] text-center w-full h-full
                 cursor-pointer ${
-                  pathName === `/board/${item.name}`
+                  pathName.includes(`/board/${item.name}/`)
                     ? 'bg-[#0099FF] text-white'
                     : 'hover:bg-gray-200'
                 } `}
-                href={`/board/${item.name}`}
+                href={`/board/${item.name}/1`}
               >
                 {item.name}
               </Link>
