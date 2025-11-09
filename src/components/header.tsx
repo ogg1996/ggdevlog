@@ -1,12 +1,10 @@
 'use client';
 
-import useAdminStore from '@/stores/adminStore';
 import useMenubarStore from '@/stores/menubarStore';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Header() {
-  const { adminState } = useAdminStore();
   const { setActive } = useMenubarStore();
 
   return (
