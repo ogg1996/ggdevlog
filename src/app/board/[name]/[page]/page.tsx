@@ -28,7 +28,7 @@ export default async function Page({
     <>
       <div className="h-[200px] bg-[url(/board-thumbnail.png)] bg-cover bg-center mb-7">
         <div
-          className="w-full h-full bg-[#000000cc] 
+          className="w-full h-full bg-[#00000099] 
           flex justify-center items-center"
         >
           <h2 className="font-[duggeunmo] font-bold text-[32px] text-white">

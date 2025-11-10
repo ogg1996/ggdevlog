@@ -19,7 +19,6 @@ export default function Menubar() {
   const [boardList, setBoardList] = useState<boardList | null>(null);
 
   const pathName = usePathname();
-  console.log(pathName);
 
   useEffect(() => {
     async function getBoard() {
