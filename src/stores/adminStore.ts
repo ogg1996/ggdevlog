@@ -3,16 +3,14 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface adminState {
   adminState: boolean;
-  login: () => void;
-  logout: () => void;
+  setAdminState: (state: boolean) => void;
 }
 
 const useAdminStore = create(
   persist<adminState>(
     set => ({
       adminState: false,
-      login: () => set({ adminState: true }),
-      logout: () => set({ adminState: false })
+      setAdminState: (state: boolean) => set({ adminState: state })
     }),
     {
       name: 'admin-state-storage',

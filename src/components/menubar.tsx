@@ -115,6 +115,9 @@ export default function Menubar() {
                     : 'hover:bg-gray-200'
                 } `}
                 href={`/board/${item.name}/1`}
+                onClick={() => {
+                  setActive(false);
+                }}
               >
                 {item.name}
               </Link>

@@ -1,26 +1,40 @@
+'use client';
+
 import Instance from '@/axios/instance';
 import Editor from '@/components/editor';
+import { useRouter } from 'next/navigation';
+import { use, useEffect, useState } from 'react';
 
-async function getBoard() {
-  const res = await Instance.get('/board');
+export default function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
 
-  return res.data;
-}
+  const router = useRouter();
+  const [visible, setVisible] = useState(false);
 
-async function getPost(id: string) {
-  const res = await Instance.get(`/post/${id}`);
+  const [boardList, setBoardList] = useState([]);
+  const [post, setPost] = useState();
 
-  return res.data;
-}
+  useEffect(() => {
+    async function init() {
+      const res = await Instance.get('/accessCheck', {
+        withCredentials: true
+      });
 
-export default async function Page({
-  params
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-  const board = await getBoard();
-  const post = await getPost(id);
+      if (res.data.success) {
+        const boardRes = await Instance.get('/board');
+        setBoardList(boardRes.data.data);
 
-  return <Editor boardList={board.data} post={post.data} />;
+        const postRes = await Instance.get(`/post/${id}`);
+        setPost(postRes.data.data);
+        setVisible(true);
+      } else {
+        alert(res.data.message);
+        router.back();
+      }
+    }
+
+    init();
+  }, []);
+
+  if (visible) return <Editor boardList={boardList} post={post} />;
 }

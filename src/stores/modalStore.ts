@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-type Modal = null | 'menu' | 'boardManagement' | 'login';
+type Modal = null | 'boardManagement' | 'login';
 
 interface ModalState {
   modalState: Modal;

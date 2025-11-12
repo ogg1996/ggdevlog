@@ -7,36 +7,40 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 export default function ModalLogin() {
-  const { login } = useAdminStore();
+  const { setAdminState } = useAdminStore();
   const { setModalState } = useModalStore();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [passward, setPassward] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
   async function handleLogin() {
+    if (passward.length === 0) {
+      inputRef.current?.focus();
+      setMessage('비밀번호를 입력하세요.');
+      return;
+    }
     try {
-      const res = await Instance.get('/login', {
-        params: {
-          pw: passward
-        }
+      const res = await Instance.post('/login', {
+        pw: passward
       });
 
       if (res.data.success) {
-        alert(res.data.message);
-        login();
+        alert('관리자 권한 승인');
         setModalState(null);
+        setAdminState(true);
       } else {
-        alert(res.data.message);
+        setMessage('비밀번호 불일치');
+        inputRef.current?.focus();
         setPassward('');
       }
     } catch (error) {
-      alert('서버 통신에 문제가 있습니다 다시 시도해 주세요.');
-      setPassward('');
+      setMessage('서버 오류');
     }
   }
 
@@ -65,21 +69,27 @@ export default function ModalLogin() {
           />
         </button>
       </div>
-      <input
-        value={passward}
-        ref={inputRef}
-        onChange={e => {
-          setPassward(e.target.value);
-        }}
-        type="password"
-        placeholder="비밀번호를 입력하세요.."
-        className="w-full p-2 border-b"
-        onKeyDown={e => {
-          if (e.key === 'Enter') {
-            handleLogin();
-          }
-        }}
-      />
+      <div>
+        <input
+          value={passward}
+          ref={inputRef}
+          onChange={e => {
+            setPassward(e.target.value);
+            setMessage('');
+          }}
+          type="password"
+          placeholder="비밀번호를 입력하세요.."
+          className="w-full p-2 mb-1 border-b"
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              handleLogin();
+            }
+          }}
+        />
+        <p className="h-[27px] text-center text-red-600 text-[16px]">
+          {message}
+        </p>
+      </div>
       <div className="flex gap-4">
         <button
           className="w-20 px-4 py-2 bg-blue-400 text-white font-bold 
