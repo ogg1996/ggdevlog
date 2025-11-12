@@ -1,5 +1,6 @@
 'use client';
 
+import Instance from '@/axios/instance';
 import Header from '@/components/header';
 import Menubar from '@/components/menubar';
 import Modal from '@/components/modal';
@@ -14,17 +15,26 @@ export default function ClientLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { adminState, logout } = useAdminStore();
+  const { adminState, setAdminState } = useAdminStore();
   const { modalState, setModalState } = useModalStore();
   const { isActive } = useMenubarStore();
 
   useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
+    async function handleKeyDown(e: KeyboardEvent) {
       if (modalState) return;
       if (e.ctrlKey && e.altKey && e.shiftKey && e.key === '~') {
         if (adminState) {
           if (confirm('관리자 권한을 해제 하시겠습니까?')) {
-            logout();
+            try {
+              const res = await Instance.post('/logout');
+
+              if (res.data.success) {
+                alert('관리자 권한을 해제');
+                setAdminState(false);
+              }
+            } catch {
+              alert('서버 오류');
+            }
           }
         } else {
           setModalState('login');
