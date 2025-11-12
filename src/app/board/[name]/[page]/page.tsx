@@ -1,9 +1,10 @@
 import Instance from '@/axios/instance';
 import PageNavigationBox from '@/components/page-navigation-box';
 import PostList from '@/components/post-list';
+import axios from 'axios';
 
 async function getPosts(name: string, page: number = 1, limit: number = 5) {
-  const res = await Instance.get('/post', {
+  const res = await axios.get('http://localhost:4050/post', {
     params: {
       board_name: name,
       page,

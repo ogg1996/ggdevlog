@@ -3,7 +3,7 @@ import PostEditBox from '@/components/post-edit-box';
 import Viewer from '@/components/viewer';
 
 async function getPost(id: string) {
-  const res = await Instance.get(`/post/${id}`);
+  const res = await Instance.get(`http://localhost:4050/post/${id}`);
 
   return res.data;
 }
