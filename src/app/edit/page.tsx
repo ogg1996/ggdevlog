@@ -1,14 +1,33 @@
+'use client';
+
 import Instance from '@/axios/instance';
 import Editor from '@/components/editor';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-async function getBoard() {
-  const res = await Instance.get('/board');
+export default function Page() {
+  const router = useRouter();
+  const [visible, setVisible] = useState(false);
 
-  return res.data;
-}
+  const [boardList, setBoardList] = useState([]);
 
-export default async function Page() {
-  const board = await getBoard();
+  useEffect(() => {
+    async function init() {
+      const res = await Instance.get('/accessCheck', {
+        withCredentials: true
+      });
 
-  return <Editor boardList={board.data} />;
+      if (res.data.success) {
+        const boardRes = await Instance.get('/board');
+        setBoardList(boardRes.data.data);
+        setVisible(true);
+      } else {
+        alert(res.data.message);
+        router.back();
+      }
+    }
+
+    init();
+  }, []);
+  if (visible) return <Editor boardList={boardList} />;
 }
