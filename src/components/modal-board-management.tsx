@@ -3,7 +3,7 @@
 import Instance from '@/axios/instance';
 import useModalStore from '@/stores/modalStore';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 type board = { id: number; name: string };
 type boardList = board[];
@@ -13,15 +13,11 @@ export default function ModalBoardManagement() {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [visible, setVisible] = useState(false);
+
   const [selected, setSelected] = useState<board | null>(null);
   const [input, setInput] = useState('');
   const [boardList, setBoardList] = useState<boardList | null>(null);
-
-  useEffect(() => {
-    getMenubarBoardList();
-
-    inputRef.current?.focus();
-  }, []);
 
   async function getMenubarBoardList() {
     const res = await Instance.get('/board');
@@ -29,6 +25,28 @@ export default function ModalBoardManagement() {
     const filterdData = res.data.data.filter((item: board) => item.id !== 1);
     setBoardList(filterdData);
   }
+
+  useEffect(() => {
+    async function init() {
+      const res = await Instance.get('/accessCheck', {
+        withCredentials: true
+      });
+
+      if (res.data.success) {
+        getMenubarBoardList();
+        setVisible(true);
+      } else {
+        alert(res.data.message);
+        setModalState(null);
+      }
+    }
+
+    init();
+  }, []);
+
+  useLayoutEffect(() => {
+    if (visible) inputRef.current?.focus();
+  }, [visible]);
 
   async function addBoard(name: string) {
     if (!input.trim()) {
@@ -45,7 +63,7 @@ export default function ModalBoardManagement() {
       }
       alert(res.data.message);
     } catch (error) {
-      alert('서버 오류로 인한 실패');
+      alert('서버 오류');
     }
   }
 
@@ -65,7 +83,7 @@ export default function ModalBoardManagement() {
       }
       alert(res.data.message);
     } catch (error) {
-      alert('서버 오류로 인한 실패');
+      alert('서버 오류');
     }
   }
 
@@ -77,123 +95,124 @@ export default function ModalBoardManagement() {
         setSelected(null);
         alert(res.data.message);
       } catch (error) {
-        alert('서버 오류로 인한 실패');
+        alert('서버 오류');
       }
     }
   }
 
-  return (
-    <div
-      className="justify-self-center self-center bg-white
+  if (visible)
+    return (
+      <div
+        className="justify-self-center self-center bg-white
       w-[500px] h-[600px] rounded-[8px] p-4 flex flex-col
       gap-2 z-50"
-    >
-      <div className="w-full flex justify-between">
-        <h2 className="text-[24px] font-bold">보드관리</h2>
-        <button
-          className="w-[36px] h-[36px] flex justify-center items-center
-          cursor-pointer hover:bg-gray-200 hover:rounded-[5px]"
-          onClick={() => {
-            setModalState(null);
-          }}
-        >
-          <Image
-            src="/icon-close.png"
-            alt="닫기 아이콘"
-            width={36}
-            height={36}
-          />
-        </button>
-      </div>
-      <ul
-        className="w-full grow border-2 border-[#0099FF] 
-          rounded-[5px]"
       >
-        {boardList &&
-          boardList.map(item => (
-            <li key={`board_management_${item.name}`}>
-              <button
-                className={`w-full h-full px-3 py-1 cursor-pointer 
+        <div className="w-full flex justify-between">
+          <h2 className="text-[24px] font-bold">보드관리</h2>
+          <button
+            className="w-[36px] h-[36px] flex justify-center items-center
+          cursor-pointer hover:bg-gray-200 hover:rounded-[5px]"
+            onClick={() => {
+              setModalState(null);
+            }}
+          >
+            <Image
+              src="/icon-close.png"
+              alt="닫기 아이콘"
+              width={36}
+              height={36}
+            />
+          </button>
+        </div>
+        <ul
+          className="w-full grow border-2 border-[#0099FF] 
+          rounded-[5px]"
+        >
+          {boardList &&
+            boardList.map(item => (
+              <li key={`board_management_${item.name}`}>
+                <button
+                  className={`w-full h-full px-3 py-1 cursor-pointer 
                 text-start text-[18px] text-[#0099FF] border-b nth-last-[n]:border-none
                 ${selected?.id === item.id && 'bg-[#0099FF] text-white'}`}
+                  onClick={() => {
+                    if (selected?.id === item.id) {
+                      setSelected(null);
+                    } else {
+                      setSelected(item);
+                    }
+                    setInput('');
+                    inputRef.current?.focus();
+                  }}
+                >
+                  {item.name}
+                </button>
+              </li>
+            ))}
+        </ul>
+        <div className="w-full h-[30px] text-[20px] text-[#0099FF]">
+          {selected && `Selected: ${selected.name}`}
+        </div>
+        <div className="w-full flex gap-2">
+          <input
+            className="grow p-2 font-bold disabled
+            border border-[rgb(204,204,204)] rounded-[5px]"
+            type="text"
+            inputMode="text"
+            ref={inputRef}
+            value={input}
+            placeholder="영문자만 입력할 수 있습니다.."
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                if (selected === null) {
+                  addBoard(input);
+                } else {
+                  updateBoard(selected.id, input);
+                }
+              }
+            }}
+            onChange={e => {
+              const input = e.target.value;
+              const filtered = input.replace(/[^a-zA-Z]/g, '');
+              setInput(filtered);
+            }}
+          />
+          <div className="flex gap-1">
+            {selected ? (
+              <button
+                className="w-16 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
+              cursor-pointer rounded-lg hover:bg-blue-600 transition"
                 onClick={() => {
-                  if (selected?.id === item.id) {
-                    setSelected(null);
-                  } else {
-                    setSelected(item);
-                  }
-                  setInput('');
-                  inputRef.current?.focus();
+                  updateBoard(selected.id, input);
                 }}
               >
-                {item.name}
+                수정
               </button>
-            </li>
-          ))}
-      </ul>
-      <div className="w-full h-[30px] text-[20px] text-[#0099FF]">
-        {selected && `Selected: ${selected.name}`}
-      </div>
-      <div className="w-full flex gap-2">
-        <input
-          className="grow p-2 font-bold disabled
-          border border-[rgb(204,204,204)] rounded-[5px]"
-          type="text"
-          inputMode="decimal"
-          ref={inputRef}
-          value={input}
-          placeholder="영문자만 입력할 수 있습니다.."
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              if (selected === null) {
-                addBoard(input);
-              } else {
-                updateBoard(selected.id, input);
-              }
-            }
-          }}
-          onChange={e => {
-            const input = e.target.value;
-            const filtered = input.replace(/[^a-zA-Z]/g, '');
-            setInput(filtered);
-          }}
-        />
-        <div className="flex gap-1">
-          {selected ? (
-            <button
-              className="w-16 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
+            ) : (
+              <button
+                className="w-16 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
               cursor-pointer rounded-lg hover:bg-blue-600 transition"
-              onClick={() => {
-                updateBoard(selected.id, input);
-              }}
-            >
-              수정
-            </button>
-          ) : (
-            <button
-              className="w-16 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
-              cursor-pointer rounded-lg hover:bg-blue-600 transition"
-              onClick={() => {
-                addBoard(input);
-              }}
-            >
-              추가
-            </button>
-          )}
+                onClick={() => {
+                  addBoard(input);
+                }}
+              >
+                추가
+              </button>
+            )}
 
-          {selected && (
-            <button
-              className="w-16 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
+            {selected && (
+              <button
+                className="w-16 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
               cursor-pointer rounded-lg hover:bg-red-500 transition"
-              onClick={() => {
-                deleteBoard(selected.id);
-              }}
-            >
-              삭제
-            </button>
-          )}
+                onClick={() => {
+                  deleteBoard(selected.id);
+                }}
+              >
+                삭제
+              </button>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 }
