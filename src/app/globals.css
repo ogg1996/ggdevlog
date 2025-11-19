@@ -17,6 +17,10 @@ body {
 }
 
 /* react-quill css custom */
+.viewer img {
+  cursor: default !important;
+}
+
 .quill .ql-editor {
   min-height: 500px;
 }
