@@ -1,9 +1,12 @@
-import Instance from '@/axios/instance';
-import PageNavigationBox from '@/components/page-navigation-box';
-import PostList from '@/components/post-list';
+import PageNavigationBox from '@/components/page/board/page-navigation-box';
+import PostList from '@/components/page/board/post-list';
 import axios from 'axios';
 
-async function getPosts(name: string, page: number = 1, limit: number = 5) {
+async function getPosts(
+  name: string = 'all',
+  page: number = 1,
+  limit: number = 5
+) {
   const res = await axios.get('http://localhost:4050/post', {
     params: {
       board_name: name,
@@ -47,7 +50,9 @@ export default async function Page({
           />
         </>
       ) : (
-        <div>등록된 게시글이 없습니다</div>
+        <div className="text-center text-[20px] font-bold">
+          포스트가 없습니다.
+        </div>
       )}
     </>
   );
