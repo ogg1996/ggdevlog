@@ -14,18 +14,15 @@ export default function Introduce() {
   const [originalImages, setOriginalImages] = useState<string[]>([]);
 
   useEffect(() => {
-    async function getIntroduce() {
+    async function init() {
       const res = await Instance.get('/introduce');
       setOriginalImages(res.data.images);
       setOriginalContent(res.data.content);
     }
 
-    getIntroduce();
+    init();
   }, []);
 
-  useEffect(() => {
-    console.log(originalContent, originalImages);
-  }, [originalContent, originalImages]);
   return (
     <div>
       <div
