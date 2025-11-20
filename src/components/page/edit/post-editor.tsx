@@ -150,6 +150,8 @@ export default function PostEditor({ boardList, post }: Props) {
           });
         }
 
+        await Instance.post('/activity');
+
         initializeState();
         router.push(`/post/${res.data.post_id}`);
       } catch (error) {
