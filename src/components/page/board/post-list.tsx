@@ -1,4 +1,4 @@
-import PostItem from '@/components/post-item';
+import PostItem from '@/components/page/board/post-item';
 
 interface Props {
   data: {

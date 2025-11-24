@@ -1,6 +1,6 @@
 import Instance from '@/axios/instance';
-import PostEditBox from '@/components/post-edit-box';
-import Viewer from '@/components/viewer';
+import PostEditBox from '@/components/page/post/post-edit-box';
+import Viewer from '@/components/common/viewer';
 
 async function getPost(id: string) {
   const res = await Instance.get(`http://localhost:4050/post/${id}`);

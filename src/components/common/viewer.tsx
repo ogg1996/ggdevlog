@@ -4,7 +4,7 @@ interface Props {
 
 export default function Viewer({ content }: Props) {
   return (
-    <div className="ql-container ql-snow">
+    <div className="viewer ql-container ql-snow">
       <div
         className="ql-editor"
         dangerouslySetInnerHTML={{ __html: content }}

@@ -1,7 +1,7 @@
 'use client';
 
 import Instance from '@/axios/instance';
-import Editor from '@/components/editor';
+import PostEditor from '@/components/page/edit/post-editor';
 import { useRouter } from 'next/navigation';
 import { use, useEffect, useState } from 'react';
 
@@ -36,5 +36,5 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     init();
   }, []);
 
-  if (visible) return <Editor boardList={boardList} post={post} />;
+  if (visible) return <PostEditor boardList={boardList} post={post} />;
 }

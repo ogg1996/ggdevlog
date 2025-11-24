@@ -1,7 +1,7 @@
 'use client';
 
-import ModalBoardManagement from '@/components/modal-board-management';
-import ModalLogin from '@/components/modal-login';
+import ModalBoardManagement from '@/components/layout/modal-board-management';
+import ModalLogin from '@/components/layout/modal-login';
 import useModalStore from '@/stores/modalStore';
 
 export default function Modal() {

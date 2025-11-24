@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Instance from '@/axios/instance';
 
 import Image from 'next/image';
-import QuillEditor from '@/components/quill-editor';
+import QuillEditor from '@/components/common/quill-editor';
 
 interface Board {
   id: number;
@@ -30,7 +30,7 @@ interface Props {
   };
 }
 
-export default function Editor({ boardList, post }: Props) {
+export default function PostEditor({ boardList, post }: Props) {
   const router = useRouter();
 
   const [selectActive, setSelectActive] = useState(false);
@@ -149,6 +149,8 @@ export default function Editor({ boardList, post }: Props) {
             images
           });
         }
+
+        await Instance.post('/activity');
 
         initializeState();
         router.push(`/post/${res.data.post_id}`);

@@ -1,9 +1,9 @@
 'use client';
 
 import Instance from '@/axios/instance';
-import Header from '@/components/header';
-import Menubar from '@/components/menubar';
-import Modal from '@/components/modal';
+import Header from '@/components/layout/header';
+import Menubar from '@/components/layout/menubar';
+import Modal from '@/components/layout/modal';
 import useAdminStore from '@/stores/adminStore';
 import useMenubarStore from '@/stores/menubarStore';
 import useModalStore from '@/stores/modalStore';
