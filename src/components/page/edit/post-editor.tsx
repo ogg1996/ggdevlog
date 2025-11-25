@@ -204,9 +204,9 @@ export default function PostEditor({ boardList, post }: Props) {
             </button>
             {selectActive && (
               <div
-                className="w-full max-h-[169px] p-1 bg-white absolute 
+                className="w-full max-h-[137px] p-1 bg-white absolute 
                 border border-[rgb(204,204,204)] border-t-0
-                rounded-[0_0_5px_5px] overflow-y-auto"
+                rounded-[0_0_5px_5px] overflow-y-auto z-40"
               >
                 {boardList.map(item => (
                   <button
