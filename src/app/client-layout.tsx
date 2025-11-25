@@ -46,15 +46,21 @@ export default function ClientLayout({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [adminState, modalState]);
 
+  useEffect(() => {
+    if (modalState) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
+    }
+  }, [modalState]);
+
   return (
     <div>
       {isActive && <Menubar />}
       <Header />
       <Modal />
       <main
-        className={`${
-          modalState && 'overflow-y-hidden'
-        } font-[pretendard] max-w-[700px] mx-auto
+        className={`font-[pretendard] max-w-[700px] mx-auto
         px-6 pt-15 py-6`}
       >
         {children}
