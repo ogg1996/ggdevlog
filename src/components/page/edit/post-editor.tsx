@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Instance from '@/axios/instance';
+import Instance from '@/api/instance';
 
 import Image from 'next/image';
 import QuillEditor from '@/components/common/quill-editor';

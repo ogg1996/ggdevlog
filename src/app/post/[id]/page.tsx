@@ -1,4 +1,4 @@
-import Instance from '@/axios/instance';
+import Instance from '@/api/instance';
 import PostEditBox from '@/components/page/post/post-edit-box';
 import Viewer from '@/components/common/viewer';
 

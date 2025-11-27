@@ -1,6 +1,6 @@
 'use client';
 
-import Instance from '@/axios/instance';
+import Instance from '@/api/instance';
 import Header from '@/components/layout/header';
 import Menubar from '@/components/layout/menubar';
 import Modal from '@/components/layout/modal';

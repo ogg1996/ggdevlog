@@ -1,6 +1,6 @@
 'use client';
 
-import Instance from '@/axios/instance';
+import Instance from '@/api/instance';
 import useAdminStore from '@/stores/adminStore';
 import Image from 'next/image';
 import Link from 'next/link';

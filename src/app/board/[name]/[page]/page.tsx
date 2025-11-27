@@ -51,7 +51,7 @@ export default async function Page({
         </>
       ) : (
         <div className="text-center text-[20px] font-bold">
-          포스트가 없습니다.
+          작성된 포스트가 없습니다.
         </div>
       )}
     </>

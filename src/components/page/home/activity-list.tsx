@@ -1,6 +1,6 @@
 'use client';
 
-import Instance from '@/axios/instance';
+import Instance from '@/api/instance';
 import ActivityItem from '@/components/page/home/activity-item';
 import { useEffect, useRef, useState } from 'react';
 

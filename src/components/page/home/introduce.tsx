@@ -1,6 +1,6 @@
 'use client';
 
-import Instance from '@/axios/instance';
+import Instance from '@/api/instance';
 import IntroduceEditor from '@/components/page/home/introduce-editor';
 import IntroduceViewer from '@/components/page/home/introduce-viewer';
 import useAdminStore from '@/stores/adminStore';
