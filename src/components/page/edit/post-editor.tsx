@@ -151,9 +151,8 @@ export default function PostEditor({ boardList, post }: Props) {
           });
           myRevalidateTag(`post-${post.id}`);
         }
-
+        myRevalidateTag('posts');
         await Instance.post('/activity');
-
         initializeState();
         router.push(`/post/${res.data.post_id}`);
       } catch (error) {
