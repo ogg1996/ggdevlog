@@ -1,22 +1,6 @@
+import { getPosts } from '@/api/fetch';
 import PageNavigationBox from '@/components/page/board/page-navigation-box';
 import PostList from '@/components/page/board/post-list';
-import axios from 'axios';
-
-async function getPosts(
-  name: string = 'all',
-  page: number = 1,
-  limit: number = 5
-) {
-  const res = await axios.get('http://localhost:4050/post', {
-    params: {
-      board_name: name,
-      page,
-      limit
-    }
-  });
-
-  return res.data;
-}
 
 export default async function Page({
   params
@@ -40,7 +24,7 @@ export default async function Page({
           </h2>
         </div>
       </div>
-      {posts.data.length !== 0 ? (
+      {posts.length !== 0 ? (
         <>
           <PostList data={posts.data} />
           <PageNavigationBox
@@ -51,7 +35,7 @@ export default async function Page({
         </>
       ) : (
         <div className="text-center text-[20px] font-bold">
-          포스트가 없습니다.
+          작성된 포스트가 없습니다.
         </div>
       )}
     </>

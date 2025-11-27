@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Instance from '@/axios/instance';
+import Instance from '@/api/instance';
 
 import Image from 'next/image';
 import QuillEditor from '@/components/common/quill-editor';
+import { myRevalidateTag } from '@/api/revalidate';
 
 interface Board {
   id: number;
@@ -148,10 +149,10 @@ export default function PostEditor({ boardList, post }: Props) {
             content,
             images
           });
+          myRevalidateTag(`post-${post.id}`);
         }
-
+        myRevalidateTag('posts');
         await Instance.post('/activity');
-
         initializeState();
         router.push(`/post/${res.data.post_id}`);
       } catch (error) {

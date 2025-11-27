@@ -1,6 +1,6 @@
 'use client';
 
-import Instance from '@/axios/instance';
+import Instance from '@/api/instance';
 import QuillEditor from '@/components/common/quill-editor';
 import { useEffect, useState } from 'react';
 

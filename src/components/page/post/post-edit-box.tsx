@@ -1,6 +1,7 @@
 'use client';
 
-import Instance from '@/axios/instance';
+import Instance from '@/api/instance';
+import { myRevalidateTag } from '@/api/revalidate';
 import useAdminStore from '@/stores/adminStore';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,6 +17,7 @@ export default function PostEditBox({ id }: { id: string }) {
         const res = await Instance.delete(`/post/${id}`);
         if (res.data.success) {
           alert(res.data.message);
+          myRevalidateTag('posts');
           router.push(`/board/${res.data.board_name}/1`);
         } else {
           alert(res.data.message);

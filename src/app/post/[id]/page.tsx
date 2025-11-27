@@ -1,12 +1,6 @@
-import Instance from '@/axios/instance';
 import PostEditBox from '@/components/page/post/post-edit-box';
 import Viewer from '@/components/common/viewer';
-
-async function getPost(id: string) {
-  const res = await Instance.get(`http://localhost:4050/post/${id}`);
-
-  return res.data;
-}
+import { getPost } from '@/api/fetch';
 
 export default async function Page({
   params
@@ -16,7 +10,7 @@ export default async function Page({
   const { id } = await params;
   const post = await getPost(id);
 
-  const createdAtToDate = new Date(post.data.created_at);
+  const createdAtToDate = new Date(post.created_at);
   const year = createdAtToDate.getFullYear();
   const month = createdAtToDate.getMonth() + 1;
   const date = createdAtToDate.getDate();
@@ -27,7 +21,7 @@ export default async function Page({
         className="h-[200px] bg-cover bg-center mb-7"
         style={{
           backgroundImage: `url(${
-            post.data.thumbnail?.image_url || '/post-thumbnail.png'
+            post.thumbnail?.image_url || '/post-thumbnail.png'
           })`
         }}
       >
@@ -40,7 +34,7 @@ export default async function Page({
             className="font-[duggeunmo] font-bold
             text-[24px] text-center text-white self-center"
           >
-            {post.data.title}
+            {post.title}
           </h2>
           <span
             className="font-[duggeunmo] 
@@ -50,7 +44,7 @@ export default async function Page({
           </span>
         </div>
       </div>
-      <Viewer content={post.data.content} />
+      <Viewer content={post.content} />
     </>
   );
 }
