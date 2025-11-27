@@ -1,6 +1,7 @@
 'use client';
 
-import Instance from '@/axios/instance';
+import { getBoard } from '@/api/fetch';
+import Instance from '@/api/instance';
 import PostEditor from '@/components/page/edit/post-editor';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -18,8 +19,8 @@ export default function Page() {
       });
 
       if (res.data.success) {
-        const boardRes = await Instance.get('/board');
-        setBoardList(boardRes.data.data);
+        const boardData = await getBoard();
+        setBoardList(boardData);
         setVisible(true);
       } else {
         alert(res.data.message);

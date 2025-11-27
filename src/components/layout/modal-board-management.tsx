@@ -1,6 +1,8 @@
 'use client';
 
-import Instance from '@/axios/instance';
+import { getBoard } from '@/api/fetch';
+import Instance from '@/api/instance';
+import { myRevalidateTag } from '@/api/revalidate';
 import useModalStore from '@/stores/modalStore';
 import Image from 'next/image';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
@@ -20,9 +22,9 @@ export default function ModalBoardManagement() {
   const [boardList, setBoardList] = useState<boardList | null>(null);
 
   async function getMenubarBoardList() {
-    const res = await Instance.get('/board');
+    const data = await getBoard();
 
-    const filterdData = res.data.data.filter((item: board) => item.id !== 1);
+    const filterdData = data.filter((item: board) => item.id !== 1);
     setBoardList(filterdData);
   }
 
@@ -104,8 +106,8 @@ export default function ModalBoardManagement() {
     return (
       <div
         className="justify-self-center self-center bg-white
-      w-[500px] h-[600px] rounded-[8px] p-4 flex flex-col
-      gap-2 z-50"
+        w-[500px] h-[600px] rounded-[8px] p-4 flex flex-col
+        gap-2 z-50"
       >
         <div className="w-full flex justify-between">
           <h2 className="text-[24px] font-bold">보드관리</h2>
@@ -181,7 +183,7 @@ export default function ModalBoardManagement() {
             {selected ? (
               <button
                 className="w-16 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
-              cursor-pointer rounded-lg hover:bg-blue-600 transition"
+                cursor-pointer rounded-lg hover:bg-blue-600 transition"
                 onClick={() => {
                   updateBoard(selected.id, input);
                 }}
@@ -191,7 +193,7 @@ export default function ModalBoardManagement() {
             ) : (
               <button
                 className="w-16 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
-              cursor-pointer rounded-lg hover:bg-blue-600 transition"
+                cursor-pointer rounded-lg hover:bg-blue-600 transition"
                 onClick={() => {
                   addBoard(input);
                 }}
@@ -203,7 +205,7 @@ export default function ModalBoardManagement() {
             {selected && (
               <button
                 className="w-16 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
-              cursor-pointer rounded-lg hover:bg-red-500 transition"
+                cursor-pointer rounded-lg hover:bg-red-500 transition"
                 onClick={() => {
                   deleteBoard(selected.id);
                 }}

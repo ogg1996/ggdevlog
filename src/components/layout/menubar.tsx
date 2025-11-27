@@ -1,6 +1,6 @@
 'use client';
 
-import Instance from '@/axios/instance';
+import { getBoard } from '@/api/fetch';
 import useAdminStore from '@/stores/adminStore';
 import useMenubarStore from '@/stores/menubarStore';
 import useModalStore from '@/stores/modalStore';
@@ -21,12 +21,12 @@ export default function Menubar() {
   const pathName = usePathname();
 
   useEffect(() => {
-    async function getBoard() {
-      const res = await Instance.get('/board');
-      setBoardList(res.data.data);
+    async function init() {
+      const data = await getBoard();
+      setBoardList(data);
     }
 
-    getBoard();
+    init();
   }, []);
 
   return (
