@@ -6,6 +6,7 @@ import Instance from '@/api/instance';
 
 import Image from 'next/image';
 import QuillEditor from '@/components/common/quill-editor';
+import { myRevalidateTag } from '@/api/revalidate';
 
 interface Board {
   id: number;
@@ -148,6 +149,7 @@ export default function PostEditor({ boardList, post }: Props) {
             content,
             images
           });
+          myRevalidateTag(`post-${post.id}`);
         }
 
         await Instance.post('/activity');
