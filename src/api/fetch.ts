@@ -1,5 +1,7 @@
+const api_url = process.env.NEXT_PUBLIC_API_URL;
+
 export async function getBoard() {
-  const res = await fetch(`http://localhost:4050/board`, { cache: 'no-store' })
+  const res = await fetch(`${api_url}/board`, { cache: 'no-store' })
     .then(res => res.json())
     .then(res => res.data);
 
@@ -7,7 +9,7 @@ export async function getBoard() {
 }
 
 export async function getPost(id: string) {
-  const res = await fetch(`http://localhost:4050/post/${id}`, {
+  const res = await fetch(`${api_url}/post/${id}`, {
     next: {
       tags: [`post-${id}`],
       revalidate: false
@@ -32,7 +34,7 @@ export async function getPosts(
 
   const queryString = new URLSearchParams(params).toString();
 
-  const res = await fetch(`http://localhost:4050/post?${queryString}`, {
+  const res = await fetch(`${api_url}/post?${queryString}`, {
     next: {
       tags: [`posts`],
       revalidate: false
