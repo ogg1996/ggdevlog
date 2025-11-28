@@ -14,16 +14,16 @@ export default function Page() {
 
   useEffect(() => {
     async function init() {
-      const res = await Instance.get('/accessCheck', {
+      const access = await Instance.get('/accessCheck', {
         withCredentials: true
-      });
+      }).then(res => res.data.success);
 
-      if (res.data.success) {
+      if (access) {
         const boardData = await getBoard();
         setBoardList(boardData);
         setVisible(true);
       } else {
-        alert(res.data.message);
+        alert('접근 권한이 없습니다.');
         router.back();
       }
     }

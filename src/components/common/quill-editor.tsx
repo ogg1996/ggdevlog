@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
@@ -7,6 +6,7 @@ import 'react-quill-new/dist/quill.snow.css';
 import { useMemo, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
+import Instance from '@/api/instance';
 
 interface Props {
   content: string;
@@ -70,38 +70,47 @@ export default function QuillEditor({
     'background'
   ];
 
-  function handleClickAddImage() {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
+  async function handleClickAddImage() {
+    try {
+      const access = await Instance.get('/accessCheck', {
+        withCredentials: true
+      }).then(res => res.data.success);
 
-    input.addEventListener('change', async () => {
-      if (input.files !== null) {
-        const file = input.files[0];
-        const formData = new FormData();
-        formData.append('img', file);
+      if (access) {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
 
-        try {
-          const response = await axios.post(
-            'http://localhost:4050/img',
-            formData
-          );
+        input.addEventListener('change', async () => {
+          if (input.files !== null) {
+            const file = input.files[0];
+            const formData = new FormData();
+            formData.append('img', file);
 
-          const IMG_NAME = response.data.img_name;
-          const IMG_URL = response.data.img_url;
+            try {
+              const res = await Instance.post('/img', formData);
 
-          setTempImages((prev: any) => [...prev, IMG_NAME]);
+              const IMG_NAME = res.data.img_name;
+              const IMG_URL = res.data.img_url;
 
-          const editor = quillRef.current.getEditor();
-          const range = editor.getSelection();
-          editor.insertEmbed(range.index, 'image', IMG_URL);
-          editor.setSelection(range.index + 1);
-        } catch (error) {
-          console.error('error: ', error);
-        }
+              setTempImages((prev: any) => [...prev, IMG_NAME]);
+
+              const editor = quillRef.current.getEditor();
+              const range = editor.getSelection();
+              editor.insertEmbed(range.index, 'image', IMG_URL);
+              editor.setSelection(range.index + 1);
+            } catch {
+              alert('서버 오류');
+            }
+          }
+        });
+      } else {
+        alert('접근 권한이 없습니다.');
       }
-    });
+    } catch {
+      alert('서버 오류');
+    }
   }
 
   return (

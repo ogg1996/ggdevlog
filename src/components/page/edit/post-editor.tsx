@@ -68,39 +68,59 @@ export default function PostEditor({ boardList, post }: Props) {
   }
 
   async function handleClickAddThumbnail() {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
+    try {
+      const access = await Instance.get('/accessCheck', {
+        withCredentials: true
+      }).then(res => res.data.success);
 
-    input.addEventListener('change', async () => {
-      if (input.files !== null) {
-        const file = input.files[0];
-        const formData = new FormData();
-        formData.append('img', file);
+      if (access) {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
 
-        try {
-          const response = await Instance.post('/img', formData);
+        input.addEventListener('change', async () => {
+          if (input.files !== null) {
+            const file = input.files[0];
+            const formData = new FormData();
+            formData.append('img', file);
 
-          const IMG_NAME = response.data.img_name;
-          const IMG_URL = response.data.img_url;
+            try {
+              const res = await Instance.post('/img', formData);
 
-          setThumbnail({ image_name: IMG_NAME, image_url: IMG_URL });
-        } catch (error) {
-          console.error('error: ', error);
-        }
+              const IMG_NAME = res.data.img_name;
+              const IMG_URL = res.data.img_url;
+
+              setThumbnail({ image_name: IMG_NAME, image_url: IMG_URL });
+            } catch {
+              alert('서버 오류');
+            }
+          }
+        });
+      } else {
+        alert('접근 권한이 없습니다.');
       }
-    });
+    } catch {
+      alert('서버 오류');
+    }
   }
 
   async function handleClickRemoveThumbnail() {
     try {
-      await Instance.delete('/img', {
-        data: [thumbnail?.image_name]
-      });
-      setThumbnail(null);
-    } catch (error) {
-      console.error('error: ', error);
+      const access = await Instance.get('/accessCheck', {
+        withCredentials: true
+      }).then(res => res.data.success);
+
+      if (access) {
+        await Instance.delete('/img', {
+          data: [thumbnail?.image_name]
+        });
+        setThumbnail(null);
+      } else {
+        alert('접근 권한이 없습니다.');
+      }
+    } catch {
+      alert('서버 오류');
     }
   }
 
@@ -116,45 +136,53 @@ export default function PostEditor({ boardList, post }: Props) {
       }
 
       try {
-        const images: string[] = [];
-        for (const image of tempImages) {
-          if (!content.includes(image)) {
-            await Instance.delete('/img', {
-              data: [image]
-            });
-          } else {
-            images.push(image);
+        const access = await Instance.get('/accessCheck', {
+          withCredentials: true
+        }).then(res => res.data.success);
+
+        if (access) {
+          const images: string[] = [];
+          for (const image of tempImages) {
+            if (!content.includes(image)) {
+              await Instance.delete('/img', {
+                data: [image]
+              });
+            } else {
+              images.push(image);
+            }
           }
-        }
 
-        let res;
+          let res;
 
-        // 게시글 추가
-        if (!post) {
-          res = await Instance.post('/post', {
-            board_id: board.id,
-            title,
-            thumbnail,
-            description,
-            content,
-            images
-          });
-          // 게시글 수정
+          // 게시글 추가
+          if (!post) {
+            res = await Instance.post('/post', {
+              board_id: board.id,
+              title,
+              thumbnail,
+              description,
+              content,
+              images
+            });
+            // 게시글 수정
+          } else {
+            res = await Instance.put(`/post/${post.id}`, {
+              board_id: board.id,
+              title,
+              thumbnail,
+              description,
+              content,
+              images
+            });
+            myRevalidateTag(`post-${post.id}`);
+          }
+          myRevalidateTag('posts');
+          await Instance.post('/activity');
+          initializeState();
+          router.push(`/post/${res.data.post_id}`);
         } else {
-          res = await Instance.put(`/post/${post.id}`, {
-            board_id: board.id,
-            title,
-            thumbnail,
-            description,
-            content,
-            images
-          });
-          myRevalidateTag(`post-${post.id}`);
+          alert('접근 권한이 없습니다.');
         }
-        myRevalidateTag('posts');
-        await Instance.post('/activity');
-        initializeState();
-        router.push(`/post/${res.data.post_id}`);
       } catch (error) {
         alert('작성 실패');
       }

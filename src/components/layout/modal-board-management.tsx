@@ -30,15 +30,15 @@ export default function ModalBoardManagement() {
 
   useEffect(() => {
     async function init() {
-      const res = await Instance.get('/accessCheck', {
+      const access = await Instance.get('/accessCheck', {
         withCredentials: true
-      });
+      }).then(res => res.data.success);
 
-      if (res.data.success) {
+      if (access) {
         getMenubarBoardList();
         setVisible(true);
       } else {
-        alert(res.data.message);
+        alert('접근권한이 없습니다.');
         setModalState(null);
       }
     }
@@ -56,14 +56,22 @@ export default function ModalBoardManagement() {
       return;
     }
     try {
-      const res = await Instance.post('/board', {
-        name
-      });
-      if (res.data.success) {
-        setInput('');
-        getMenubarBoardList();
+      const access = await Instance.get('/accessCheck', {
+        withCredentials: true
+      }).then(res => res.data.success);
+
+      if (access) {
+        const res = await Instance.post('/board', {
+          name
+        });
+        if (res.data.success) {
+          setInput('');
+          getMenubarBoardList();
+        }
+        alert(res.data.message);
+      } else {
+        alert('접근 권한이 없습니다.');
       }
-      alert(res.data.message);
     } catch (error) {
       alert('서버 오류');
     }
@@ -75,15 +83,24 @@ export default function ModalBoardManagement() {
       return;
     }
     try {
-      const res = await Instance.put(`/board/${id}`, {
-        name
-      });
-      if (res.data.success) {
-        setInput('');
-        setSelected(null);
-        getMenubarBoardList();
+      const access = await Instance.get('/accessCheck', {
+        withCredentials: true
+      }).then(res => res.data.success);
+
+      if (access) {
+        const res = await Instance.put(`/board/${id}`, {
+          name
+        });
+
+        if (res.data.success) {
+          setInput('');
+          setSelected(null);
+          getMenubarBoardList();
+        }
+        alert(res.data.message);
+      } else {
+        alert('접근 권한이 없습니다.');
       }
-      alert(res.data.message);
     } catch (error) {
       alert('서버 오류');
     }
@@ -92,10 +109,18 @@ export default function ModalBoardManagement() {
   async function deleteBoard(id: number) {
     if (confirm('정말로 삭제하시겠습니까?')) {
       try {
-        const res = await Instance.delete(`/board/${id}`);
-        getMenubarBoardList();
-        setSelected(null);
-        alert(res.data.message);
+        const access = await Instance.get('/accessCheck', {
+          withCredentials: true
+        }).then(res => res.data.success);
+
+        if (access) {
+          const res = await Instance.delete(`/board/${id}`);
+          getMenubarBoardList();
+          setSelected(null);
+          alert(res.data.message);
+        } else {
+          alert('접근 권한이 없습니다.');
+        }
       } catch (error) {
         alert('서버 오류');
       }
