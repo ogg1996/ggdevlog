@@ -14,16 +14,24 @@ export default function PostEditBox({ id }: { id: string }) {
   async function handleDelete() {
     if (confirm('정말로 게시글을 삭제 하시겠습니까?')) {
       try {
-        const res = await Instance.delete(`/post/${id}`);
-        if (res.data.success) {
-          alert(res.data.message);
-          myRevalidateTag('posts');
-          router.push(`/board/${res.data.board_name}/1`);
+        const access = await Instance.get('/accessCheck', {
+          withCredentials: true
+        }).then(res => res.data.success);
+
+        if (access) {
+          const res = await Instance.delete(`/post/${id}`);
+          if (res.data.success) {
+            alert(res.data.message);
+            myRevalidateTag('posts');
+            router.push(`/board/${res.data.board_name}/1`);
+          } else {
+            alert(res.data.message);
+          }
         } else {
-          alert(res.data.message);
+          alert('접근 권한이 없습니다.');
         }
-      } catch (e) {
-        alert('서버 오류로 인한 실패');
+      } catch {
+        alert('서버 오류');
       }
     }
   }

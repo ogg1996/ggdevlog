@@ -2,7 +2,7 @@
 
 import Instance from '@/api/instance';
 import QuillEditor from '@/components/common/quill-editor';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface Props {
   originalContent: string;
@@ -24,27 +24,36 @@ export default function IntroduceEditor({
 
   async function handleSave() {
     try {
-      const images: string[] = [];
-      if (tempImages.length !== 0) {
-        const deleteImages: string[] = [];
-        for (const image of tempImages) {
-          if (!content.includes(image)) {
-            deleteImages.push(image);
-          } else {
-            images.push(image);
+      const access = await Instance.get('/accessCheck', {
+        withCredentials: true
+      }).then(res => res.data.success);
+
+      if (access) {
+        const images: string[] = [];
+        if (tempImages.length !== 0) {
+          const deleteImages: string[] = [];
+          for (const image of tempImages) {
+            if (!content.includes(image)) {
+              deleteImages.push(image);
+            } else {
+              images.push(image);
+            }
           }
+          await Instance.delete('/img', {
+            data: deleteImages
+          });
         }
-        await Instance.delete('/img', {
-          data: deleteImages
+        const res = await Instance.put('/introduce', {
+          content,
+          images
         });
+
+        setOriginalContent(res.data.content);
+        setOriginalImages(res.data.images);
+        setEdit(false);
+      } else {
+        alert('접근 권한이 없습니다.');
       }
-      const res = await Instance.put('/introduce', {
-        content,
-        images
-      });
-      setOriginalContent(res.data.content);
-      setOriginalImages(res.data.images);
-      setEdit(false);
     } catch (error) {
       alert('서버 오류');
     }
