@@ -26,7 +26,7 @@ export default function ModalLogin() {
       return;
     }
     try {
-      const res = await Instance.post('/login', {
+      const res = await Instance.post('/auth/login', {
         pw: passward
       });
 

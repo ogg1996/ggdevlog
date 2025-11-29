@@ -30,7 +30,7 @@ export default function ModalBoardManagement() {
 
   useEffect(() => {
     async function init() {
-      const access = await Instance.get('/accessCheck', {
+      const access = await Instance.get('/auth/accessCheck', {
         withCredentials: true
       }).then(res => res.data.success);
 
@@ -56,7 +56,7 @@ export default function ModalBoardManagement() {
       return;
     }
     try {
-      const access = await Instance.get('/accessCheck', {
+      const access = await Instance.get('/auth/accessCheck', {
         withCredentials: true
       }).then(res => res.data.success);
 
@@ -83,7 +83,7 @@ export default function ModalBoardManagement() {
       return;
     }
     try {
-      const access = await Instance.get('/accessCheck', {
+      const access = await Instance.get('/auth/accessCheck', {
         withCredentials: true
       }).then(res => res.data.success);
 
@@ -109,7 +109,7 @@ export default function ModalBoardManagement() {
   async function deleteBoard(id: number) {
     if (confirm('정말로 삭제하시겠습니까?')) {
       try {
-        const access = await Instance.get('/accessCheck', {
+        const access = await Instance.get('/auth/accessCheck', {
           withCredentials: true
         }).then(res => res.data.success);
 

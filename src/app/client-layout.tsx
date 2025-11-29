@@ -26,7 +26,7 @@ export default function ClientLayout({
         if (adminState) {
           if (confirm('관리자 권한을 해제 하시겠습니까?')) {
             try {
-              const res = await Instance.post('/logout');
+              const res = await Instance.post('/auth/logout');
 
               if (res.data.success) {
                 alert('관리자 권한을 해제');

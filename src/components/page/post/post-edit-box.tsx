@@ -14,7 +14,7 @@ export default function PostEditBox({ id }: { id: string }) {
   async function handleDelete() {
     if (confirm('정말로 게시글을 삭제 하시겠습니까?')) {
       try {
-        const access = await Instance.get('/accessCheck', {
+        const access = await Instance.get('/auth/accessCheck', {
           withCredentials: true
         }).then(res => res.data.success);
 
