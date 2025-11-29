@@ -72,7 +72,7 @@ export default function QuillEditor({
 
   async function handleClickAddImage() {
     try {
-      const access = await Instance.get('/accessCheck', {
+      const access = await Instance.get('/auth/accessCheck', {
         withCredentials: true
       }).then(res => res.data.success);
 

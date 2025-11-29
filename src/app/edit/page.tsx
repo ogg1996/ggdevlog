@@ -14,7 +14,7 @@ export default function Page() {
 
   useEffect(() => {
     async function init() {
-      const access = await Instance.get('/accessCheck', {
+      const access = await Instance.get('/auth/accessCheck', {
         withCredentials: true
       }).then(res => res.data.success);
 

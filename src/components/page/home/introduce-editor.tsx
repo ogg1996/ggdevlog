@@ -2,7 +2,7 @@
 
 import Instance from '@/api/instance';
 import QuillEditor from '@/components/common/quill-editor';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props {
   originalContent: string;
@@ -22,9 +22,29 @@ export default function IntroduceEditor({
   const [tempImages, setTempImages] = useState<string[]>(originalImages);
   const [content, setContent] = useState(originalContent);
 
+  useEffect(() => {
+    async function init() {
+      try {
+        const access = await Instance.get('/auth/accessCheck', {
+          withCredentials: true
+        }).then(res => res.data.success);
+
+        if (access) {
+        } else {
+          alert('접근 권한이 없습니다.');
+          setEdit(false);
+        }
+      } catch (error) {
+        alert('서버 오류');
+      }
+    }
+
+    init();
+  }, []);
+
   async function handleSave() {
     try {
-      const access = await Instance.get('/accessCheck', {
+      const access = await Instance.get('/auth/accessCheck', {
         withCredentials: true
       }).then(res => res.data.success);
 
@@ -48,6 +68,7 @@ export default function IntroduceEditor({
           images
         });
 
+        alert('수정 완료');
         setOriginalContent(res.data.content);
         setOriginalImages(res.data.images);
         setEdit(false);

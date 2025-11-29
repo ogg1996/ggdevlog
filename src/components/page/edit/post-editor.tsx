@@ -69,7 +69,7 @@ export default function PostEditor({ boardList, post }: Props) {
 
   async function handleClickAddThumbnail() {
     try {
-      const access = await Instance.get('/accessCheck', {
+      const access = await Instance.get('/auth/accessCheck', {
         withCredentials: true
       }).then(res => res.data.success);
 
@@ -107,7 +107,7 @@ export default function PostEditor({ boardList, post }: Props) {
 
   async function handleClickRemoveThumbnail() {
     try {
-      const access = await Instance.get('/accessCheck', {
+      const access = await Instance.get('/auth/accessCheck', {
         withCredentials: true
       }).then(res => res.data.success);
 
@@ -136,7 +136,7 @@ export default function PostEditor({ boardList, post }: Props) {
       }
 
       try {
-        const access = await Instance.get('/accessCheck', {
+        const access = await Instance.get('/auth/accessCheck', {
           withCredentials: true
         }).then(res => res.data.success);
 

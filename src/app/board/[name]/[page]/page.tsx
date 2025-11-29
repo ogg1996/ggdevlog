@@ -24,7 +24,7 @@ export default async function Page({
           </h2>
         </div>
       </div>
-      {posts.length !== 0 ? (
+      {posts.total !== 0 ? (
         <>
           <PostList data={posts.data} />
           <PageNavigationBox
