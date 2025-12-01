@@ -9,7 +9,7 @@ export async function generateMetadata({
 }) {
   const board = await params;
   return {
-    metadataBase: new URL('http://localhost:3000'),
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_META_DATA_BASE_URL}`),
     title: `GGDevLog - ${board.name}`,
     description: `${board.name} 게시판의 ${board.page}페이지`,
     openGraph: {

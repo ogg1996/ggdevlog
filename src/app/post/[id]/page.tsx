@@ -11,7 +11,7 @@ export async function generateMetadata({
   const post = await getPost(id);
 
   return {
-    metadataBase: new URL('http://localhost:3000'),
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_META_DATA_BASE_URL}`),
     title: `GGDevLog - ${post.title}`,
     description: post.description,
     openGraph: {

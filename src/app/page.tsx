@@ -3,7 +3,7 @@ import Introduce from '@/components/page/home/introduce';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL(`${process.env.NEXT_PUBLIC_META_DATA_BASE_URL}`),
   title: 'GGDevLog - home',
   description: 'GGDevLog - 나의 개발 기록 저장소',
   openGraph: {
