@@ -2,6 +2,33 @@ import PostEditBox from '@/components/page/post/post-edit-box';
 import Viewer from '@/components/common/viewer';
 import { getPost } from '@/api/fetch';
 
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+  const post = await getPost(id);
+
+  return {
+    metadataBase: new URL('http://localhost:3000'),
+    title: `GGDevLog - ${post.title}`,
+    description: post.description,
+    openGraph: {
+      title: `GGDevLog - ${post.title}`,
+      description: post.description,
+      images: [
+        {
+          url: post.thumbnail?.image_url || '/post-thumbnail.png',
+          alt: '포스트 페이지 썸네일'
+        }
+      ],
+      locale: 'ko_KR',
+      type: 'website'
+    }
+  };
+}
+
 export default async function Page({
   params
 }: {
