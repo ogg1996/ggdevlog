@@ -2,6 +2,31 @@ import { getPosts } from '@/api/fetch';
 import PageNavigationBox from '@/components/page/board/page-navigation-box';
 import PostList from '@/components/page/board/post-list';
 
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ name: string; page: string }>;
+}) {
+  const board = await params;
+  return {
+    metadataBase: new URL('http://localhost:3000'),
+    title: `GGDevLog - ${board.name}`,
+    description: `${board.name} 게시판의 ${board.page}페이지`,
+    openGraph: {
+      title: `GGDevLog - ${board.name}`,
+      description: `${board.name} 게시판의 ${board.page}페이지`,
+      images: [
+        {
+          url: '/board-thumbnail.png',
+          alt: '보드 페이지 썸네일'
+        }
+      ],
+      locale: 'ko_KR',
+      type: 'website'
+    }
+  };
+}
+
 export default async function Page({
   params
 }: {
