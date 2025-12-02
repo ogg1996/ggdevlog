@@ -17,7 +17,6 @@ export async function getPost(id: string) {
   })
     .then(res => res.json())
     .then(res => res.data);
-
   return res;
 }
 
@@ -39,7 +38,9 @@ export async function getPosts(
       tags: [`posts`],
       revalidate: false
     }
-  }).then(res => res.json());
+  })
+    .then(res => res.json())
+    .then(res => res.data);
 
   return res;
 }

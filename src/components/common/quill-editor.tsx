@@ -89,7 +89,9 @@ export default function QuillEditor({
             formData.append('img', file);
 
             try {
-              const res = await Instance.post('/img', formData);
+              const res = await Instance.post('/img', formData).then(
+                res => res.data
+              );
 
               const IMG_NAME = res.data.img_name;
               const IMG_URL = res.data.img_url;

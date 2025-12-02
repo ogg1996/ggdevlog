@@ -26,20 +26,26 @@ export default function ModalLogin() {
       return;
     }
     try {
-      const res = await Instance.post('/auth/login', {
-        pw: passward
-      });
+      const res = await Instance.post(
+        '/auth/login',
+        {
+          pw: passward
+        },
+        {
+          validateStatus: status => status < 500
+        }
+      );
 
       if (res.data.success) {
-        alert('관리자 권한 승인');
+        alert(res.data.message);
         setModalState(null);
         setAdminState(true);
       } else {
-        setMessage('비밀번호 불일치');
+        setMessage(res.data.message);
         inputRef.current?.focus();
         setPassward('');
       }
-    } catch (error) {
+    } catch {
       setMessage('서버 오류');
     }
   }

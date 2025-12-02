@@ -29,7 +29,7 @@ export default function ClientLayout({
               const res = await Instance.post('/auth/logout');
 
               if (res.data.success) {
-                alert('관리자 권한을 해제');
+                alert(res.data.message);
                 setAdminState(false);
               }
             } catch {

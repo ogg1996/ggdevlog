@@ -15,7 +15,7 @@ export default function Introduce() {
 
   useEffect(() => {
     async function init() {
-      const res = await Instance.get('/introduce');
+      const res = await Instance.get('/introduce').then(res => res.data);
       setOriginalImages(res.data.images);
       setOriginalContent(res.data.content);
     }

@@ -34,7 +34,7 @@ export default function IntroduceEditor({
           alert('접근 권한이 없습니다.');
           setEdit(false);
         }
-      } catch (error) {
+      } catch {
         alert('서버 오류');
       }
     }
@@ -66,7 +66,7 @@ export default function IntroduceEditor({
         const res = await Instance.put('/introduce', {
           content,
           images
-        });
+        }).then(res => res.data);
 
         alert('수정 완료');
         setOriginalContent(res.data.content);
@@ -75,7 +75,7 @@ export default function IntroduceEditor({
       } else {
         alert('접근 권한이 없습니다.');
       }
-    } catch (error) {
+    } catch {
       alert('서버 오류');
     }
   }
@@ -98,7 +98,7 @@ export default function IntroduceEditor({
         }
         setEdit(false);
         setContent(originalContent);
-      } catch (error) {
+      } catch {
         alert('서버 오류');
       }
     }

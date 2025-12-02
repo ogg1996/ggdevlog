@@ -16,7 +16,7 @@ export default function ActivityList() {
   useEffect(() => {
     async function init() {
       const res = await Instance('/activity');
-      const activityMap = res.data;
+      const activityMap = res.data.data;
 
       const start = new Date('2025-05-05');
       const end = new Date();

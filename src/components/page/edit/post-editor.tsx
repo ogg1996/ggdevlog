@@ -86,7 +86,9 @@ export default function PostEditor({ boardList, post }: Props) {
             formData.append('img', file);
 
             try {
-              const res = await Instance.post('/img', formData);
+              const res = await Instance.post('/img', formData).then(
+                res => res.data
+              );
 
               const IMG_NAME = res.data.img_name;
               const IMG_URL = res.data.img_url;
@@ -179,11 +181,11 @@ export default function PostEditor({ boardList, post }: Props) {
           myRevalidateTag('posts');
           await Instance.post('/activity');
           initializeState();
-          router.push(`/post/${res.data.post_id}`);
+          router.push(`/post/${res.data.data.post_id}`);
         } else {
           alert('접근 권한이 없습니다.');
         }
-      } catch (error) {
+      } catch {
         alert('작성 실패');
       }
     }
@@ -208,8 +210,8 @@ export default function PostEditor({ boardList, post }: Props) {
         }
         initializeState();
         router.back();
-      } catch (error) {
-        console.error('error: ', error);
+      } catch {
+        alert('서버 오류');
       }
     }
   }
