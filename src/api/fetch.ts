@@ -1,7 +1,12 @@
 const api_url = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getBoard() {
-  const res = await fetch(`${api_url}/board`, { cache: 'no-store' })
+  const res = await fetch(`${api_url}/board`, {
+    next: {
+      tags: ['board'],
+      revalidate: false
+    }
+  })
     .then(res => res.json())
     .then(res => res.data);
 

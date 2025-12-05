@@ -30,9 +30,9 @@ export default function ModalBoardManagement() {
 
   useEffect(() => {
     async function init() {
-      const access = await Instance.get('/auth/accessCheck', {
-        withCredentials: true
-      }).then(res => res.data.success);
+      const access = await Instance.get('/auth/accessCheck').then(
+        res => res.data.success
+      );
 
       if (access) {
         getMenubarBoardList();
@@ -56,9 +56,9 @@ export default function ModalBoardManagement() {
       return;
     }
     try {
-      const access = await Instance.get('/auth/accessCheck', {
-        withCredentials: true
-      }).then(res => res.data.success);
+      const access = await Instance.get('/auth/accessCheck').then(
+        res => res.data.success
+      );
 
       if (access) {
         const res = await Instance.post('/board', {
@@ -69,6 +69,7 @@ export default function ModalBoardManagement() {
           getMenubarBoardList();
         }
         alert(res.data.message);
+        myRevalidateTag('board');
       } else {
         alert('접근 권한이 없습니다.');
       }
@@ -83,9 +84,9 @@ export default function ModalBoardManagement() {
       return;
     }
     try {
-      const access = await Instance.get('/auth/accessCheck', {
-        withCredentials: true
-      }).then(res => res.data.success);
+      const access = await Instance.get('/auth/accessCheck').then(
+        res => res.data.success
+      );
 
       if (access) {
         const res = await Instance.put(`/board/${id}`, {
@@ -98,6 +99,7 @@ export default function ModalBoardManagement() {
           getMenubarBoardList();
         }
         alert(res.data.message);
+        myRevalidateTag('board');
       } else {
         alert('접근 권한이 없습니다.');
       }
@@ -109,15 +111,16 @@ export default function ModalBoardManagement() {
   async function deleteBoard(id: number) {
     if (confirm('정말로 삭제하시겠습니까?')) {
       try {
-        const access = await Instance.get('/auth/accessCheck', {
-          withCredentials: true
-        }).then(res => res.data.success);
+        const access = await Instance.get('/auth/accessCheck').then(
+          res => res.data.success
+        );
 
         if (access) {
           const res = await Instance.delete(`/board/${id}`);
           getMenubarBoardList();
           setSelected(null);
           alert(res.data.message);
+          myRevalidateTag('board');
         } else {
           alert('접근 권한이 없습니다.');
         }

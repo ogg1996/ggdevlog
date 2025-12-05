@@ -17,9 +17,9 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
   useEffect(() => {
     async function init() {
-      const access = await Instance.get('/auth/accessCheck', {
-        withCredentials: true
-      }).then(res => res.data.success);
+      const access = await Instance.get('/auth/accessCheck').then(
+        res => res.data.success
+      );
 
       if (access) {
         const boardData = await getBoard();
