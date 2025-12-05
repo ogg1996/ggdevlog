@@ -5,7 +5,6 @@ import 'react-quill-new/dist/quill.snow.css';
 
 import { useMemo, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import axios from 'axios';
 import Instance from '@/api/instance';
 
 interface Props {
@@ -72,9 +71,9 @@ export default function QuillEditor({
 
   async function handleClickAddImage() {
     try {
-      const access = await Instance.get('/auth/accessCheck', {
-        withCredentials: true
-      }).then(res => res.data.success);
+      const access = await Instance.get('/auth/accessCheck').then(
+        res => res.data.success
+      );
 
       if (access) {
         const input = document.createElement('input');

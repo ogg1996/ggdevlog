@@ -26,15 +26,9 @@ export default function ModalLogin() {
       return;
     }
     try {
-      const res = await Instance.post(
-        '/auth/login',
-        {
-          pw: passward
-        },
-        {
-          validateStatus: status => status < 500
-        }
-      );
+      const res = await Instance.post('/auth/login', {
+        pw: passward
+      });
 
       if (res.data.success) {
         alert(res.data.message);

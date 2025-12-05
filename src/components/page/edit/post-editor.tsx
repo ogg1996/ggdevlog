@@ -69,9 +69,9 @@ export default function PostEditor({ boardList, post }: Props) {
 
   async function handleClickAddThumbnail() {
     try {
-      const access = await Instance.get('/auth/accessCheck', {
-        withCredentials: true
-      }).then(res => res.data.success);
+      const access = await Instance.get('/auth/accessCheck').then(
+        res => res.data.success
+      );
 
       if (access) {
         const input = document.createElement('input');
@@ -109,9 +109,9 @@ export default function PostEditor({ boardList, post }: Props) {
 
   async function handleClickRemoveThumbnail() {
     try {
-      const access = await Instance.get('/auth/accessCheck', {
-        withCredentials: true
-      }).then(res => res.data.success);
+      const access = await Instance.get('/auth/accessCheck').then(
+        res => res.data.success
+      );
 
       if (access) {
         await Instance.delete('/img', {
@@ -138,9 +138,9 @@ export default function PostEditor({ boardList, post }: Props) {
       }
 
       try {
-        const access = await Instance.get('/auth/accessCheck', {
-          withCredentials: true
-        }).then(res => res.data.success);
+        const access = await Instance.get('/auth/accessCheck').then(
+          res => res.data.success
+        );
 
         if (access) {
           const images: string[] = [];
