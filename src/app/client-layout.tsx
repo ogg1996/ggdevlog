@@ -1,15 +1,20 @@
 'use client';
 import { useEffect } from 'react';
 
+import dynamic from 'next/dynamic';
+
 import Instance from '@/api/instance';
 
 import useAdminStore from '@/stores/adminStore';
 import useMenubarStore from '@/stores/menubarStore';
 import useModalStore from '@/stores/modalStore';
 
-import Header from '@/components/layout/header';
-import Menubar from '@/components/layout/menubar';
-import Modal from '@/components/layout/modal';
+const Modal = dynamic(() => import('@/components/layout/modal'), {
+  ssr: false
+});
+const Menubar = dynamic(() => import('@/components/layout/menubar'), {
+  ssr: false
+});
 
 export default function ClientLayout({
   children
@@ -48,24 +53,14 @@ export default function ClientLayout({
   }, [adminState, modalState]);
 
   useEffect(() => {
-    if (modalState) {
-      document.body.style.overflowY = 'hidden';
-    } else {
-      document.body.style.overflowY = 'auto';
-    }
+    document.body.style.overflowY = modalState ? 'hidden' : 'auto';
   }, [modalState]);
 
   return (
-    <div>
+    <>
       {isActive && <Menubar />}
-      <Header />
       <Modal />
-      <main
-        className={`font-[pretendard] max-w-[700px] mx-auto
-        px-6 pt-15 py-6`}
-      >
-        {children}
-      </main>
-    </div>
+      {children}
+    </>
   );
 }
