@@ -1,8 +1,13 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+
+import dynamic from 'next/dynamic';
 
 import Instance from '@/api/instance';
-import QuillEditor from '@/components/common/quill-editor';
+
+const QuillEditor = dynamic(() => import('@/components/common/quill-editor'), {
+  ssr: false
+});
 
 interface Props {
   originalContent: string;
@@ -111,11 +116,15 @@ export default function IntroduceEditor({
 
   return (
     <div>
-      <QuillEditor
-        content={content}
-        setContent={setContent}
-        setTempImages={setTempImages}
-      />
+      <div className="min-h-[544px]">
+        <Suspense fallback={<div>에이터 로딩중...</div>}>
+          <QuillEditor
+            content={content}
+            setContent={setContent}
+            setTempImages={setTempImages}
+          />
+        </Suspense>
+      </div>
       <div className="flex justify-end mt-5 gap-2">
         <button
           onClick={handleCancel}
