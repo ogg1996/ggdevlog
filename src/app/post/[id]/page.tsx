@@ -15,7 +15,6 @@ export async function generateMetadata({
   const post = await getPost(id);
 
   return {
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_META_DATA_BASE_URL}`),
     title: `GGDevLog - ${post.title}`,
     description: post.description,
     openGraph: {
@@ -23,7 +22,9 @@ export async function generateMetadata({
       description: post.description,
       images: [
         {
-          url: post.thumbnail?.image_url || '/post-thumbnail.webp',
+          url:
+            post.thumbnail?.image_url ||
+            `${process.env.NEXT_PUBLIC_MY_URL}/post-thumbnail.webp`,
           alt: '포스트 페이지 썸네일'
         }
       ],

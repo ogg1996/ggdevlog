@@ -13,7 +13,6 @@ export async function generateMetadata({
 }) {
   const board = await params;
   return {
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_META_DATA_BASE_URL}`),
     title: `GGDevLog - ${board.name}`,
     description: `${board.name} 게시판의 ${board.page}페이지`,
     openGraph: {
@@ -21,7 +20,7 @@ export async function generateMetadata({
       description: `${board.name} 게시판의 ${board.page}페이지`,
       images: [
         {
-          url: '/board-thumbnail.webp',
+          url: `${process.env.NEXT_PUBLIC_MY_URL}/board-thumbnail.webp`,
           alt: '보드 페이지 썸네일'
         }
       ],
