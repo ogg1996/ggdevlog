@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
 import { getPosts } from '@/api/fetch';
 
@@ -39,6 +40,8 @@ export default async function Page({
 
   const { name, page } = await params;
   const posts = await getPosts(name, Number(page), CONTENT_LIMIT);
+
+  if (!posts) notFound();
 
   return (
     <>

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
 import { getPost } from '@/api/fetch';
 
@@ -39,6 +40,8 @@ export default async function Page({
 }) {
   const { id } = await params;
   const post = await getPost(id);
+
+  if (!post) notFound();
 
   const createdAtToDate = new Date(post.created_at);
   const year = createdAtToDate.getFullYear();
