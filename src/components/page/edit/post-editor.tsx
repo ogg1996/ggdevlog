@@ -112,11 +112,7 @@ export default function PostEditor({ boardList, post }: Props) {
       const access = await Instance.get('/auth/accessCheck').then(
         res => res.data.success
       );
-
       if (access) {
-        await Instance.delete('/img', {
-          data: [thumbnail?.image_name]
-        });
         setThumbnail(null);
       } else {
         alert('접근 권한이 없습니다.');
@@ -178,9 +174,11 @@ export default function PostEditor({ boardList, post }: Props) {
             });
             myRevalidateTag(`post-${post.id}`);
           }
+
           myRevalidateTag('posts');
           await Instance.post('/activity');
           initializeState();
+          alert(res.data.message);
           router.push(`/post/${res.data.data.post_id}`);
         } else {
           alert('접근 권한이 없습니다.');
@@ -209,6 +207,7 @@ export default function PostEditor({ boardList, post }: Props) {
           });
         }
         initializeState();
+        alert('취소되었습니다.');
         router.back();
       } catch {
         alert('서버 오류');
@@ -319,15 +318,13 @@ export default function PostEditor({ boardList, post }: Props) {
         setTempImages={setTempImages}
       />
       <div className="flex justify-end mt-5 gap-2">
-        {!post && (
-          <button
-            onClick={handleCancel}
-            className="w-24 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
+        <button
+          onClick={handleCancel}
+          className="w-24 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
               cursor-pointer rounded-lg hover:bg-red-500 transition"
-          >
-            작성취소
-          </button>
-        )}
+        >
+          {!post ? '작성취소' : '수정취소'}
+        </button>
         <button
           onClick={handleSave}
           className="w-24 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
