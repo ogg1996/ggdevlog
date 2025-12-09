@@ -10,6 +10,7 @@ import ClientLayout from '@/app/client-layout';
 const dungGeunmoMo = localFont({
   src: '../../public/fonts/DungGeunMo.woff2',
   display: 'swap',
+  preload: true,
   weight: '400 900',
   variable: '--font-dungGeunMo'
 });

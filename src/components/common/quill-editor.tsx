@@ -101,6 +101,16 @@ export default function QuillEditor({
               const editor = quillRef.current.getEditor();
               const range = editor.getSelection();
               editor.insertEmbed(range.index, 'image', IMG_URL);
+
+              setTimeout(() => {
+                const imgs = editor.root.querySelectorAll('img');
+                const img = imgs[imgs.length - 1];
+
+                if (img) {
+                  img.setAttribute('alt', `컨텐츠 이미지${imgs.length}`);
+                }
+              });
+
               editor.setSelection(range.index + 1);
             } catch {
               alert('서버 오류');

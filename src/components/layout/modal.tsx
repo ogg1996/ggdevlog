@@ -10,13 +10,12 @@ export default function Modal() {
     <>
       {modalState && (
         <div
-          className="fixed w-full h-full bg-black/30 z-60"
+          className="fixed inset-0 w-full h-full bg-black/30 z-60"
           onClick={() => {
             if (modalState === 'login' || modalState === 'boardManagement')
               return;
             setModalState(null);
           }}
-          aria-hidden="true"
         >
           {modalState === 'login' && <ModalLogin />}
           {modalState === 'boardManagement' && <ModalBoardManagement />}

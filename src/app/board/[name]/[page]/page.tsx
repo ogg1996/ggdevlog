@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { getPosts } from '@/api/fetch';
 
 import PageNavigationBox from '@/components/page/board/page-navigation-box';
@@ -40,9 +42,16 @@ export default async function Page({
 
   return (
     <>
-      <div className="h-[200px] bg-[url(/board-thumbnail.webp)] bg-cover bg-center mb-7">
+      <div className="relative h-[200px] mb-7">
+        <Image
+          src="/board-thumbnail.webp"
+          alt="보드 페이지 썸네일"
+          className="object-cover object-center"
+          fill
+          priority
+        />
         <div
-          className="w-full h-full bg-[#00000099] 
+          className="absolute inset-0 bg-[#00000099] 
           flex justify-center items-center"
         >
           <h2 className="font-[duggeunmo] font-bold text-[32px] text-white">
