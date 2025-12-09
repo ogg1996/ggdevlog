@@ -1,5 +1,7 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
+
+import dynamic from 'next/dynamic';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -7,7 +9,9 @@ import { useRouter } from 'next/navigation';
 import Instance from '@/api/instance';
 import { myRevalidateTag } from '@/api/revalidate';
 
-import QuillEditor from '@/components/common/quill-editor';
+const QuillEditor = dynamic(() => import('@/components/common/quill-editor'), {
+  ssr: false
+});
 
 interface Board {
   id: number;
@@ -289,7 +293,7 @@ export default function PostEditor({ boardList, post }: Props) {
               height={96}
               className="absolute z-10 opacity-0 group-hover:opacity-100"
             />
-            <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-60 transition"></div>
+            <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-60 transition" />
           </button>
         ) : (
           <button
@@ -297,10 +301,11 @@ export default function PostEditor({ boardList, post }: Props) {
                border-[rgb(204,204,204)] rounded-[5px] cursor-pointer group overflow-hidden"
             onClick={handleClickRemoveThumbnail}
           >
-            <img
+            <Image
               src={thumbnail.image_url}
               alt="thumbnail"
               className="w-[100%] relative z-10 opacity-100 group-hover:opacity-60"
+              fill
             />
             <Image
               src="/icon-minus.png"
@@ -309,15 +314,19 @@ export default function PostEditor({ boardList, post }: Props) {
               height={96}
               className="absolute z-10 opacity-0 group-hover:opacity-100"
             />
-            <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-60 transition"></div>
+            <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-60 transition" />
           </button>
         )}
       </div>
-      <QuillEditor
-        content={content}
-        setContent={setContent}
-        setTempImages={setTempImages}
-      />
+      <div className="min-h-[544px]">
+        <Suspense fallback={<div>에이터 로딩중...</div>}>
+          <QuillEditor
+            content={content}
+            setContent={setContent}
+            setTempImages={setTempImages}
+          />
+        </Suspense>
+      </div>
       <div className="flex justify-end mt-5 gap-2">
         <button
           onClick={handleCancel}
