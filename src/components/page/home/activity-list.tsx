@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import Instance from '@/api/instance';
 
+import dayjs from '@/utils/dayjs';
+
 import ActivityItem from '@/components/page/home/activity-item';
 
 type ActivityItem = {
@@ -24,20 +26,24 @@ export default function ActivityList() {
         ])
       );
 
-      const start = new Date('2025-12-08');
-      const end = new Date();
+      const start = dayjs.tz('2025-12-08');
+      const end = dayjs();
 
       const resultArr: ActivityItem[][] = [];
 
       let weekIndex = 0;
       let dayIndex = 0;
 
-      for (const i = new Date(start); i <= end; i.setDate(i.getDate() + 1)) {
+      for (
+        let i = start.clone();
+        i.isBefore(end, 'day') || i.isSame(end, 'day');
+        i = i.add(1, 'day')
+      ) {
         if (dayIndex === 7) {
           weekIndex++;
           dayIndex = 0;
         }
-        const dateStr = i.toISOString().slice(0, 10);
+        const dateStr = i.format('YYYY-MM-DD');
         const activityCount = activityMap[dateStr] || 0;
 
         if (!resultArr[weekIndex]) resultArr[weekIndex] = [];

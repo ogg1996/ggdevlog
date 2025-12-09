@@ -6,6 +6,8 @@ import { getPost } from '@/api/fetch';
 import PostEditBox from '@/components/page/post/post-edit-box';
 import Viewer from '@/components/common/viewer';
 
+import dayjs from '@/utils/dayjs';
+
 export async function generateMetadata({
   params
 }: {
@@ -43,11 +45,7 @@ export default async function Page({
   const post = await getPost(id);
 
   if (!post) notFound();
-
-  const createdAtToDate = new Date(post.created_at);
-  const year = createdAtToDate.getFullYear();
-  const month = createdAtToDate.getMonth() + 1;
-  const date = createdAtToDate.getDate();
+  const created = dayjs(post.created_at).format('YYYY. MM. DD');
 
   return (
     <>
@@ -74,7 +72,7 @@ export default async function Page({
             className="font-[duggeunmo] 
             font-bold text-white"
           >
-            {`${year}. ${month}. ${date}`}
+            {created}
           </span>
         </div>
       </div>
