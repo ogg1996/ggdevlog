@@ -3,13 +3,14 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: false,
-  async rewrites() {
-    return [
+  images: {
+    remotePatterns: [
       {
-        source: '/api/:path*',
-        destination: 'http://localhost:4050/:path*' // Express 서버 프록시
+        protocol: 'https',
+        hostname: 'mjnzrjkwayaskqqbkrid.supabase.co',
+        pathname: '/storage/v1/object/public/**'
       }
-    ];
+    ]
   }
 };
 

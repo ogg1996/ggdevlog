@@ -1,11 +1,14 @@
 'use client';
+import { useEffect, useState } from 'react';
+
+import Image from 'next/image';
 
 import Instance from '@/api/instance';
+
+import useAdminStore from '@/stores/adminStore';
+
 import IntroduceEditor from '@/components/page/home/introduce-editor';
 import IntroduceViewer from '@/components/page/home/introduce-viewer';
-import useAdminStore from '@/stores/adminStore';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
 
 export default function Introduce() {
   const { adminState } = useAdminStore();

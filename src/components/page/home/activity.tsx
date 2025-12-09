@@ -1,5 +1,3 @@
-'use client';
-
 import ActivityList from '@/components/page/home/activity-list';
 
 export default function Activity() {

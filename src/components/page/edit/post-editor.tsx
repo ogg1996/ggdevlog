@@ -1,12 +1,17 @@
 'use client';
+import React, { Suspense, useEffect, useState } from 'react';
 
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Instance from '@/api/instance';
+import dynamic from 'next/dynamic';
 
 import Image from 'next/image';
-import QuillEditor from '@/components/common/quill-editor';
+import { useRouter } from 'next/navigation';
+
+import Instance from '@/api/instance';
 import { myRevalidateTag } from '@/api/revalidate';
+
+const QuillEditor = dynamic(() => import('@/components/common/quill-editor'), {
+  ssr: false
+});
 
 interface Board {
   id: number;
@@ -112,11 +117,7 @@ export default function PostEditor({ boardList, post }: Props) {
       const access = await Instance.get('/auth/accessCheck').then(
         res => res.data.success
       );
-
       if (access) {
-        await Instance.delete('/img', {
-          data: [thumbnail?.image_name]
-        });
         setThumbnail(null);
       } else {
         alert('접근 권한이 없습니다.');
@@ -178,9 +179,11 @@ export default function PostEditor({ boardList, post }: Props) {
             });
             myRevalidateTag(`post-${post.id}`);
           }
+
           myRevalidateTag('posts');
           await Instance.post('/activity');
           initializeState();
+          alert(res.data.message);
           router.push(`/post/${res.data.data.post_id}`);
         } else {
           alert('접근 권한이 없습니다.');
@@ -209,6 +212,7 @@ export default function PostEditor({ boardList, post }: Props) {
           });
         }
         initializeState();
+        alert('취소되었습니다.');
         router.back();
       } catch {
         alert('서버 오류');
@@ -289,7 +293,7 @@ export default function PostEditor({ boardList, post }: Props) {
               height={96}
               className="absolute z-10 opacity-0 group-hover:opacity-100"
             />
-            <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-60 transition"></div>
+            <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-60 transition" />
           </button>
         ) : (
           <button
@@ -297,10 +301,11 @@ export default function PostEditor({ boardList, post }: Props) {
                border-[rgb(204,204,204)] rounded-[5px] cursor-pointer group overflow-hidden"
             onClick={handleClickRemoveThumbnail}
           >
-            <img
+            <Image
               src={thumbnail.image_url}
               alt="thumbnail"
               className="w-[100%] relative z-10 opacity-100 group-hover:opacity-60"
+              fill
             />
             <Image
               src="/icon-minus.png"
@@ -309,25 +314,27 @@ export default function PostEditor({ boardList, post }: Props) {
               height={96}
               className="absolute z-10 opacity-0 group-hover:opacity-100"
             />
-            <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-60 transition"></div>
+            <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-60 transition" />
           </button>
         )}
       </div>
-      <QuillEditor
-        content={content}
-        setContent={setContent}
-        setTempImages={setTempImages}
-      />
+      <div className="min-h-[544px]">
+        <Suspense fallback={<div>에이터 로딩중...</div>}>
+          <QuillEditor
+            content={content}
+            setContent={setContent}
+            setTempImages={setTempImages}
+          />
+        </Suspense>
+      </div>
       <div className="flex justify-end mt-5 gap-2">
-        {!post && (
-          <button
-            onClick={handleCancel}
-            className="w-24 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
+        <button
+          onClick={handleCancel}
+          className="w-24 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
               cursor-pointer rounded-lg hover:bg-red-500 transition"
-          >
-            작성취소
-          </button>
-        )}
+        >
+          {!post ? '작성취소' : '수정취소'}
+        </button>
         <button
           onClick={handleSave}
           className="w-24 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white

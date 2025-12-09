@@ -1,11 +1,16 @@
 import './globals.css';
+
 import type { Metadata } from 'next';
-import ClientLayout from '@/app/client-layout';
 import localFont from 'next/font/local';
+
+import Header from '@/components/layout/header';
+
+import ClientLayout from '@/app/client-layout';
 
 const dungGeunmoMo = localFont({
   src: '../../public/fonts/DungGeunMo.woff2',
   display: 'swap',
+  preload: true,
   weight: '400 900',
   variable: '--font-dungGeunMo'
 });
@@ -23,7 +28,15 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${dungGeunmoMo.className}`} spellCheck="false">
-        <ClientLayout>{children}</ClientLayout>
+        <Header />
+        <ClientLayout>
+          <main
+            className="font-[pretendard] max-w-[700px] mx-auto
+            px-6 pt-15 py-6"
+          >
+            {children}
+          </main>
+        </ClientLayout>
       </body>
     </html>
   );

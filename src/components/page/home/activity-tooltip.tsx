@@ -1,5 +1,7 @@
-import Portal from '@/components/common/portal';
+'use client';
 import { useMemo } from 'react';
+
+import Portal from '@/components/common/portal';
 
 interface Props {
   text: string;

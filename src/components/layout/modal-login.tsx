@@ -1,10 +1,12 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
+
+import Image from 'next/image';
 
 import Instance from '@/api/instance';
+
 import useAdminStore from '@/stores/adminStore';
 import useModalStore from '@/stores/modalStore';
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
 
 export default function ModalLogin() {
   const { setAdminState } = useAdminStore();

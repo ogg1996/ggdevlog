@@ -1,8 +1,9 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
 
 import Instance from '@/api/instance';
+
 import ActivityItem from '@/components/page/home/activity-item';
-import { useEffect, useRef, useState } from 'react';
 
 type ActivityItem = {
   date: string;
@@ -15,10 +16,15 @@ export default function ActivityList() {
 
   useEffect(() => {
     async function init() {
-      const res = await Instance('/activity');
-      const activityMap = res.data.data;
+      const res = await Instance('/activity').then(res => res.data);
+      const activityMap = Object.fromEntries(
+        res.data.map((item: { date: string; count: number }) => [
+          item.date,
+          item.count
+        ])
+      );
 
-      const start = new Date('2025-05-05');
+      const start = new Date('2025-12-08');
       const end = new Date();
 
       const resultArr: ActivityItem[][] = [];

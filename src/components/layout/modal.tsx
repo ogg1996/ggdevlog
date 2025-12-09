@@ -1,8 +1,8 @@
 'use client';
+import useModalStore from '@/stores/modalStore';
 
 import ModalBoardManagement from '@/components/layout/modal-board-management';
 import ModalLogin from '@/components/layout/modal-login';
-import useModalStore from '@/stores/modalStore';
 
 export default function Modal() {
   const { modalState, setModalState } = useModalStore();
@@ -10,13 +10,12 @@ export default function Modal() {
     <>
       {modalState && (
         <div
-          className="fixed w-full h-full bg-black/30 z-60"
+          className="fixed inset-0 w-full h-full bg-black/30 z-60"
           onClick={() => {
             if (modalState === 'login' || modalState === 'boardManagement')
               return;
             setModalState(null);
           }}
-          aria-hidden="true"
         >
           {modalState === 'login' && <ModalLogin />}
           {modalState === 'boardManagement' && <ModalBoardManagement />}
