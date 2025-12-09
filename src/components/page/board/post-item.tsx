@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import dayjs from '@/utils/dayjs';
+
 interface Props {
   id: number;
   title: string;
@@ -16,10 +18,7 @@ export default function PostItem({
   createdAt,
   thumbnailUrl
 }: Props) {
-  const createdAtToDate = new Date(createdAt);
-  const year = createdAtToDate.getFullYear();
-  const month = createdAtToDate.getMonth() + 1;
-  const date = createdAtToDate.getDate();
+  const created = dayjs(createdAt).format('YYYY. MM. DD');
 
   return (
     <Link className="h-[145px] mb-7 flex group" href={`/post/${id}`}>
@@ -37,7 +36,7 @@ export default function PostItem({
         >
           {description}
         </p>
-        <p className="h-[18px] text-[12px] text-[#999999]">{`${year}. ${month}. ${date}`}</p>
+        <p className="h-[18px] text-[12px] text-[#999999]">{created}</p>
       </div>
       <div
         className="ml-10 flex-shrink-0
