@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import Instance from '@/api/instance';
-import { myRevalidateTag } from '@/api/revalidate';
+import { myUpdateTag } from '@/api/revalidate';
 
 const QuillEditor = dynamic(() => import('@/components/common/quill-editor'), {
   ssr: false
@@ -177,10 +177,10 @@ export default function PostEditor({ boardList, post }: Props) {
               content,
               images
             });
-            myRevalidateTag(`post-${post.id}`);
+            myUpdateTag(`post-${post.id}`);
           }
 
-          myRevalidateTag('posts');
+          myUpdateTag('posts');
           await Instance.post('/activity');
           initializeState();
           alert(res.data.message);

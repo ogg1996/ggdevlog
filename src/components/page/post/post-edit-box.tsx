@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import Instance from '@/api/instance';
 import useAdminStore from '@/stores/adminStore';
-import { myRevalidateTag } from '@/api/revalidate';
+import { myUpdateTag } from '@/api/revalidate';
 
 export default function PostEditBox({ id }: { id: string }) {
   const { adminState } = useAdminStore();
@@ -22,7 +22,7 @@ export default function PostEditBox({ id }: { id: string }) {
           const res = await Instance.delete(`/post/${id}`);
           if (res.data.success) {
             alert(res.data.message);
-            myRevalidateTag('posts');
+            myUpdateTag('posts');
             router.push(`/board/${res.data.board_name}/1`);
           } else {
             alert(res.data.message);

@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import Instance from '@/api/instance';
 import { getBoard } from '@/api/fetch';
-import { myRevalidateTag } from '@/api/revalidate';
+import { myUpdateTag } from '@/api/revalidate';
 
 import useModalStore from '@/stores/modalStore';
 
@@ -71,7 +71,7 @@ export default function ModalBoardManagement() {
           getMenubarBoardList();
         }
         alert(res.data.message);
-        myRevalidateTag('board');
+        myUpdateTag('board');
       } else {
         alert('접근 권한이 없습니다.');
       }
@@ -101,7 +101,7 @@ export default function ModalBoardManagement() {
           getMenubarBoardList();
         }
         alert(res.data.message);
-        myRevalidateTag('board');
+        myUpdateTag('board');
       } else {
         alert('접근 권한이 없습니다.');
       }
@@ -122,7 +122,7 @@ export default function ModalBoardManagement() {
           getMenubarBoardList();
           setSelected(null);
           alert(res.data.message);
-          myRevalidateTag('board');
+          myUpdateTag('board');
         } else {
           alert('접근 권한이 없습니다.');
         }
