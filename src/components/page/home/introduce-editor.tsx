@@ -59,16 +59,18 @@ export default function IntroduceEditor({
               images.push(image);
             }
           }
-          await Instance.delete('/img', {
-            data: deleteImages
-          });
+          if (deleteImages.length !== 0) {
+            await Instance.delete('/img', {
+              data: deleteImages
+            });
+          }
         }
         const res = await Instance.put('/introduce', {
           content,
           images
         }).then(res => res.data);
 
-        alert('수정 완료');
+        alert(res.message);
         setOriginalContent(res.data.content);
         setOriginalImages(res.data.images);
         setEdit(false);
@@ -92,12 +94,15 @@ export default function IntroduceEditor({
               deleteImages.push(image);
             }
           }
-          await Instance.delete('/img', {
-            data: deleteImages
-          });
+          if (deleteImages.length !== 0) {
+            await Instance.delete('/img', {
+              data: deleteImages
+            });
+          }
         }
         setEdit(false);
         setContent(originalContent);
+        alert('취소되었습니다.');
       } catch {
         alert('서버 오류');
       }
