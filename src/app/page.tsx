@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     description: 'GGDevLog - 나의 개발 기록 저장소',
     images: [
       {
-        url: '/home-thumbnail.png',
+        url: '/home-thumbnail.webp',
         alt: '홈 페이지 썸네일'
       }
     ],

@@ -19,7 +19,7 @@ export async function generateMetadata({
       description: post.description,
       images: [
         {
-          url: post.thumbnail?.image_url || '/post-thumbnail.png',
+          url: post.thumbnail?.image_url || '/post-thumbnail.webp',
           alt: '포스트 페이지 썸네일'
         }
       ],
@@ -48,7 +48,7 @@ export default async function Page({
         className="h-[200px] bg-cover bg-center mb-7"
         style={{
           backgroundImage: `url(${
-            post.thumbnail?.image_url || '/post-thumbnail.png'
+            post.thumbnail?.image_url || '/post-thumbnail.webp'
           })`
         }}
       >

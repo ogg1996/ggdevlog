@@ -18,7 +18,7 @@ export async function generateMetadata({
       description: `${board.name} 게시판의 ${board.page}페이지`,
       images: [
         {
-          url: '/board-thumbnail.png',
+          url: '/board-thumbnail.webp',
           alt: '보드 페이지 썸네일'
         }
       ],
@@ -40,7 +40,7 @@ export default async function Page({
 
   return (
     <>
-      <div className="h-[200px] bg-[url(/board-thumbnail.png)] bg-cover bg-center mb-7">
+      <div className="h-[200px] bg-[url(/board-thumbnail.webp)] bg-cover bg-center mb-7">
         <div
           className="w-full h-full bg-[#00000099] 
           flex justify-center items-center"

@@ -9,7 +9,7 @@ export default function Header() {
       <div className="flex items-center gap-2">
         <MenubarButton />
         <Link className="h-[60px] flex items-center" href={'/'}>
-          <Image src="/logo.png" alt="로고 아이콘" width={130} height={30} />
+          <Image src="/logo.webp" alt="로고 아이콘" width={130} height={30} />
         </Link>
       </div>
     </header>
