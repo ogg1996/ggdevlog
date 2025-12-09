@@ -1,43 +1,20 @@
-'use client';
-import { use, useEffect, useState } from 'react';
+import { notFound } from 'next/navigation';
 
-import { useRouter } from 'next/navigation';
-
-import Instance from '@/api/instance';
 import { getBoard, getPost } from '@/api/fetch';
 
 import PostEditor from '@/components/page/edit/post-editor';
 
-export default function Page({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default async function Page({
+  params
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
 
-  const router = useRouter();
-  const [visible, setVisible] = useState(false);
+  const post = await getPost(id);
+  if (!post) notFound();
 
-  const [boardList, setBoardList] = useState([]);
-  const [post, setPost] = useState();
+  const boardList = await getBoard();
 
-  useEffect(() => {
-    async function init() {
-      const access = await Instance.get('/auth/accessCheck').then(
-        res => res.data.success
-      );
-
-      if (access) {
-        const boardData = await getBoard();
-        setBoardList(boardData);
-
-        const postData = await getPost(id);
-        setPost(postData);
-        setVisible(true);
-      } else {
-        alert('접근 권한이 없습니다');
-        router.back();
-      }
-    }
-
-    init();
-  }, []);
-
-  if (visible) return <PostEditor boardList={boardList} post={post} />;
+  return <PostEditor boardList={boardList} post={post} />;
 }
