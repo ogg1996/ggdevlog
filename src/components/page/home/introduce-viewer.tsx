@@ -1,7 +1,7 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
 
 import Viewer from '@/components/common/viewer';
-import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   content: string;

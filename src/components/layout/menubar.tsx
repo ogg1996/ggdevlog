@@ -1,13 +1,15 @@
 'use client';
+import { useEffect, useState } from 'react';
 
-import { getBoard } from '@/api/fetch';
-import useAdminStore from '@/stores/adminStore';
-import useMenubarStore from '@/stores/menubarStore';
-import useModalStore from '@/stores/modalStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+
+import { getBoard } from '@/api/fetch';
+
+import useAdminStore from '@/stores/adminStore';
+import useMenubarStore from '@/stores/menubarStore';
+import useModalStore from '@/stores/modalStore';
 
 type boardList = { id: number; name: string }[];
 

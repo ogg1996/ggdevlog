@@ -1,8 +1,9 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
 
 import Instance from '@/api/instance';
+
 import ActivityItem from '@/components/page/home/activity-item';
-import { useEffect, useRef, useState } from 'react';
 
 type ActivityItem = {
   date: string;

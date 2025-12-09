@@ -1,11 +1,13 @@
 'use client';
-
-import { getBoard } from '@/api/fetch';
-import Instance from '@/api/instance';
-import { myRevalidateTag } from '@/api/revalidate';
-import useModalStore from '@/stores/modalStore';
-import Image from 'next/image';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+
+import Image from 'next/image';
+
+import Instance from '@/api/instance';
+import { getBoard } from '@/api/fetch';
+import { myRevalidateTag } from '@/api/revalidate';
+
+import useModalStore from '@/stores/modalStore';
 
 type board = { id: number; name: string };
 type boardList = board[];

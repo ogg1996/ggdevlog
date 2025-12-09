@@ -1,8 +1,8 @@
 'use client';
+import useModalStore from '@/stores/modalStore';
 
 import ModalBoardManagement from '@/components/layout/modal-board-management';
 import ModalLogin from '@/components/layout/modal-login';
-import useModalStore from '@/stores/modalStore';
 
 export default function Modal() {
   const { modalState, setModalState } = useModalStore();

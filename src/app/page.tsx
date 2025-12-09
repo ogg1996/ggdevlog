@@ -1,6 +1,7 @@
+import { Metadata } from 'next';
+
 import Activity from '@/components/page/home/activity';
 import Introduce from '@/components/page/home/introduce';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_META_DATA_BASE_URL}`),

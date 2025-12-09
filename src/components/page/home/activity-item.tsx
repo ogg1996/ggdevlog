@@ -1,5 +1,6 @@
-import ActivityTooltip from '@/components/page/home/activity-tooltip';
 import { useRef, useState } from 'react';
+
+import ActivityTooltip from '@/components/page/home/activity-tooltip';
 
 type ActivityItem = {
   date: string;

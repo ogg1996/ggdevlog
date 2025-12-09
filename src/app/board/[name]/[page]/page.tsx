@@ -1,4 +1,5 @@
 import { getPosts } from '@/api/fetch';
+
 import PageNavigationBox from '@/components/page/board/page-navigation-box';
 import PostList from '@/components/page/board/post-list';
 

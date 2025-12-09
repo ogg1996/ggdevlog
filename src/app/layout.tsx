@@ -1,7 +1,9 @@
 import './globals.css';
+
 import type { Metadata } from 'next';
-import ClientLayout from '@/app/client-layout';
 import localFont from 'next/font/local';
+
+import ClientLayout from '@/app/client-layout';
 
 const dungGeunmoMo = localFont({
   src: '../../public/fonts/DungGeunMo.woff2',

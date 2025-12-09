@@ -1,8 +1,8 @@
 'use client';
+import { useEffect, useState } from 'react';
 
 import Instance from '@/api/instance';
 import QuillEditor from '@/components/common/quill-editor';
-import { useEffect, useState } from 'react';
 
 interface Props {
   originalContent: string;

@@ -1,5 +1,6 @@
-import PageNavigationLink from '@/components/page/board/page-navigation-Link';
 import Link from 'next/link';
+
+import PageNavigationLink from '@/components/page/board/page-navigation-Link';
 
 interface Props {
   boardName: string;

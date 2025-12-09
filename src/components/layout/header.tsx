@@ -1,8 +1,8 @@
 'use client';
-
-import useMenubarStore from '@/stores/menubarStore';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import useMenubarStore from '@/stores/menubarStore';
 
 export default function Header() {
   const { setActive } = useMenubarStore();

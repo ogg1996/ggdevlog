@@ -1,14 +1,15 @@
 'use client';
+import { useEffect } from 'react';
 
 import Instance from '@/api/instance';
-import Header from '@/components/layout/header';
-import Menubar from '@/components/layout/menubar';
-import Modal from '@/components/layout/modal';
+
 import useAdminStore from '@/stores/adminStore';
 import useMenubarStore from '@/stores/menubarStore';
 import useModalStore from '@/stores/modalStore';
 
-import { useEffect } from 'react';
+import Header from '@/components/layout/header';
+import Menubar from '@/components/layout/menubar';
+import Modal from '@/components/layout/modal';
 
 export default function ClientLayout({
   children

@@ -1,10 +1,12 @@
 'use client';
-
-import { getBoard } from '@/api/fetch';
-import Instance from '@/api/instance';
-import PostEditor from '@/components/page/edit/post-editor';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+
+import { useRouter } from 'next/navigation';
+
+import Instance from '@/api/instance';
+import { getBoard } from '@/api/fetch';
+
+import PostEditor from '@/components/page/edit/post-editor';
 
 export default function Page() {
   const router = useRouter();
