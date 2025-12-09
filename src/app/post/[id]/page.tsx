@@ -45,7 +45,7 @@ export default async function Page({
   const post = await getPost(id);
 
   if (!post) notFound();
-  const created = dayjs(post.created_at).format('YYYY. MM. DD');
+  const created = dayjs(post.created_at).tz().format('YYYY. MM. DD');
 
   return (
     <>

@@ -18,7 +18,7 @@ export default function PostItem({
   createdAt,
   thumbnailUrl
 }: Props) {
-  const created = dayjs(createdAt).format('YYYY. MM. DD');
+  const created = dayjs(createdAt).tz().format('YYYY. MM. DD');
 
   return (
     <Link className="h-[145px] mb-7 flex group" href={`/post/${id}`}>
