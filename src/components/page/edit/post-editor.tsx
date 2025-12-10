@@ -167,6 +167,7 @@ export default function PostEditor({ boardList, post }: Props) {
               content,
               images
             });
+            await Instance.post('/activity');
             // 게시글 수정
           } else {
             res = await Instance.put(`/post/${post.id}`, {
@@ -181,7 +182,6 @@ export default function PostEditor({ boardList, post }: Props) {
           }
 
           myUpdateTag('posts');
-          await Instance.post('/activity');
           initializeState();
           alert(res.data.message);
           router.push(`/post/${res.data.data.post_id}`);
