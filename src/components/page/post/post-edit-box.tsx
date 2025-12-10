@@ -42,7 +42,7 @@ export default function PostEditBox({ id }: { id: string }) {
         <>
           <Link
             className="w-[36px] h-[36px] flex justify-center items-center
-              cursor-pointer hover:bg-gray-400 hover:rounded-[5px]"
+            cursor-pointer hover:bg-gray-400 hover:rounded-[5px]"
             href={`/edit/${id}`}
           >
             <Image
@@ -50,11 +50,12 @@ export default function PostEditBox({ id }: { id: string }) {
               alt="글쓰기 아이콘"
               width={28}
               height={28}
+              priority
             />
           </Link>
           <button
             className={`w-[36px] h-[36px] flex justify-center items-center
-              cursor-pointer hover:bg-gray-400 hover:rounded-[5px]`}
+            cursor-pointer hover:bg-gray-400 hover:rounded-[5px]`}
             onClick={handleDelete}
           >
             <Image
@@ -62,6 +63,7 @@ export default function PostEditBox({ id }: { id: string }) {
               alt="설정 아이콘"
               width={28}
               height={28}
+              priority
             />
           </button>
         </>

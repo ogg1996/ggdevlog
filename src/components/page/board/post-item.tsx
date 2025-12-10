@@ -39,26 +39,23 @@ export default function PostItem({
         <p className="h-[18px] text-[12px] text-[#999999]">{created}</p>
       </div>
       <div
-        className="ml-10 flex-shrink-0
+        className="relative ml-10 flex-shrink-0
         w-[120px] h-[145px] overflow-hidden"
       >
         {thumbnailUrl ? (
-          <img
+          <Image
             className="w-full h-full object-center object-cover"
             src={thumbnailUrl}
             alt="썸네일 이미지"
+            fill
+            priority
           />
         ) : (
           <div
             className="w-full h-full flex justify-center items-center 
-          bg-[#DDDDDD]"
+          bg-[#999999] text-white font-bold"
           >
-            <Image
-              width={100}
-              height={100}
-              src={'/none-thumbnail.png'}
-              alt="썸네일 이미지"
-            />
+            No Thumbnail
           </div>
         )}
       </div>

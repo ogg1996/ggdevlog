@@ -14,7 +14,13 @@ export default function MenubarButton() {
         setActive(true);
       }}
     >
-      <Image src="/icon-menu.png" alt="메뉴바 아이콘" width={36} height={36} />
+      <Image
+        src="/icon-menu.png"
+        alt="메뉴바 아이콘"
+        width={36}
+        height={36}
+        priority
+      />
     </button>
   );
 }

@@ -282,37 +282,42 @@ export default function PostEditor({ boardList, post }: Props) {
         {thumbnail === null ? (
           <button
             className="relative flex justify-center items-center w-[142px] h-[142px] 
-               border border-[rgb(204,204,204)] rounded-[5px] cursor-pointer group overflow-hidden"
+            border border-[rgb(204,204,204)] rounded-[5px] cursor-pointer group overflow-hidden"
             onClick={handleClickAddThumbnail}
           >
             <p className="font-bold text-2xl text-[rgb(204,204,204)]">썸네일</p>
             <Image
+              className="absolute z-10 opacity-0 group-hover:opacity-100"
               src="/icon-plus.png"
               alt="background"
               width={96}
               height={96}
-              className="absolute z-10 opacity-0 group-hover:opacity-100"
+              priority
             />
             <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-60 transition" />
           </button>
         ) : (
           <button
             className="px-1 relative flex justify-center items-center w-[142px] h-[142px] border
-               border-[rgb(204,204,204)] rounded-[5px] cursor-pointer group overflow-hidden"
+            border-[rgb(204,204,204)] rounded-[5px] cursor-pointer group overflow-hidden"
             onClick={handleClickRemoveThumbnail}
           >
             <Image
+              className="w-full h-full object-center object-cover
+              z-10 opacity-100 group-hover:opacity-60"
               src={thumbnail.image_url}
-              alt="thumbnail"
-              className="w-[100%] relative z-10 opacity-100 group-hover:opacity-60"
+              alt="썸네일 이미지"
               fill
+              priority
             />
             <Image
+              className="absolute z-10 opacity-0
+              group-hover:opacity-100"
               src="/icon-minus.png"
               alt="background"
               width={96}
               height={96}
-              className="absolute z-10 opacity-0 group-hover:opacity-100"
+              priority
             />
             <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-60 transition" />
           </button>

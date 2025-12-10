@@ -68,6 +68,7 @@ export default function ModalLogin() {
             alt="닫기 아이콘"
             width={36}
             height={36}
+            priority
           />
         </button>
       </div>

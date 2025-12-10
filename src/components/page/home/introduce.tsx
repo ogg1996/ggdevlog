@@ -51,6 +51,7 @@ export default function Introduce() {
               alt="글쓰기 아이콘"
               width={28}
               height={28}
+              priority
             />
           </button>
         )}

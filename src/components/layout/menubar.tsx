@@ -50,10 +50,17 @@ export default function Menubar() {
             alt="닫기 아이콘"
             width={36}
             height={36}
+            priority
           />
         </button>
         <Link className="h-[60px] flex items-center" href={'/'}>
-          <Image src="/logo.webp" alt="로고 아이콘" width={130} height={30} />
+          <Image
+            src="/logo.webp"
+            alt="로고 아이콘"
+            width={130}
+            height={30}
+            priority
+          />
         </Link>
       </div>
       <div className="flex justify-between">
@@ -73,6 +80,7 @@ export default function Menubar() {
                 alt="글쓰기 아이콘"
                 width={28}
                 height={28}
+                priority
               />
             </Link>
             <button
@@ -88,6 +96,7 @@ export default function Menubar() {
                 alt="설정 아이콘"
                 width={28}
                 height={28}
+                priority
               />
             </button>
           </div>
