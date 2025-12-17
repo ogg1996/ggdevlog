@@ -45,6 +45,10 @@ body {
   padding: 10px;
 }
 
+.ql-editor > ol {
+  padding: 0 !important;
+}
+
 .ql-code-block-container {
   overflow-x: auto !important;
 }
