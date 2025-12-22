@@ -26,7 +26,7 @@ export default function ActivityList() {
         ])
       );
 
-      const start = dayjs.tz('2025-12-15');
+      const start = dayjs.tz('2025-12-22');
       const end = dayjs();
 
       const resultArr: ActivityItem[][] = [];

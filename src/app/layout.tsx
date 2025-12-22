@@ -31,7 +31,7 @@ export default function RootLayout({
         <Header />
         <ClientLayout>
           <main
-            className="font-[pretendard] max-w-[700px] mx-auto
+            className="font-[pretendard] max-w-[800px] mx-auto
             px-6 pt-15 py-6"
           >
             {children}
