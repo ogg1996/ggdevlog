@@ -129,12 +129,16 @@ export default function PostEditor({ boardList, post }: Props) {
 
   async function handleSave() {
     if (confirm('게시글 작성을 완료 하시겠습니까?')) {
-      if (title.trim().length === 0 && 26 >= title.length) {
-        alert('제목은 1 ~ 26자로 작성해야 합니다.');
+      if (title.trim().length === 0) {
+        alert('제목을 작성하셔야 합니다.');
         return;
       }
-      if (description.trim().length === 0 && 50 >= description.length) {
-        alert('설명은 1 ~ 50자로 작성해야 합니다.');
+      if (title.length <= 25) {
+        alert('제목은 25자 내로 작성하셔야 합니다.');
+        return;
+      }
+      if (description.trim().length === 0) {
+        alert('설명을 작성하셔야 합니다.');
         return;
       }
 
