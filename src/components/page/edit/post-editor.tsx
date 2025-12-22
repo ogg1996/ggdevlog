@@ -133,7 +133,7 @@ export default function PostEditor({ boardList, post }: Props) {
         alert('제목을 작성하셔야 합니다.');
         return;
       }
-      if (title.length <= 25) {
+      if (title.length > 25) {
         alert('제목은 25자 내로 작성하셔야 합니다.');
         return;
       }
