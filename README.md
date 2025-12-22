@@ -41,16 +41,45 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 
 <br/>
 
-## 📌 주요 기능
-- 관리자 권한 로그인 기능과 권한 부여
+## ✨ 프로젝트 기능 소개
+### 관리자 권한
+> 클라이언트에서 입력한 관리자 비밀번호가 서버에 저장된 값과 일치할 경우,  
+> JWT가 발급되어 블로그 관리 권한을 획득하게 됩니다.
 
-- 게시판 추가 / 수정 / 삭제
+|실행화면|
+|---|
+|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
 
-- 게시글 추가 / 수정 / 삭제
+> 관리자 권한이 없는 상태에서(jwt가 없거나 일치하지 않을 때) 블로그 관리 동작을 한다면..
 
-- 게시글 목록 / 상세 조회
+|실행화면|
+|---|
+|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
+|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
+|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
 
+### 활동 기록 시각화 기능
+> 깃허브 잔디에 영감을 받아 활동 기록을 시각화 하는 기능을 구현했습니다.
 
+|실행화면|
+|---|
+|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
+
+### 보드 관리 기능
+> 모달로 보드 관리 기능을 구현했으며,
+> 이를 활용해 게시판 추가 / 수정 / 삭제 기능을 사용할 수 있습니다.
+
+|실행화면|
+|---|
+|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
+
+### 게시글 관리 기능
+> Quill Editor를 활용해서 WYSIWYG 에디터를 구현했으며,
+> 이를 활용해 게시글 추가 / 수정 기능을 구현했습니다.
+
+|실행화면|
+|---|
+|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
 
 <br>
 
@@ -64,4 +93,5 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 <br>
 
 ### [🔗 GGDevLog 서버 Github](https://github.com/ogg1996/ggdevlog-server)
+
 
