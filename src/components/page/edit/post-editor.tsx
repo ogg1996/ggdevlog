@@ -134,7 +134,7 @@ export default function PostEditor({ boardList, post }: Props) {
         return;
       }
       if (title.length > 25) {
-        alert('제목은 25자 내로 작성하셔야 합니다.');
+        alert('제목은 25자 이내로 작성하셔야 합니다.');
         return;
       }
       if (description.trim().length === 0) {

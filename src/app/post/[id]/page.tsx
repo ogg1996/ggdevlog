@@ -17,10 +17,10 @@ export async function generateMetadata({
   const post = await getPost(id);
 
   return {
-    title: `GGDevLog - ${post.title}`,
+    title: `GGDevLog - [${post.board.name}] ${post.title}`,
     description: post.description,
     openGraph: {
-      title: `GGDevLog - ${post.title}`,
+      title: `GGDevLog - [${post.board.name}] ${post.title}`,
       description: post.description,
       images: [
         {
@@ -66,7 +66,7 @@ export default async function Page({
             className="font-[duggeunmo] font-bold
             text-[24px] text-center text-white self-center"
           >
-            {post.title}
+            [{post.board.name}] {post.title}
           </h2>
           <span
             className="font-[duggeunmo] 
