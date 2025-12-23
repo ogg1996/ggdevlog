@@ -27,11 +27,11 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 
 ### 🔄 상태 관리
 - Zustand
-  - 세션 스토리지를 활용해 새로고침 이후에도 관리자/모달/메뉴바 상태를 유지하기 위해 사용되었습니다.
+  - 세션 스토리지를 활용해 새로고침 이후에도 관리자/모달/메뉴바 상태를 유지하기 위해 사용하였습니다.
 
 ### 🌐 네트워킹
 - Next의 fetch API
-  - 게시판 및 게시글 페이지에서 캐시 기능을 활용해 빠르게 데이터를 로딩하기 위해 사용되었습니다.
+  - 게시판 및 게시글 페이지에서 캐시 기능을 활용해 빠르게 데이터를 로딩하기 위해 사용하였습니다.
 - Axios
   - 클라이언트 컴포넌트 내에서 `POST`, `PUT`, `DELETE` 요청을 처리하기 위해 사용하였습니다.
 
@@ -99,6 +99,12 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 |---|
 |![](https://github.com/ogg1996/readmeResource/blob/main/ggdevlog/ggdevlog_post.gif)|
 
+### 🖥️ GGDevLog Preview
+> 마지막으로 블로그의 전반적인 화면 구성과 페이지 흐름을 간단히 살펴볼 수 있는 프리뷰 GIF입니다.
+
+![](https://github.com/ogg1996/readmeResource/blob/main/ggdevlog/ggdevlog_preview.gif)
+
+<br>
 
 ## 🚧 실행 환경 및 제약 사항
 본 프로젝트의 서버는 제작자의 Supabase(PostgreSQL) 및 외부 스토리지와 직접 연동되도록 설계되어 있어,  
@@ -110,4 +116,3 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 <br>
 
 ### [🔗 GGDevLog 서버 Github](https://github.com/ogg1996/ggdevlog-server)
-
