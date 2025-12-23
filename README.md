@@ -27,7 +27,7 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 
 ### 🔄 상태 관리
 - Zustand
-  - 세션 스토리지를 활용하여 새로고침 시에도 모달 상태를 유지하기 위해 사용되었습니다.
+  - 세션 스토리지를 활용해 새로고침 이후에도 관리자/모달/메뉴바 상태를 유지하기 위해 사용되었습니다.
 
 ### 🌐 네트워킹
 - Next의 fetch API
@@ -42,30 +42,35 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 <br/>
 
 ## ✨ 프로젝트 기능 소개
-### 관리자 권한
-> 클라이언트에서 입력한 관리자 비밀번호가 서버에 저장된 값과 일치할 경우,  
-> JWT가 발급되어 블로그 관리 권한을 획득하게 됩니다.
+### ☰ 메뉴바 기능
+> 메뉴바를 통해 게시판, 게시판 관리, 게시글 작성에 접근할 수 있습니다.
+
+### 🔐 관리자 기능
+> 클라이언트에서 입력한 관리자 비밀번호가 서버에 저장된 값과 일치하면,  
+> JWT(Json Web Token)를 발급받아 블로그 관리 권한을 얻게 됩니다.  
+> 관리자 UI 표시는 Admin State에 따라 노출될 수 있지만,  
+> JWT가 유효하지 않은 경우에는 블로그 수정이 불가능하도록 설계했습니다.
+
+|로그인/로그아웃|
+|---|
+|![](https://github.com/ogg1996/readmeResource/blob/main/ggdevlog/ggdevlog_login_logout.gif)|
+
+|JWT가 유효하지 않을 때|
+|---|
+|![](https://github.com/ogg1996/readmeResource/blob/main/ggdevlog/ggdevlog_access_denied.gif)|
+
+### 📊 활동 기록 시각화 기능
+> GitHub의 잔디 그래프에서 영감을 받아 블로그 활동 기록을 시각적으로 표현하는 기능을 구현했습니다.  
+> 단순히 색상만으로 표시하면 "그래서 오늘 얼마나 활동한 거지?"라는 의문이 생길 수 있기 때문에,  
+> 각 활동 아이템에 마우스를 올리면 해당 날짜와 활동 횟수가 표시되는 툴팁이 나타나도록 구현했습니다.
 
 |실행화면|
 |---|
-|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
+|![](https://github.com/ogg1996/readmeResource/blob/main/ggdevlog/ggdevlog_home_activity.gif)|
 
-> 관리자 권한이 없는 상태에서(jwt가 없거나 일치하지 않을 때) 블로그 관리 동작을 한다면..
+### 🙋‍♂️ 자기소개 기능
 
-|실행화면|
-|---|
-|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
-|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
-|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
-
-### 활동 기록 시각화 기능
-> 깃허브 잔디에 영감을 받아 활동 기록을 시각화 하는 기능을 구현했습니다.
-
-|실행화면|
-|---|
-|![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
-
-### 보드 관리 기능
+### 📁 게시판 관리 기능
 > 모달로 보드 관리 기능을 구현했으며,
 > 이를 활용해 게시판 추가 / 수정 / 삭제 기능을 사용할 수 있습니다.
 
@@ -74,8 +79,7 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 |![](https://github.com/ogg1996/readmeResource/blob/main/dff/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.gif)|
 
 ### 게시글 관리 기능
-> Quill Editor를 활용해서 WYSIWYG 에디터를 구현했으며,
-> 이를 활용해 게시글 추가 / 수정 기능을 구현했습니다.
+> Quill E> Quill Editor를 활용해서 WYSIWYG 에디터를 구현했으며, 게시글 추가 / 수정 기능을 구현했습니다.
 
 |실행화면|
 |---|
@@ -93,5 +97,6 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 <br>
 
 ### [🔗 GGDevLog 서버 Github](https://github.com/ogg1996/ggdevlog-server)
+
 
 
