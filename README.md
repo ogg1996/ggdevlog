@@ -82,8 +82,14 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 |![](https://github.com/ogg1996/readmeResource/blob/main/ggdevlog/ggdevlog_board_management.gif)|
 
 ### 🙋‍♂️ 자기소개 / 📝 게시글 관리 기능
-> Quill Editor를 활용해서 WYSIWYG 에디터를 구현했습니다.    
-> 해당 에디터는 자기소개 수정 기능과 게시글 추가 / 수정에 사용했습니다.
+> Quill Editor를 활용해서 WYSIWYG 에디터를 구현했습니다.  
+> 이 에디터는 자기소개 수정과 게시글 추가 / 수정 기능에 사용됩니다.  
+> 작성 중 업로드된 이미지 중 게시글과 연관이 없는 이미지는  
+> 게시글 작성 완료 또는 취소 시 자동으로 삭제되도록 처리했습니다.  
+> 만약 삭제되지 않은 이미지가 남아 있을 경우,  
+> Supabase의 Edge Functions와 cron schedule 기능을 활용해  
+> 일정 주기로 이미지 사용 여부를 검사하고,  
+> 더 이상 사용되지 않는 이미지는 자동으로 삭제되도록 구현했습니다.
 
 |자기소개 관리|
 |---|
@@ -104,3 +110,4 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 <br>
 
 ### [🔗 GGDevLog 서버 Github](https://github.com/ogg1996/ggdevlog-server)
+
