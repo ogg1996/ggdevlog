@@ -15,7 +15,7 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 
 ### 📌 프론트엔드
 - Next
-  - SSR 기반으로 구축하여 SEO 최적화 및 초기 로딩 성능 향상을 위해 사용하였습니다.
+  - SSR 기반으로 구축하여 SEO 및 초기 로딩 성능 향상을 위해 사용하였습니다.
 - TypeScript
   - 안정적인 코드 작성과 유지 보수를 위해 사용하였습니다.
 - Tailwind CSS
@@ -116,3 +116,4 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 <br>
 
 ### [🔗 GGDevLog 서버 Github](https://github.com/ogg1996/ggdevlog-server)
+
