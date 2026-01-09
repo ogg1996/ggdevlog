@@ -5,8 +5,11 @@ import '@/styles/tiptap.css';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
-import Color from '@tiptap/extension-color';
-import Highlight from '@tiptap/extension-highlight';
+import {
+  TextStyle,
+  Color,
+  BackgroundColor
+} from '@tiptap/extension-text-style';
 import Image from '@tiptap/extension-image';
 import Youtube from '@tiptap/extension-youtube';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
@@ -28,9 +31,10 @@ import TiptapToolbar from '@/components/common/tiptap/tiptap-toolbar';
 
 interface Props {
   setTempImages: React.Dispatch<React.SetStateAction<string[]>>;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function TiptapEditor({ setTempImages }: Props) {
+export default function TiptapEditor({ setTempImages, setContent }: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -50,8 +54,9 @@ export default function TiptapEditor({ setTempImages }: Props) {
         }
       }),
       Underline,
+      TextStyle,
       Color,
-      Highlight,
+      BackgroundColor,
       Image,
       Youtube.configure({
         inline: false,
