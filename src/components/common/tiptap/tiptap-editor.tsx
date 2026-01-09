@@ -26,7 +26,11 @@ lowlight.register('ts', ts);
 
 import TiptapToolbar from '@/components/common/tiptap/tiptap-toolbar';
 
-export default function TiptapEditor() {
+interface Props {
+  setTempImages: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+export default function TiptapEditor({ setTempImages }: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -74,7 +78,7 @@ export default function TiptapEditor() {
       className="relative w-full p-2 h-[544px] overflow-y-auto
       border border-[rgb(204,204,204)] rounded-[5px] "
     >
-      <TiptapToolbar editor={editor} />
+      <TiptapToolbar editor={editor} setTempImages={setTempImages} />
       <EditorContent editor={editor} />
     </div>
   );

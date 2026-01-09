@@ -1,10 +1,12 @@
+import addImage from '@/utils/add-image';
 import type { Editor } from '@tiptap/core';
 
 interface Props {
   editor: Editor | null;
+  setTempImages: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export default function TiptapToolbar({ editor }: Props) {
+export default function TiptapToolbar({ editor, setTempImages }: Props) {
   if (!editor) return null;
 
   return (
@@ -73,23 +75,34 @@ export default function TiptapToolbar({ editor }: Props) {
       >
         Link
       </button>
-      <button onClick={() => editor.chain().focus().toggleUnderline().run()}>
+      <button
+        onClick={async () => {
+          const result = await addImage();
+
+          if (result === null) {
+            return;
+          }
+          if (typeof result === 'string') {
+            alert(result);
+            return;
+          }
+
+          editor.chain().focus().setImage({ src: result.img_url }).run();
+          setTempImages((prev: string[]) => [...prev, result.img_name]);
+        }}
+      >
         Image
       </button>
       <button
         onClick={() => {
-          if (editor.isActive('youtube')) {
-            editor.chain().focus().deleteSelection().run();
-          } else {
-            const input: string | null = prompt('Enter Youtube URL');
-            if (input === null) return;
+          const input: string | null = prompt('Enter Youtube URL');
+          if (input === null) return;
 
-            const url = input.trim();
+          const url = input.trim();
 
-            const src = /^(https?:)?\/\//i.test(url) ? url : `https://${url}`;
+          const src = /^(https?:)?\/\//i.test(url) ? url : `https://${url}`;
 
-            editor.commands.setYoutubeVideo({ src });
-          }
+          editor.commands.setYoutubeVideo({ src });
         }}
       >
         Youtube
