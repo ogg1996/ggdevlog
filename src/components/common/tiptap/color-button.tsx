@@ -1,25 +1,28 @@
-'use client';
-
 import { useRef, useState } from 'react';
 
+import useOnClickOutside from '@/hooks/useOnCilckOutside';
 import Tooltip from '@/components/common/tooltip';
+import ColorDropdown from '@/components/common/tiptap/color-dropdown';
 
 interface Props {
-  title: string;
-  isActive?: boolean;
+  nowColor: string;
   icon: React.ComponentType<{ size?: number; color?: string }>;
   size: number;
-  onClick: () => void;
+  title: string;
+  colors: string[];
+  onSelect: (color: string | null) => void;
 }
 
-export default function ToolbarButton({
-  title,
-  isActive,
+export default function ColorButton({
+  nowColor,
+  colors,
+  onSelect,
   icon: Icon,
   size,
-  onClick
+  title
 }: Props) {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLButtonElement | null>(null);
+  const [active, setActive] = useState(false);
   const [hover, setHover] = useState(false);
   const [rect, setRect] = useState<DOMRect | null>(null);
 
@@ -29,15 +32,23 @@ export default function ToolbarButton({
         ref={ref}
         className="w-[24px] h-[24px] cursor-pointer  
         flex justify-center items-center"
-        onClick={onClick}
+        onClick={() => setActive(prev => !prev)}
         onMouseEnter={() => {
           if (ref.current) setRect(ref.current.getBoundingClientRect());
           setHover(true);
         }}
         onMouseLeave={() => setHover(false)}
       >
-        <Icon size={size} color={isActive ? '#0099FF' : '#999999'} />
+        <Icon size={size} color={nowColor ? nowColor : '#999999'} />
       </button>
+      <ColorDropdown
+        colors={colors}
+        targetRect={rect}
+        active={active}
+        openDropdownRef={ref}
+        setActive={setActive}
+        onSelect={onSelect}
+      />
       <Tooltip text={title} visible={hover} targetRect={rect} />
     </>
   );

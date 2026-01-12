@@ -21,7 +21,7 @@ import {
 import ToolbarGroup from '@/components/common/tiptap/toolbar-group';
 import ToolbarButton from '@/components/common/tiptap/toolbar-button';
 import ToolbarLine from '@/components/common/tiptap/toolbar-line';
-import ColorDropdown from '@/components/common/tiptap/color-dropdown';
+import ColorDropdown from '@/components/common/tiptap/color-button';
 
 interface Props {
   editor: Editor | null;
@@ -123,7 +123,7 @@ export default function TiptapToolbar({ editor, setTempImages }: Props) {
           }}
           icon={Highlighter}
           size={20}
-          title="백그라운드 색상"
+          title="배경 색상"
         />
       </ToolbarGroup>
       <ToolbarLine />
