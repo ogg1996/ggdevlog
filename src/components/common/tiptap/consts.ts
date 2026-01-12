@@ -83,19 +83,19 @@ const markToolbarItems: ToolbarItem[] = [
 const blockToolbarItems: ToolbarItem[] = [
   {
     key: 'blockquote',
-    text: '인용구',
+    text: '인용',
     icon: TextQuote,
     action: editor => editor.chain().focus().toggleBlockquote().run()
   },
   {
     key: 'bulletList',
-    text: '• 목록',
+    text: '글머리 기호 목록',
     icon: List,
     action: editor => editor.chain().focus().toggleBulletList().run()
   },
   {
     key: 'orderedList',
-    text: '1. 목록',
+    text: '번호 매기기 목록',
     icon: ListOrdered,
     action: editor => editor.chain().focus().toggleOrderedList().run()
   }
