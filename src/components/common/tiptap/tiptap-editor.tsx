@@ -53,6 +53,14 @@ export default function TiptapEditor({ setTempImages, setContent }: Props) {
             target: '_blank',
             rel: 'noopener noreferrer'
           }
+        },
+        bulletList: {
+          keepMarks: true,
+          keepAttributes: false
+        },
+        orderedList: {
+          keepMarks: true,
+          keepAttributes: false
         }
       }),
       Underline,
