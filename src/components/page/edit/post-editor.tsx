@@ -1,7 +1,5 @@
 'use client';
-import React, { Suspense, useEffect, useState } from 'react';
-
-import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -9,9 +7,9 @@ import { useRouter } from 'next/navigation';
 import Instance from '@/api/instance';
 import { myUpdateTag } from '@/api/revalidate';
 
-const QuillEditor = dynamic(() => import('@/components/common/quill-editor'), {
-  ssr: false
-});
+import addImage from '@/utils/add-image';
+
+import TiptapEditor from '@/components/common/tiptap/tiptap-editor';
 
 interface Board {
   id: number;
@@ -79,30 +77,17 @@ export default function PostEditor({ boardList, post }: Props) {
       );
 
       if (access) {
-        const input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-        input.click();
+        const result = await addImage();
 
-        input.addEventListener('change', async () => {
-          if (input.files !== null) {
-            const file = input.files[0];
-            const formData = new FormData();
-            formData.append('img', file);
+        if (result === null) return;
+        if (typeof result === 'string') {
+          alert(result);
+          return;
+        }
 
-            try {
-              const res = await Instance.post('/img', formData).then(
-                res => res.data
-              );
-
-              const IMG_NAME = res.data.img_name;
-              const IMG_URL = res.data.img_url;
-
-              setThumbnail({ image_name: IMG_NAME, image_url: IMG_URL });
-            } catch {
-              alert('서버 오류');
-            }
-          }
+        setThumbnail({
+          image_name: result.img_name,
+          image_url: result.img_url
         });
       } else {
         alert('접근 권한이 없습니다.');
@@ -327,15 +312,7 @@ export default function PostEditor({ boardList, post }: Props) {
           </button>
         )}
       </div>
-      <div className="min-h-[544px]">
-        <Suspense fallback={<div>에이터 로딩중...</div>}>
-          <QuillEditor
-            content={content}
-            setContent={setContent}
-            setTempImages={setTempImages}
-          />
-        </Suspense>
-      </div>
+      <TiptapEditor setTempImages={setTempImages} setContent={setContent} />
       <div className="flex justify-end mt-5 gap-2">
         <button
           onClick={handleCancel}

@@ -2,6 +2,8 @@
 
 import '@/styles/tiptap.css';
 
+import { useEffect } from 'react';
+
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
@@ -80,8 +82,8 @@ export default function TiptapEditor({ setTempImages, setContent }: Props) {
 
   return (
     <div
-      className="relative w-full p-2 h-[544px] overflow-y-auto
-      border border-[rgb(204,204,204)] rounded-[5px] "
+      className="relative w-full p-2
+      border border-[rgb(204,204,204)] rounded-[5px]"
     >
       <TiptapToolbar editor={editor} setTempImages={setTempImages} />
       <EditorContent editor={editor} />
