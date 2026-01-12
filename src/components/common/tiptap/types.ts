@@ -12,19 +12,25 @@ type ToolbarItem = {
 };
 
 type EditorState = {
-  heading1: boolean;
-  heading2: boolean;
-  heading3: boolean;
-  bold: boolean;
-  italic: boolean;
-  strike: boolean;
-  underline: boolean;
-  blockquote: boolean;
-  bulletList: boolean;
-  orderedList: boolean;
-  link: boolean;
+  active: {
+    heading1: boolean;
+    heading2: boolean;
+    heading3: boolean;
+    bold: boolean;
+    italic: boolean;
+    strike: boolean;
+    underline: boolean;
+    blockquote: boolean;
+    bulletList: boolean;
+    orderedList: boolean;
+    link: boolean;
+  };
+  textStyle: {
+    textColor: string;
+    bgColor: string;
+  };
 };
 
-type EditorKey = keyof EditorState;
+type EditorKey = keyof EditorState['active'];
 
 export { type ToolbarItem, type EditorState, type EditorKey };
