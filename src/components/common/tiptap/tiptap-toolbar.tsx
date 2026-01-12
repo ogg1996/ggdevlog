@@ -5,19 +5,23 @@ import { useEditorState } from '@tiptap/react';
 import { Baseline, Highlighter } from 'lucide-react';
 
 import {
-  ToolbarItem,
   headingToolbarItems,
   markToolbarItems,
   blockToolbarItems,
-  mediaToolbarItems
-} from '@/components/common/tiptap/const-toolbar';
+  mediaToolbarItems,
+  textColors,
+  bgColors
+} from '@/components/common/tiptap/consts';
 
-import addImage from '@/utils/add-image';
-
-import { EditorKey, EditorState } from '@/components/common/tiptap/types';
+import {
+  EditorKey,
+  EditorState,
+  ToolbarItem
+} from '@/components/common/tiptap/types';
 import ToolbarGroup from '@/components/common/tiptap/toolbar-group';
 import ToolbarButton from '@/components/common/tiptap/toolbar-button';
 import ToolbarLine from '@/components/common/tiptap/toolbar-line';
+import ColorDropdown from '@/components/common/tiptap/color-dropdown';
 
 interface Props {
   editor: Editor | null;
@@ -33,17 +37,23 @@ export default function TiptapToolbar({ editor, setTempImages }: Props) {
       if (!editor) return null;
 
       return {
-        heading1: editor.isActive('heading', { level: 1 }),
-        heading2: editor.isActive('heading', { level: 2 }),
-        heading3: editor.isActive('heading', { level: 3 }),
-        bold: editor.isActive('bold'),
-        italic: editor.isActive('italic'),
-        strike: editor.isActive('strike'),
-        underline: editor.isActive('underline'),
-        blockquote: editor.isActive('blockquote'),
-        bulletList: editor.isActive('bulletList'),
-        orderedList: editor.isActive('orderedList'),
-        link: editor.isActive('link')
+        active: {
+          heading1: editor.isActive('heading', { level: 1 }),
+          heading2: editor.isActive('heading', { level: 2 }),
+          heading3: editor.isActive('heading', { level: 3 }),
+          bold: editor.isActive('bold'),
+          italic: editor.isActive('italic'),
+          strike: editor.isActive('strike'),
+          underline: editor.isActive('underline'),
+          blockquote: editor.isActive('blockquote'),
+          bulletList: editor.isActive('bulletList'),
+          orderedList: editor.isActive('orderedList'),
+          link: editor.isActive('link')
+        },
+        textStyle: {
+          textColor: editor.getAttributes('textStyle').color,
+          bgColor: editor.getAttributes('textStyle').backgroundColor
+        }
       };
     }
   });
@@ -61,7 +71,7 @@ export default function TiptapToolbar({ editor, setTempImages }: Props) {
             <ToolbarButton
               key={key}
               title={text}
-              isActive={editorState[key as EditorKey]}
+              isActive={editorState.active[key as EditorKey]}
               icon={Icon}
               size={24}
               onClick={() => {
@@ -78,7 +88,7 @@ export default function TiptapToolbar({ editor, setTempImages }: Props) {
             <ToolbarButton
               key={key}
               title={text}
-              isActive={editorState[key as EditorKey]}
+              isActive={editorState.active[key as EditorKey]}
               icon={Icon}
               size={20}
               onClick={() => {
@@ -87,20 +97,34 @@ export default function TiptapToolbar({ editor, setTempImages }: Props) {
             />
           )
         )}
-        <button
-          className="w-[24px] cursor-pointer  
-          flex justify-center items-center"
-          onClick={() => editor.chain().focus().toggleStrike().run()}
-        >
-          <Baseline size={20} color="#999999" />
-        </button>
-        <button
-          className="w-[24px] cursor-pointer  
-          flex justify-center items-center"
-          onClick={() => editor.chain().focus().toggleUnderline().run()}
-        >
-          <Highlighter size={20} color="#999999" />
-        </button>
+        <ColorDropdown
+          nowColor={editorState.textStyle.textColor}
+          colors={textColors}
+          onSelect={color => {
+            if (!color) {
+              editor.chain().focus().unsetColor().run();
+              return;
+            }
+            editor.chain().focus().setColor(color).run();
+          }}
+          icon={Baseline}
+          size={20}
+          title="텍스트 색상"
+        />
+        <ColorDropdown
+          nowColor={editorState.textStyle.bgColor}
+          colors={bgColors}
+          onSelect={color => {
+            if (!color) {
+              editor.chain().focus().unsetBackgroundColor().run();
+              return;
+            }
+            editor.chain().focus().setBackgroundColor(color).run();
+          }}
+          icon={Highlighter}
+          size={20}
+          title="백그라운드 색상"
+        />
       </ToolbarGroup>
       <ToolbarLine />
       <ToolbarGroup>
@@ -109,7 +133,7 @@ export default function TiptapToolbar({ editor, setTempImages }: Props) {
             <ToolbarButton
               key={key}
               title={text}
-              isActive={editorState[key as EditorKey]}
+              isActive={editorState.active[key as EditorKey]}
               icon={Icon}
               size={24}
               onClick={() => {
@@ -126,7 +150,7 @@ export default function TiptapToolbar({ editor, setTempImages }: Props) {
             <ToolbarButton
               key={key}
               title={text}
-              isActive={editorState[key as EditorKey]}
+              isActive={editorState.active[key as EditorKey]}
               icon={Icon}
               size={18}
               onClick={() => {
