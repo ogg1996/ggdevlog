@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import ActivityTooltip from '@/components/page/home/activity-tooltip';
+import Tooltip from '@/components/common/tooltip';
 
 type ActivityItem = {
   date: string;
@@ -17,6 +17,7 @@ export default function ActivityItem({ day }: Props) {
   const [rect, setRect] = useState<DOMRect | null>(null);
 
   const text = `<${day.date}> ${day.activityCount}회`;
+
   return (
     <>
       <div
@@ -39,7 +40,7 @@ export default function ActivityItem({ day }: Props) {
           }`}
         />
       </div>
-      <ActivityTooltip text={text} visible={hover} targetRect={rect} />
+      <Tooltip text={text} visible={hover} targetRect={rect} />
     </>
   );
 }
