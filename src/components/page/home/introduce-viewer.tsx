@@ -1,10 +1,13 @@
 'use client';
+
 import { useEffect, useRef, useState } from 'react';
 
-import Viewer from '@/components/common/viewer';
+import { JSONContent } from '@tiptap/react';
+
+import TiptapViewer from '@/components/tiptap/tiptap-viewer';
 
 interface Props {
-  content: string;
+  content: JSONContent;
 }
 
 export default function IntroduceViewer({ content }: Props) {
@@ -30,7 +33,7 @@ export default function IntroduceViewer({ content }: Props) {
         className="relative overflow-y-hidden transition-all duration-200"
         style={{ maxHeight: '420px' }}
       >
-        <Viewer content={content} />
+        <TiptapViewer content={content} />
         {!open && (
           <div
             className="

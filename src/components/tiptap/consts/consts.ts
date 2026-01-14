@@ -14,8 +14,8 @@ import {
   SquarePlay
 } from 'lucide-react';
 
-import { ToolbarItem } from '@/components/common/tiptap/types';
-import addImage from '@/utils/add-image';
+import { ToolbarItem } from '@/components/tiptap/types/types';
+import addImage from '@/components/tiptap/utils/add-image';
 import Instance from '@/api/instance';
 
 const textColors: string[] = [
@@ -130,7 +130,7 @@ const mediaToolbarItems: ToolbarItem[] = [
     key: 'image',
     text: '이미지',
     icon: Image,
-    action: async (editor, setTempImages) => {
+    action: async editor => {
       try {
         const access = await Instance.get('/auth/accessCheck').then(
           res => res.data.success
@@ -148,7 +148,6 @@ const mediaToolbarItems: ToolbarItem[] = [
           }
 
           editor.chain().focus().setImage({ src: result.img_url }).run();
-          setTempImages!((prev: string[]) => [...prev, result.img_name]);
         } else {
           alert('접근 권한이 없습니다.');
         }

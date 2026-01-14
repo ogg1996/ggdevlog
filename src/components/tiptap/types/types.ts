@@ -5,10 +5,7 @@ type ToolbarItem = {
   key: string;
   text: string;
   icon: LucideIcon;
-  action: (
-    editor: Editor,
-    setTempImages?: React.Dispatch<React.SetStateAction<string[]>>
-  ) => void;
+  action: (editor: Editor) => void;
 };
 
 type EditorState = {

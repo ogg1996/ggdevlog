@@ -32,8 +32,8 @@ export default function ColorDropdown({
   const pos = useMemo(() => {
     if (!targetRect) return null;
 
-    const x = targetRect.left - 6;
-    const y = targetRect.bottom + 4;
+    const x = targetRect.left + window.scrollX - 6;
+    const y = targetRect.bottom + window.scrollY + 4;
 
     return { x, y };
   }, [targetRect]);

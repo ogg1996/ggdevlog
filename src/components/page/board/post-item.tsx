@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import dayjs from '@/utils/dayjs';
+import dayjs from '@/components/common/utils/dayjs';
 
 interface Props {
   id: number;

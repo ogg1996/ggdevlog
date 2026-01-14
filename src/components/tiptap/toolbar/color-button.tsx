@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 
 import useOnClickOutside from '@/hooks/useOnCilckOutside';
 import Tooltip from '@/components/common/tooltip';
-import ColorDropdown from '@/components/common/tiptap/color-dropdown';
+import ColorDropdown from '@/components/tiptap/toolbar/color-dropdown';
 
 interface Props {
   nowColor: string;

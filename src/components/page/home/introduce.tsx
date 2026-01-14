@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
+import { JSONContent } from '@tiptap/react';
+
 import Instance from '@/api/instance';
 
 import useAdminStore from '@/stores/adminStore';
@@ -13,14 +15,12 @@ import IntroduceViewer from '@/components/page/home/introduce-viewer';
 export default function Introduce() {
   const { adminState } = useAdminStore();
   const [edit, setEdit] = useState(false);
-  const [originalContent, setOriginalContent] = useState('');
-  const [originalImages, setOriginalImages] = useState<string[]>([]);
+  const [content, setContent] = useState<JSONContent | null>(null);
 
   useEffect(() => {
     async function init() {
       const res = await Instance.get('/introduce').then(res => res.data);
-      setOriginalImages(res.data.images);
-      setOriginalContent(res.data.content);
+      setContent(res.data.content);
     }
 
     init();
@@ -56,17 +56,17 @@ export default function Introduce() {
           </button>
         )}
       </div>
-      {!edit ? (
-        <IntroduceViewer content={originalContent} />
-      ) : (
-        <IntroduceEditor
-          originalContent={originalContent}
-          setOriginalContent={setOriginalContent}
-          originalImages={originalImages}
-          setOriginalImages={setOriginalImages}
-          setEdit={setEdit}
-        />
-      )}
+      {content !== null &&
+        (!edit ? (
+          <IntroduceViewer content={content} />
+        ) : (
+          <IntroduceEditor
+            content={content}
+            setContent={setContent}
+            setEdit={setEdit}
+          />
+        ))}
+      {}
     </div>
   );
 }

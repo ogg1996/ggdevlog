@@ -11,24 +11,23 @@ import {
   mediaToolbarItems,
   textColors,
   bgColors
-} from '@/components/common/tiptap/consts';
+} from '@/components/tiptap/consts/consts';
 
 import {
   EditorKey,
   EditorState,
   ToolbarItem
-} from '@/components/common/tiptap/types';
-import ToolbarGroup from '@/components/common/tiptap/toolbar-group';
-import ToolbarButton from '@/components/common/tiptap/toolbar-button';
-import ToolbarLine from '@/components/common/tiptap/toolbar-line';
-import ColorDropdown from '@/components/common/tiptap/color-button';
+} from '@/components/tiptap/types/types';
+import ToolbarGroup from '@/components/tiptap/toolbar/toolbar-group';
+import ToolbarButton from '@/components/tiptap/toolbar/toolbar-button';
+import ToolbarLine from '@/components/tiptap/toolbar/toolbar-line';
+import ColorDropdown from '@/components/tiptap/toolbar/color-button';
 
 interface Props {
-  editor: Editor | null;
-  setTempImages: React.Dispatch<React.SetStateAction<string[]>>;
+  editor: Editor;
 }
 
-export default function TiptapToolbar({ editor, setTempImages }: Props) {
+export default function TiptapToolbar({ editor }: Props) {
   const editorState: EditorState | null = useEditorState({
     editor,
     selector: snapshot => {
@@ -155,7 +154,7 @@ export default function TiptapToolbar({ editor, setTempImages }: Props) {
               size={18}
               onClick={() => {
                 if (key === 'image') {
-                  action(editor, setTempImages);
+                  action(editor);
                 } else {
                   action(editor);
                 }
