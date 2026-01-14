@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation';
 import { getPost } from '@/api/fetch';
 
 import PostEditBox from '@/components/page/post/post-edit-box';
-import Viewer from '@/components/common/viewer';
+import TiptapViewer from '@/components/tiptap/tiptap-viewer';
 
-import dayjs from '@/utils/dayjs';
+import dayjs from '@/components/common/utils/dayjs';
 
 export async function generateMetadata({
   params
@@ -76,7 +76,7 @@ export default async function Page({
           </span>
         </div>
       </div>
-      <Viewer content={post.content} />
+      <TiptapViewer content={post.content} />
     </>
   );
 }
