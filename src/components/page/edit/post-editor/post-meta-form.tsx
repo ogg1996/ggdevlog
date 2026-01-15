@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 
 import { Board } from '@/components/common/types/types';
+import useOnClickOutside from '@/hooks/useOnCilckOutside';
 
 interface Props {
   boardList: Board[];
@@ -23,17 +24,22 @@ export default function PostMetaForm({
   setTitle,
   setDescription
 }: Props) {
+  const boardRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
   const [selectActive, setSelectActive] = useState(false);
 
+  useOnClickOutside(boardRef, () => {
+    setSelectActive(false);
+  });
+
   return (
     <div className="grow flex flex-col gap-2">
-      <div className="flex gap-2">
-        <div className="relative">
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <div ref={boardRef} className="relative">
           <button
-            className={`w-[150px] h-[42px] p-2
+            className={`sm:w-[150px] w-full h-[42px] p-2
             border border-[#cccccc] rounded-[5px]
             text-start flex items-center 
             ${selectActive && 'rounded-[5px_5px_0_0]'}`}
@@ -80,8 +86,8 @@ export default function PostMetaForm({
         defaultValue={description}
         onBlur={() => setDescription(descriptionRef.current?.value ?? '')}
         placeholder="설명"
-        className="grow w-full p-2 font-bold border border-[#cccccc]
-              rounded-[5px] resize-none focus:outline-none"
+        className="sm:grow w-full h-[42px] p-1 font-bold border border-[#cccccc]
+        rounded-[5px] resize-none focus:outline-none"
       />
     </div>
   );
