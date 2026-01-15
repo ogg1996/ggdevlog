@@ -5,10 +5,10 @@ import MenubarButton from '@/components/layout/menubar-button';
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center px-2 w-full h-[50px] fixed bg-white z-40">
+    <header className="fixed z-40 flex h-[50px] w-full items-center justify-between bg-white px-2">
       <div className="flex items-center gap-2">
         <MenubarButton />
-        <Link className="h-[60px] flex items-center" href={'/'}>
+        <Link className="flex h-[60px] items-center" href={'/'}>
           <Image
             src="/logo.webp"
             alt="로고 아이콘"

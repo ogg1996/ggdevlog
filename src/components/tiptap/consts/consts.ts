@@ -1,22 +1,22 @@
 import {
+  Bold,
   Heading1,
   Heading2,
   Heading3,
-  Bold,
+  Image,
   Italic,
-  Strikethrough,
-  Underline,
-  TextQuote,
+  Link,
   List,
   ListOrdered,
-  Link,
-  Image,
-  SquarePlay
+  SquarePlay,
+  Strikethrough,
+  TextQuote,
+  Underline
 } from 'lucide-react';
 
+import Instance from '@/api/instance';
 import { ToolbarItem } from '@/components/tiptap/types/types';
 import addImage from '@/components/tiptap/utils/add-image';
-import Instance from '@/api/instance';
 
 const textColors: string[] = [
   '#EF4444',
@@ -174,10 +174,10 @@ const mediaToolbarItems: ToolbarItem[] = [
 ];
 
 export {
-  textColors,
   bgColors,
+  blockToolbarItems,
   headingToolbarItems,
   markToolbarItems,
-  blockToolbarItems,
-  mediaToolbarItems
+  mediaToolbarItems,
+  textColors
 };

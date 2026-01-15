@@ -134,16 +134,11 @@ export default function ModalBoardManagement() {
 
   if (visible)
     return (
-      <div
-        className="justify-self-center self-center bg-white
-        w-[500px] h-[600px] rounded-[8px] p-4 flex flex-col
-        gap-2 z-50"
-      >
-        <div className="w-full flex justify-between">
+      <div className="z-50 flex h-[600px] w-[500px] flex-col gap-2 self-center justify-self-center rounded-[8px] bg-white p-4">
+        <div className="flex w-full justify-between">
           <h2 className="text-[24px] font-bold">보드관리</h2>
           <button
-            className="w-[36px] h-[36px] flex justify-center items-center
-          cursor-pointer hover:bg-gray-200 hover:rounded-[5px]"
+            className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
             onClick={() => {
               setModalState(null);
             }}
@@ -157,17 +152,12 @@ export default function ModalBoardManagement() {
             />
           </button>
         </div>
-        <ul
-          className="w-full grow border-2 border-[#0099FF] 
-          rounded-[5px]"
-        >
+        <ul className="w-full grow rounded-[5px] border-2 border-[#0099FF]">
           {boardList &&
             boardList.map(item => (
               <li key={`board_management_${item.name}`}>
                 <button
-                  className={`w-full h-full px-3 py-1 cursor-pointer 
-                text-start text-[18px] text-[#0099FF] border-b nth-last-[n]:border-none
-                ${selected?.id === item.id && 'bg-[#0099FF] text-white'}`}
+                  className={`h-full w-full cursor-pointer border-b px-3 py-1 text-start text-[18px] text-[#0099FF] nth-last-[n]:border-none ${selected?.id === item.id && 'bg-[#0099FF] text-white'}`}
                   onClick={() => {
                     if (selected?.id === item.id) {
                       setSelected(null);
@@ -183,13 +173,12 @@ export default function ModalBoardManagement() {
               </li>
             ))}
         </ul>
-        <div className="w-full h-[30px] text-[20px] text-[#0099FF]">
+        <div className="h-[30px] w-full text-[20px] text-[#0099FF]">
           {selected && `Selected: ${selected.name}`}
         </div>
-        <div className="w-full flex gap-2">
+        <div className="flex w-full gap-2">
           <input
-            className="grow p-2 font-bold disabled
-            border border-[#cccccc] rounded-[5px]"
+            className="disabled grow rounded-[5px] border border-[#cccccc] p-2 font-bold"
             type="text"
             inputMode="text"
             ref={inputRef}
@@ -213,8 +202,7 @@ export default function ModalBoardManagement() {
           <div className="flex gap-1">
             {selected ? (
               <button
-                className="w-16 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
-                cursor-pointer rounded-lg hover:bg-blue-600 transition"
+                className="w-16 cursor-pointer rounded-lg bg-blue-400 px-4 py-2 font-[duggeunmo] text-white transition hover:bg-blue-600"
                 onClick={() => {
                   updateBoard(selected.id, input);
                 }}
@@ -223,8 +211,7 @@ export default function ModalBoardManagement() {
               </button>
             ) : (
               <button
-                className="w-16 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
-                cursor-pointer rounded-lg hover:bg-blue-600 transition"
+                className="w-16 cursor-pointer rounded-lg bg-blue-400 px-4 py-2 font-[duggeunmo] text-white transition hover:bg-blue-600"
                 onClick={() => {
                   addBoard(input);
                 }}
@@ -235,8 +222,7 @@ export default function ModalBoardManagement() {
 
             {selected && (
               <button
-                className="w-16 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
-                cursor-pointer rounded-lg hover:bg-red-500 transition"
+                className="w-16 cursor-pointer rounded-lg bg-red-400 px-4 py-2 font-[duggeunmo] text-white transition hover:bg-red-500"
                 onClick={() => {
                   deleteBoard(selected.id);
                 }}

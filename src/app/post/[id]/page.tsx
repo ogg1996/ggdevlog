@@ -49,7 +49,7 @@ export default async function Page({
 
   return (
     <>
-      <div className="relative h-[200px] mb-7">
+      <div className="relative mb-7 h-[200px]">
         <Image
           src={post.thumbnail?.image_url || '/post-thumbnail.webp'}
           alt="포스트 페이지 썸네일"
@@ -57,21 +57,12 @@ export default async function Page({
           fill
           priority
         />
-        <div
-          className="absolute inset-0 bg-[#00000099] 
-          flex flex-col justify-between p-3"
-        >
+        <div className="absolute inset-0 flex flex-col justify-between bg-[#00000099] p-3">
           <PostEditBox id={id} />
-          <h2
-            className="font-[duggeunmo] font-bold
-            text-[24px] text-center text-white self-center"
-          >
+          <h2 className="self-center text-center font-[duggeunmo] text-[24px] font-bold text-white">
             [{post.board.name}] {post.title}
           </h2>
-          <span
-            className="font-[duggeunmo] 
-            font-bold text-white"
-          >
+          <span className="font-[duggeunmo] font-bold text-white">
             {created}
           </span>
         </div>

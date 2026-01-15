@@ -4,8 +4,8 @@ import Image from 'next/image';
 
 import Instance from '@/api/instance';
 
-import addImage from '@/components/tiptap/utils/add-image';
 import { Thumbnail } from '@/components/common/types/types';
+import addImage from '@/components/tiptap/utils/add-image';
 
 interface Props {
   thumbnail: Thumbnail | null;
@@ -58,11 +58,10 @@ export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
   if (thumbnail === null)
     return (
       <button
-        className="relative flex justify-center items-center w-[142px] h-[142px] 
-            border border-[#cccccc] rounded-[5px] cursor-pointer group overflow-hidden"
+        className="group relative flex h-[142px] w-[142px] cursor-pointer items-center justify-center overflow-hidden rounded-[5px] border border-[#cccccc]"
         onClick={handleClickAddThumbnail}
       >
-        <p className="font-bold text-2xl text-[#cccccc]">썸네일</p>
+        <p className="text-2xl font-bold text-[#cccccc]">썸네일</p>
         <Image
           className="absolute z-10 opacity-0 group-hover:opacity-100"
           src="/icon-plus.png"
@@ -71,34 +70,31 @@ export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
           height={96}
           priority
         />
-        <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-60 transition" />
+        <div className="absolute inset-0 bg-green-500 opacity-0 transition group-hover:opacity-60" />
       </button>
     );
 
   return (
     <button
-      className="px-1 relative flex justify-center items-center w-[142px] h-[142px] border
-            border-[#cccccc] rounded-[5px] cursor-pointer group overflow-hidden"
+      className="group relative flex h-[142px] w-[142px] cursor-pointer items-center justify-center overflow-hidden rounded-[5px] border border-[#cccccc] px-1"
       onClick={handleClickRemoveThumbnail}
     >
       <Image
-        className="w-full h-full object-center object-cover
-              z-10 opacity-100 group-hover:opacity-60"
+        className="z-10 h-full w-full object-cover object-center opacity-100 group-hover:opacity-60"
         src={thumbnail.image_url}
         alt="썸네일 이미지"
         fill
         priority
       />
       <Image
-        className="absolute z-10 opacity-0
-              group-hover:opacity-100"
+        className="absolute z-10 opacity-0 group-hover:opacity-100"
         src="/icon-minus.png"
         alt="background"
         width={96}
         height={96}
         priority
       />
-      <div className="absolute inset-0 bg-red-500 opacity-0 group-hover:opacity-60 transition" />
+      <div className="absolute inset-0 bg-red-500 opacity-0 transition group-hover:opacity-60" />
     </button>
   );
 }

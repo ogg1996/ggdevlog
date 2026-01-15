@@ -60,10 +60,7 @@ export default function TiptapToolbar({ editor }: Props) {
   if (!editor || !editorState) return null;
 
   return (
-    <div
-      className="flex flex-wrap justify-center gap-2 
-      pb-3 border-b border-[#cccccc] "
-    >
+    <div className="flex flex-wrap justify-center gap-2 border-b border-[#cccccc] pb-3">
       <ToolbarGroup>
         {headingToolbarItems.map(
           ({ key, text, icon: Icon, action }: ToolbarItem) => (

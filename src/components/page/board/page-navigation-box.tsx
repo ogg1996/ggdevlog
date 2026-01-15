@@ -30,12 +30,11 @@ export default function PageNavigationBox({
     nowPageGroup === totalPageGroup ? totalPage % PAGE_LIMIT : PAGE_LIMIT;
 
   return (
-    <div className="flex justify-center text-[#999999] font-bold">
+    <div className="flex justify-center font-bold text-[#999999]">
       {totalPageGroup > 2 && nowPageGroup !== 1 && (
         <Link
           href={`/board/${boardName}/${1}`}
-          className="w-6 h-6 text-center 
-          hover:border-b-2"
+          className="h-6 w-6 text-center hover:border-b-2"
         >
           {'<<'}
         </Link>
@@ -43,8 +42,7 @@ export default function PageNavigationBox({
       {nowPageGroup !== 1 && (
         <Link
           href={`/board/${boardName}/${(nowPageGroup - 2) * PAGE_LIMIT + 1}`}
-          className="w-6 h-6 text-center 
-          hover:border-b-2"
+          className="h-6 w-6 text-center hover:border-b-2"
         >
           {'<'}
         </Link>
@@ -60,8 +58,7 @@ export default function PageNavigationBox({
       {nowPageGroup !== totalPageGroup && (
         <Link
           href={`/board/${boardName}/${nowPageGroup * PAGE_LIMIT + 1}`}
-          className="w-6 h-6 text-center 
-          hover:border-b-2"
+          className="h-6 w-6 text-center hover:border-b-2"
         >
           {'>'}
         </Link>
@@ -69,8 +66,7 @@ export default function PageNavigationBox({
       {totalPageGroup > 2 && nowPageGroup !== totalPageGroup && (
         <Link
           href={`/board/${boardName}/${(totalPageGroup - 1) * PAGE_LIMIT + 1}`}
-          className="w-6 h-6 text-center 
-          hover:border-b-2"
+          className="h-6 w-6 text-center hover:border-b-2"
         >
           {'>>'}
         </Link>

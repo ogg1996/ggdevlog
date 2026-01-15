@@ -35,31 +35,24 @@ export default function PostMetaForm({
   });
 
   return (
-    <div className="grow flex flex-col gap-2">
+    <div className="flex grow flex-col gap-2">
       <div className="flex flex-col gap-2 sm:flex-row">
         <div ref={boardRef} className="relative">
           <button
-            className={`sm:w-[150px] w-full h-[42px] p-2
-            border border-[#cccccc] rounded-[5px]
-            text-start flex items-center 
-            ${selectActive && 'rounded-[5px_5px_0_0]'}`}
+            className={`flex h-[42px] w-full items-center rounded-[5px] border border-[#cccccc] p-2 text-start sm:w-[150px] ${selectActive && 'rounded-[5px_5px_0_0]'}`}
             onClick={() => {
               setSelectActive(!selectActive);
             }}
           >
             <span className="grow">{board.name}</span>
-            <span className="text-[#cccccc] text-[12px]">▼</span>
+            <span className="text-[12px] text-[#cccccc]">▼</span>
           </button>
           {selectActive && (
-            <div
-              className="w-full max-h-[137px] p-1 bg-white absolute 
-                    border border-[#cccccc] border-t-0
-                    rounded-[0_0_5px_5px] overflow-y-auto z-40"
-            >
+            <div className="absolute z-40 max-h-[137px] w-full overflow-y-auto rounded-[0_0_5px_5px] border border-t-0 border-[#cccccc] bg-white p-1">
               {boardList.map(item => (
                 <button
                   key={`board_${item.name}`}
-                  className="w-full text-start p-1 hover:bg-gray-200"
+                  className="w-full p-1 text-start hover:bg-gray-200"
                   onClick={() => {
                     setBoard({ id: item.id, name: item.name });
                     setSelectActive(false);
@@ -77,8 +70,7 @@ export default function PostMetaForm({
           onBlur={() => setTitle(titleRef.current?.value ?? '')}
           type="text"
           placeholder="제목"
-          className="grow p-2 font-bold border
-              border-[#cccccc] rounded-[5px] focus:outline-none"
+          className="grow rounded-[5px] border border-[#cccccc] p-2 font-bold focus:outline-none"
         />
       </div>
       <textarea
@@ -86,8 +78,7 @@ export default function PostMetaForm({
         defaultValue={description}
         onBlur={() => setDescription(descriptionRef.current?.value ?? '')}
         placeholder="설명"
-        className="sm:grow w-full h-[42px] p-1 font-bold border border-[#cccccc]
-        rounded-[5px] resize-none focus:outline-none"
+        className="h-[42px] w-full resize-none rounded-[5px] border border-[#cccccc] p-1 font-bold focus:outline-none sm:grow"
       />
     </div>
   );

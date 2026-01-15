@@ -14,10 +14,7 @@ export default function TiptapEditor({ editor }: Props) {
   if (!editor) return <div>에이터 로딩중...</div>;
 
   return (
-    <div
-      className="relative w-full p-2
-      border border-[#cccccc] rounded-[5px]"
-    >
+    <div className="relative w-full rounded-[5px] border border-[#cccccc] p-2">
       <TiptapToolbar editor={editor} />
       <EditorContent editor={editor} />
     </div>

@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import Instance from '@/api/instance';
-import useAdminStore from '@/stores/adminStore';
 import { myUpdateTag } from '@/api/revalidate';
+import useAdminStore from '@/stores/adminStore';
 
 export default function PostEditBox({ id }: { id: string }) {
   const { adminState } = useAdminStore();
@@ -37,12 +37,11 @@ export default function PostEditBox({ id }: { id: string }) {
   }
 
   return (
-    <div className="self-end h-[36px] flex ">
+    <div className="flex h-[36px] self-end">
       {adminState && (
         <>
           <Link
-            className="w-[36px] h-[36px] flex justify-center items-center
-            cursor-pointer hover:bg-gray-400 hover:rounded-[5px]"
+            className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-400"
             href={`/edit/${id}`}
           >
             <Image
@@ -54,8 +53,7 @@ export default function PostEditBox({ id }: { id: string }) {
             />
           </Link>
           <button
-            className={`w-[36px] h-[36px] flex justify-center items-center
-            cursor-pointer hover:bg-gray-400 hover:rounded-[5px]`}
+            className={`flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-400`}
             onClick={handleDelete}
           >
             <Image

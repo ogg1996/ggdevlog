@@ -36,11 +36,7 @@ export default function Tooltip({ text, targetRect, visible }: Props) {
   return (
     <Portal>
       <div
-        className="font-[pretendard]
-        fixed px-2 py-1 border border-[#999999]
-        rounded-[5px] bg-white
-        text-[14px] text-[#333333] text-center
-        font-bold whitespace-nowrap"
+        className="fixed rounded-[5px] border border-[#999999] bg-white px-2 py-1 text-center font-[pretendard] text-[14px] font-bold whitespace-nowrap text-[#333333]"
         style={{
           left: pos.x,
           top: pos.y,

@@ -1,7 +1,7 @@
 import '@/components/tiptap/styles/tiptap.css';
 
-import { JSONContent } from '@tiptap/react';
 import { generateHTML } from '@tiptap/html';
+import { JSONContent } from '@tiptap/react';
 
 import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
 import { htmlCodeHighlight } from '@/components/tiptap/utils/html-code-highlight';
@@ -15,7 +15,7 @@ export default function TiptapViewer({ content }: Props) {
 
   return (
     <div
-      className="tiptap prose focus:outline-none max-w-none"
+      className="tiptap prose max-w-none focus:outline-none"
       dangerouslySetInnerHTML={{ __html: htmlCodeHighlight(html) }}
     />
   );

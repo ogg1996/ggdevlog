@@ -28,20 +28,13 @@ export default function Introduce() {
 
   return (
     <div>
-      <div
-        className="bg-[#0099FF] mb-2 px-2 py-1 rounded-[4px]
-        flex justify-between items-center gap-2"
-      >
-        <div
-          className="font-[duggeunmo]
-          text-[24px] text-white font-bold"
-        >
+      <div className="mb-2 flex items-center justify-between gap-2 rounded-[4px] bg-[#0099FF] px-2 py-1">
+        <div className="font-[duggeunmo] text-[24px] font-bold text-white">
           Introduce
         </div>
         {adminState && !edit && (
           <button
-            className="w-[36px] h-[36px] flex justify-center items-center
-            cursor-pointer hover:bg-gray-200 hover:rounded-[5px]"
+            className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
             onClick={() => {
               setEdit(!edit);
             }}

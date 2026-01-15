@@ -68,18 +68,16 @@ export default function IntroduceEditor({
       <div className="min-h-[544px]">
         <TiptapEditor editor={editor} />
       </div>
-      <div className="flex justify-end mt-5 gap-2">
+      <div className="mt-5 flex justify-end gap-2">
         <button
           onClick={handleCancel}
-          className="w-24 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
-              cursor-pointer rounded-lg hover:bg-red-500 transition"
+          className="w-24 cursor-pointer rounded-lg bg-red-400 px-4 py-2 font-[duggeunmo] text-white transition hover:bg-red-500"
         >
           취소
         </button>
         <button
           onClick={handleSave}
-          className="w-24 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
-            cursor-pointer rounded-lg hover:bg-blue-600 transition"
+          className="w-24 cursor-pointer rounded-lg bg-blue-400 px-4 py-2 font-[duggeunmo] text-white transition hover:bg-blue-600"
         >
           완료
         </button>

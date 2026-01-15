@@ -14,7 +14,7 @@ export default function PageNavigationLink({
   return (
     <Link
       href={`/board/${boardName}/${page}`}
-      className={`w-6 h-6 text-center hover:border-b-2 ${
+      className={`h-6 w-6 text-center hover:border-b-2 ${
         nowPage === page && 'text-[#333333]'
       }`}
     >

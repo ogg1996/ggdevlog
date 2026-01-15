@@ -13,9 +13,9 @@ import { Board, Post, Thumbnail } from '@/components/common/types/types';
 import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
 import { extractImages } from '@/components/tiptap/utils/extract-images';
 
+import PostActionButtons from '@/components/page/edit/post-editor/post-action-buttons';
 import PostMetaForm from '@/components/page/edit/post-editor/post-meta-form';
 import PostThumbnailForm from '@/components/page/edit/post-editor/post-thumbnail-form';
-import PostActionButtons from '@/components/page/edit/post-editor/post-action-buttons';
 import TiptapEditor from '@/components/tiptap/tiptap-editor';
 
 interface Props {
@@ -117,7 +117,7 @@ export default function PostEditor({ boardList, post }: Props) {
 
   return (
     <div>
-      <div className="flex gap-2 mb-4">
+      <div className="mb-4 flex gap-2">
         <PostMetaForm
           boardList={boardList}
           board={board}

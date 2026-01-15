@@ -68,7 +68,7 @@ export default function ActivityList() {
   }, [activity]);
 
   return (
-    <div className="flex overflow-x-auto max-w-[600px]" ref={scrollRef}>
+    <div className="flex max-w-[600px] overflow-x-auto" ref={scrollRef}>
       {activity.map((week, weekIndex) => (
         <div key={`week-${weekIndex}`} className="grid grid-rows-7">
           {week.map((day, dayIndex) => (

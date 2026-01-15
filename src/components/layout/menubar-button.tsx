@@ -8,8 +8,7 @@ export default function MenubarButton() {
 
   return (
     <button
-      className="w-[44px] h-[44px] flex justify-center items-center
-      cursor-pointer hover:bg-gray-200 hover:rounded-[5px]"
+      className="flex h-[44px] w-[44px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
       onClick={() => {
         setActive(true);
       }}

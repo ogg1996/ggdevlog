@@ -35,20 +35,12 @@ export default function IntroduceViewer({ content }: Props) {
       >
         <TiptapViewer content={content} />
         {!open && (
-          <div
-            className="
-              absolute bottom-0 left-0 right-0 h-30
-              pointer-events-none
-              bg-gradient-to-t from-white to-transparent
-            "
-          />
+          <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-30 bg-gradient-to-t from-white to-transparent" />
         )}
       </div>
       {open ? (
         <button
-          className="w-full h-12 font-bold cursor-pointer
-         text-[#999999] text-[18px] rounded-[5px]
-         hover:text-[#333333] hover:bg-[#eeeeee]"
+          className="h-12 w-full cursor-pointer rounded-[5px] text-[18px] font-bold text-[#999999] hover:bg-[#eeeeee] hover:text-[#333333]"
           onClick={() => {
             setOpen(!open);
           }}
@@ -57,9 +49,7 @@ export default function IntroduceViewer({ content }: Props) {
         </button>
       ) : (
         <button
-          className="w-full h-12 font-bold cursor-pointer
-         text-[#999999] text-[18px] rounded-[5px]
-         hover:text-[#333333] hover:bg-[#eeeeee]"
+          className="h-12 w-full cursor-pointer rounded-[5px] text-[18px] font-bold text-[#999999] hover:bg-[#eeeeee] hover:text-[#333333]"
           onClick={() => {
             setOpen(!open);
           }}
