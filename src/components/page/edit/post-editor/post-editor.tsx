@@ -48,7 +48,7 @@ export default function PostEditor({ boardList, post }: Props) {
   }, [post, editor]);
 
   function validatePost(): string | null {
-    if (title.trim()) return '제목을 작성해야 합니다.';
+    if (!title.trim()) return '제목을 작성해야 합니다.';
     if (title.length > 25) return '제목은 25자 이내로 작성해야 합니다.';
     if (!description.trim()) return '설명을 작성해야 합니다.';
     return null;
@@ -70,7 +70,7 @@ export default function PostEditor({ boardList, post }: Props) {
       const validateResult = validatePost();
 
       if (validateResult) {
-        alert(validatePost);
+        alert(validateResult);
         return;
       }
 
