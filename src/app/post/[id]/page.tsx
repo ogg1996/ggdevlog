@@ -3,10 +3,9 @@ import { notFound } from 'next/navigation';
 
 import { getPost } from '@/api/fetch';
 
+import dayjs from '@/components/common/utils/dayjs';
 import PostEditBox from '@/components/page/post/post-edit-box';
 import TiptapViewer from '@/components/tiptap/tiptap-viewer';
-
-import dayjs from '@/components/common/utils/dayjs';
 
 export async function generateMetadata({
   params

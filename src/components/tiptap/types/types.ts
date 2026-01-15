@@ -30,4 +30,4 @@ type EditorState = {
 
 type EditorKey = keyof EditorState['active'];
 
-export { type ToolbarItem, type EditorState, type EditorKey };
+export { type EditorKey, type EditorState, type ToolbarItem };

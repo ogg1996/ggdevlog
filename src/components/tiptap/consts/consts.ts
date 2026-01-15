@@ -15,8 +15,10 @@ import {
 } from 'lucide-react';
 
 import Instance from '@/api/instance';
-import { ToolbarItem } from '@/components/tiptap/types/types';
+
 import addImage from '@/components/tiptap/utils/add-image';
+
+import { ToolbarItem } from '@/components/tiptap/types/types';
 
 const textColors: string[] = [
   '#EF4444',

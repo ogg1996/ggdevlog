@@ -5,23 +5,23 @@ import { useEditorState } from '@tiptap/react';
 import { Baseline, Highlighter } from 'lucide-react';
 
 import {
+  bgColors,
+  blockToolbarItems,
   headingToolbarItems,
   markToolbarItems,
-  blockToolbarItems,
   mediaToolbarItems,
-  textColors,
-  bgColors
+  textColors
 } from '@/components/tiptap/consts/consts';
 
+import ColorDropdown from '@/components/tiptap/toolbar/color-button';
+import ToolbarButton from '@/components/tiptap/toolbar/toolbar-button';
+import ToolbarGroup from '@/components/tiptap/toolbar/toolbar-group';
+import ToolbarLine from '@/components/tiptap/toolbar/toolbar-line';
 import {
   EditorKey,
   EditorState,
   ToolbarItem
 } from '@/components/tiptap/types/types';
-import ToolbarGroup from '@/components/tiptap/toolbar/toolbar-group';
-import ToolbarButton from '@/components/tiptap/toolbar/toolbar-button';
-import ToolbarLine from '@/components/tiptap/toolbar/toolbar-line';
-import ColorDropdown from '@/components/tiptap/toolbar/color-button';
 
 interface Props {
   editor: Editor;

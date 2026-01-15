@@ -3,8 +3,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
-import Instance from '@/api/instance';
 import { getBoard } from '@/api/fetch';
+import Instance from '@/api/instance';
 import { myUpdateTag } from '@/api/revalidate';
 
 import useModalStore from '@/stores/modalStore';

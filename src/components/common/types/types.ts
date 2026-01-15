@@ -22,4 +22,4 @@ type Post = {
   updated_at: Date;
 };
 
-export { type Board, type Thumbnail, type Post };
+export { type Board, type Post, type Thumbnail };
