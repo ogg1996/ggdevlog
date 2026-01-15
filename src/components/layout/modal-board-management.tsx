@@ -189,7 +189,7 @@ export default function ModalBoardManagement() {
         <div className="w-full flex gap-2">
           <input
             className="grow p-2 font-bold disabled
-            border border-[rgb(204,204,204)] rounded-[5px]"
+            border border-[#cccccc] rounded-[5px]"
             type="text"
             inputMode="text"
             ref={inputRef}

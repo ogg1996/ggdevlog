@@ -16,7 +16,7 @@ export default function TiptapEditor({ editor }: Props) {
   return (
     <div
       className="relative w-full p-2
-      border border-[rgb(204,204,204)] rounded-[5px]"
+      border border-[#cccccc] rounded-[5px]"
     >
       <TiptapToolbar editor={editor} />
       <EditorContent editor={editor} />

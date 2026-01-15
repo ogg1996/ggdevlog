@@ -69,7 +69,7 @@ export default function ColorDropdown({
             setActive(false);
           }}
           className="cursor-pointer w-5 h-5 rounded-full 
-            border-[3px] border-[rgb(204,204,204)] relative"
+            border-[3px] border-[#cccccc] relative"
         >
           <div
             className="w-[16px] h-[2px] rotate-45 bg-[#cccccc]
