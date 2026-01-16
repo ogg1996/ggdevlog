@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import dayjs from '@/utils/dayjs';
+import dayjs from '@/components/common/utils/dayjs';
 
 interface Props {
   id: number;
@@ -21,40 +21,27 @@ export default function PostItem({
   const created = dayjs(createdAt).tz().format('YYYY. MM. DD');
 
   return (
-    <Link className="h-[145px] mb-7 flex group" href={`/post/${id}`}>
-      <div className="grow min-w-0 ">
-        <h2
-          className="h-[30px] mb-3 font-bold 
-          text-[20px] text-[#555555] truncate
-        group-hover:text-[#000000] group-hover:underline"
-        >
+    <Link className="group mb-7 flex h-[145px]" href={`/post/${id}`}>
+      <div className="min-w-0 grow">
+        <h2 className="mb-3 h-[30px] truncate text-[20px] font-bold text-[#555555] group-hover:text-[#000000] group-hover:underline">
           {title}
         </h2>
-        <p
-          className="h-[63px] mb-5 text-[14px] text-[#999999] 
-          overflow-hidden text-ellipsis "
-        >
+        <p className="mb-5 h-[63px] overflow-hidden text-[14px] text-ellipsis text-[#999999]">
           {description}
         </p>
         <p className="h-[18px] text-[12px] text-[#999999]">{created}</p>
       </div>
-      <div
-        className="relative ml-10 flex-shrink-0
-        w-[120px] h-[145px] overflow-hidden"
-      >
+      <div className="relative ml-10 h-[145px] w-[120px] flex-shrink-0 overflow-hidden">
         {thumbnailUrl ? (
           <Image
-            className="w-full h-full object-center object-cover"
+            className="h-full w-full object-cover object-center"
             src={thumbnailUrl}
             alt="썸네일 이미지"
             fill
             priority
           />
         ) : (
-          <div
-            className="w-full h-full flex justify-center items-center 
-          bg-[#999999] text-white font-bold"
-          >
+          <div className="flex h-full w-full items-center justify-center bg-[#999999] font-bold text-white">
             No Thumbnail
           </div>
         )}

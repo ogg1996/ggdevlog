@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import 'react-quill-new/dist/quill.snow.css';
+@plugin "@tailwindcss/typography";
 
 @font-face {
   font-family: 'duggeunmo';
@@ -15,46 +15,4 @@ html,
 body {
   box-sizing: border-box;
   min-height: 100vh;
-}
-
-/* react-quill css custom */
-.viewer img {
-  cursor: default !important;
-}
-
-.quill .ql-editor {
-  min-height: 500px;
-  max-height: 500px;
-}
-
-.quill {
-  border: 1px solid rgb(204, 204, 204);
-  border-radius: 6px;
-}
-
-.ql-toolbar {
-  border: none !important;
-  border-bottom: 1px solid rgb(204, 204, 204) !important;
-}
-
-.ql-container {
-  border: none !important;
-  font-size: 16px !important;
-  font-family: 'pretendard' !important;
-}
-
-.ql-editor > p > img {
-  padding: 10px;
-}
-
-.ql-editor > ol {
-  padding: 0 !important;
-}
-
-.ql-code-block-container {
-  overflow-x: auto !important;
-}
-
-.ql-code-block-container > .ql-code-block {
-  white-space: pre;
 }

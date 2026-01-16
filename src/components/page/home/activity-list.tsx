@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import Instance from '@/api/instance';
 
-import dayjs from '@/utils/dayjs';
+import dayjs from '@/components/common/utils/dayjs';
 
 import ActivityItem from '@/components/page/home/activity-item';
 
@@ -26,7 +26,7 @@ export default function ActivityList() {
         ])
       );
 
-      const start = dayjs.tz('2025-12-22');
+      const start = dayjs.tz('2026-01-12');
       const end = dayjs();
 
       const resultArr: ActivityItem[][] = [];
@@ -68,7 +68,7 @@ export default function ActivityList() {
   }, [activity]);
 
   return (
-    <div className="flex overflow-x-auto max-w-[600px]" ref={scrollRef}>
+    <div className="flex max-w-[600px] overflow-x-auto" ref={scrollRef}>
       {activity.map((week, weekIndex) => (
         <div key={`week-${weekIndex}`} className="grid grid-rows-7">
           {week.map((day, dayIndex) => (

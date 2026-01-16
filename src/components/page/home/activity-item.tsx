@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import ActivityTooltip from '@/components/page/home/activity-tooltip';
+import Tooltip from '@/components/common/tooltip';
 
 type ActivityItem = {
   date: string;
@@ -17,12 +17,12 @@ export default function ActivityItem({ day }: Props) {
   const [rect, setRect] = useState<DOMRect | null>(null);
 
   const text = `<${day.date}> ${day.activityCount}회`;
+
   return (
     <>
       <div
         ref={ref}
-        className="relative w-6 h-6 group
-        flex justify-center items-center"
+        className="group relative flex h-6 w-6 items-center justify-center"
         onMouseEnter={() => {
           if (ref.current) setRect(ref.current.getBoundingClientRect());
           setHover(true);
@@ -30,16 +30,16 @@ export default function ActivityItem({ day }: Props) {
         onMouseLeave={() => setHover(false)}
       >
         <div
-          className={`w-5 h-5 rounded-sm ${
+          className={`h-5 w-5 rounded-sm ${
             day.activityCount > 2
               ? 'bg-blue-400'
               : day.activityCount > 0
-              ? 'bg-blue-300'
-              : 'bg-gray-600'
+                ? 'bg-blue-300'
+                : 'bg-gray-600'
           }`}
         />
       </div>
-      <ActivityTooltip text={text} visible={hover} targetRect={rect} />
+      <Tooltip text={text} visible={hover} targetRect={rect} />
     </>
   );
 }

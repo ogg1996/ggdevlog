@@ -6,10 +6,10 @@ import Portal from '@/components/common/portal';
 interface Props {
   text: string;
   targetRect: DOMRect | null;
-  visible: boolean;
+  visible: boolean | undefined;
 }
 
-export default function ActivityTooltip({ text, targetRect, visible }: Props) {
+export default function Tooltip({ text, targetRect, visible }: Props) {
   const pos = useMemo(() => {
     if (!targetRect) return null;
 
@@ -36,11 +36,7 @@ export default function ActivityTooltip({ text, targetRect, visible }: Props) {
   return (
     <Portal>
       <div
-        className="font-[pretendard] w-[150px]
-        fixed py-1 border border-[#333333]
-        rounded-[4px] bg-[#eeeeee]
-        text-[14px] text-[#333333] text-center
-        font-bold whitespace-nowrap"
+        className="fixed rounded-[5px] border border-[#999999] bg-white px-2 py-1 text-center font-[pretendard] text-[14px] font-bold whitespace-nowrap text-[#333333]"
         style={{
           left: pos.x,
           top: pos.y,

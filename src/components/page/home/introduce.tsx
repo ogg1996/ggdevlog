@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
+import { JSONContent } from '@tiptap/react';
+
 import Instance from '@/api/instance';
 
 import useAdminStore from '@/stores/adminStore';
@@ -13,14 +15,12 @@ import IntroduceViewer from '@/components/page/home/introduce-viewer';
 export default function Introduce() {
   const { adminState } = useAdminStore();
   const [edit, setEdit] = useState(false);
-  const [originalContent, setOriginalContent] = useState('');
-  const [originalImages, setOriginalImages] = useState<string[]>([]);
+  const [content, setContent] = useState<JSONContent | null>(null);
 
   useEffect(() => {
     async function init() {
       const res = await Instance.get('/introduce').then(res => res.data);
-      setOriginalImages(res.data.images);
-      setOriginalContent(res.data.content);
+      setContent(res.data.content);
     }
 
     init();
@@ -28,20 +28,13 @@ export default function Introduce() {
 
   return (
     <div>
-      <div
-        className="bg-[#0099FF] mb-2 px-2 py-1 rounded-[4px]
-        flex justify-between items-center gap-2"
-      >
-        <div
-          className="font-[duggeunmo]
-          text-[24px] text-white font-bold"
-        >
+      <div className="mb-2 flex items-center justify-between gap-2 rounded-[4px] bg-[#0099FF] px-2 py-1">
+        <div className="font-[duggeunmo] text-[24px] font-bold text-white">
           Introduce
         </div>
         {adminState && !edit && (
           <button
-            className="w-[36px] h-[36px] flex justify-center items-center
-            cursor-pointer hover:bg-gray-200 hover:rounded-[5px]"
+            className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
             onClick={() => {
               setEdit(!edit);
             }}
@@ -56,17 +49,17 @@ export default function Introduce() {
           </button>
         )}
       </div>
-      {!edit ? (
-        <IntroduceViewer content={originalContent} />
-      ) : (
-        <IntroduceEditor
-          originalContent={originalContent}
-          setOriginalContent={setOriginalContent}
-          originalImages={originalImages}
-          setOriginalImages={setOriginalImages}
-          setEdit={setEdit}
-        />
-      )}
+      {content !== null &&
+        (!edit ? (
+          <IntroduceViewer content={content} />
+        ) : (
+          <IntroduceEditor
+            content={content}
+            setContent={setContent}
+            setEdit={setEdit}
+          />
+        ))}
+      {}
     </div>
   );
 }

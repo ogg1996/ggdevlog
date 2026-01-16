@@ -48,17 +48,15 @@ export default function ModalLogin() {
 
   return (
     <div
-      className="bg-white w-[300px] h-[250px] self-center justify-self-center
-      rounded-[8px] p-4 flex flex-col justify-between items-center gap-2"
+      className="flex h-[250px] w-[300px] flex-col items-center justify-between gap-2 self-center justify-self-center rounded-[8px] bg-white p-4"
       onClick={e => {
         e.stopPropagation();
       }}
     >
-      <div className="w-full flex justify-between">
+      <div className="flex w-full justify-between">
         <h2 className="text-[24px] font-bold">로그인</h2>
         <button
-          className="w-[36px] h-[36px] flex justify-center items-center
-                        cursor-pointer hover:bg-gray-200 hover:rounded-[5px]"
+          className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
           onClick={() => {
             setModalState(null);
           }}
@@ -82,28 +80,26 @@ export default function ModalLogin() {
           }}
           type="password"
           placeholder="비밀번호를 입력하세요.."
-          className="w-full p-2 mb-1 border-b"
+          className="mb-1 w-full border-b p-2"
           onKeyDown={e => {
             if (e.key === 'Enter') {
               handleLogin();
             }
           }}
         />
-        <p className="h-[27px] text-center text-red-600 text-[16px]">
+        <p className="h-[27px] text-center text-[16px] text-red-600">
           {message}
         </p>
       </div>
       <div className="flex gap-4">
         <button
-          className="w-20 px-4 py-2 bg-blue-400 text-white font-bold 
-          cursor-pointer rounded-lg hover:bg-blue-600 transition"
+          className="w-20 cursor-pointer rounded-lg bg-blue-400 px-4 py-2 font-bold text-white transition hover:bg-blue-600"
           onClick={handleLogin}
         >
           로그인
         </button>
         <button
-          className="w-20 px-4 py-2 bg-red-400 text-white font-bold 
-            cursor-pointer rounded-lg hover:bg-red-500 transition"
+          className="w-20 cursor-pointer rounded-lg bg-red-400 px-4 py-2 font-bold text-white transition hover:bg-red-500"
           onClick={() => setModalState(null)}
         >
           취소

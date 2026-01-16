@@ -1,51 +1,30 @@
 'use client';
-import { Suspense, useEffect, useState } from 'react';
 
-import dynamic from 'next/dynamic';
+import { useEditor, JSONContent } from '@tiptap/react';
 
 import Instance from '@/api/instance';
 
-const QuillEditor = dynamic(() => import('@/components/common/quill-editor'), {
-  ssr: false
-});
+import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
+import { extractImages } from '@/components/tiptap/utils/extract-images';
+
+import TiptapEditor from '@/components/tiptap/tiptap-editor';
 
 interface Props {
-  originalContent: string;
-  setOriginalContent: React.Dispatch<React.SetStateAction<string>>;
-  originalImages: string[];
-  setOriginalImages: React.Dispatch<React.SetStateAction<string[]>>;
+  content: JSONContent;
+  setContent: React.Dispatch<React.SetStateAction<JSONContent>>;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function IntroduceEditor({
-  originalContent,
-  setOriginalContent,
-  originalImages,
-  setOriginalImages,
+  content,
+  setContent,
   setEdit
 }: Props) {
-  const [tempImages, setTempImages] = useState<string[]>(originalImages);
-  const [content, setContent] = useState(originalContent);
+  const editor = useEditor(tiptapConfig);
 
-  useEffect(() => {
-    async function init() {
-      try {
-        const access = await Instance.get('/auth/accessCheck').then(
-          res => res.data.success
-        );
+  if (!editor) return null;
 
-        if (access) {
-        } else {
-          alert('접근 권한이 없습니다.');
-          setEdit(false);
-        }
-      } catch {
-        alert('서버 오류');
-      }
-    }
-
-    init();
-  }, []);
+  editor.commands.setContent(content);
 
   async function handleSave() {
     try {
@@ -54,30 +33,18 @@ export default function IntroduceEditor({
       );
 
       if (access) {
+        const content = editor.getJSON();
         const images: string[] = [];
-        if (tempImages.length !== 0) {
-          const deleteImages: string[] = [];
-          for (const image of tempImages) {
-            if (!content.includes(image)) {
-              deleteImages.push(image);
-            } else {
-              images.push(image);
-            }
-          }
-          if (deleteImages.length !== 0) {
-            await Instance.delete('/img', {
-              data: deleteImages
-            });
-          }
-        }
+
+        extractImages(content, images);
+
         const res = await Instance.put('/introduce', {
           content,
           images
         }).then(res => res.data);
 
         alert(res.message);
-        setOriginalContent(res.data.content);
-        setOriginalImages(res.data.images);
+        setContent(res.data.content);
         setEdit(false);
       } else {
         alert('접근 권한이 없습니다.');
@@ -87,56 +54,30 @@ export default function IntroduceEditor({
     }
   }
 
-  async function handleCancel() {
+  function handleCancel() {
     if (
       confirm('작성 중인 내용이 전부 사라집니다.\n정말로 취소하시겠습니까?')
     ) {
-      try {
-        if (tempImages.length !== 0) {
-          const deleteImages: string[] = [];
-          for (const image of tempImages) {
-            if (!originalContent.includes(image)) {
-              deleteImages.push(image);
-            }
-          }
-          if (deleteImages.length !== 0) {
-            await Instance.delete('/img', {
-              data: deleteImages
-            });
-          }
-        }
-        setEdit(false);
-        setContent(originalContent);
-        alert('취소되었습니다.');
-      } catch {
-        alert('서버 오류');
-      }
+      setEdit(false);
+      alert('취소되었습니다.');
     }
   }
 
   return (
     <div>
       <div className="min-h-[544px]">
-        <Suspense fallback={<div>에이터 로딩중...</div>}>
-          <QuillEditor
-            content={content}
-            setContent={setContent}
-            setTempImages={setTempImages}
-          />
-        </Suspense>
+        <TiptapEditor editor={editor} />
       </div>
-      <div className="flex justify-end mt-5 gap-2">
+      <div className="mt-5 flex justify-end gap-2">
         <button
           onClick={handleCancel}
-          className="w-24 font-[duggeunmo] px-4 py-2 bg-red-400 text-white
-              cursor-pointer rounded-lg hover:bg-red-500 transition"
+          className="w-24 cursor-pointer rounded-lg bg-red-400 px-4 py-2 font-[duggeunmo] text-white transition hover:bg-red-500"
         >
           취소
         </button>
         <button
           onClick={handleSave}
-          className="w-24 font-[duggeunmo] px-4 py-2 bg-blue-400 text-white
-            cursor-pointer rounded-lg hover:bg-blue-600 transition"
+          className="w-24 cursor-pointer rounded-lg bg-blue-400 px-4 py-2 font-[duggeunmo] text-white transition hover:bg-blue-600"
         >
           완료
         </button>

@@ -44,7 +44,7 @@ export default async function Page({
 
   return (
     <>
-      <div className="relative h-[200px] mb-7">
+      <div className="relative mb-7 h-[200px]">
         <Image
           src="/board-thumbnail.webp"
           alt="보드 페이지 썸네일"
@@ -52,11 +52,8 @@ export default async function Page({
           fill
           priority
         />
-        <div
-          className="absolute inset-0 bg-[#00000099] 
-          flex justify-center items-center"
-        >
-          <h2 className="font-[duggeunmo] font-bold text-[32px] text-white">
+        <div className="absolute inset-0 flex items-center justify-center bg-[#00000099]">
+          <h2 className="font-[duggeunmo] text-[32px] font-bold text-white">
             {name}({posts.total})
           </h2>
         </div>

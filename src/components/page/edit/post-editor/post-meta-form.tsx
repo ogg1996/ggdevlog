@@ -1,0 +1,85 @@
+'use client';
+
+import { useRef, useState } from 'react';
+
+import { Board } from '@/components/common/types/types';
+import useOnClickOutside from '@/hooks/useOnCilckOutside';
+
+interface Props {
+  boardList: Board[];
+  board: Board;
+  title: string;
+  description: string;
+  setBoard: React.Dispatch<React.SetStateAction<Board>>;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  setDescription: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function PostMetaForm({
+  boardList,
+  board,
+  title,
+  description,
+  setBoard,
+  setTitle,
+  setDescription
+}: Props) {
+  const boardRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+
+  const [selectActive, setSelectActive] = useState(false);
+
+  useOnClickOutside(boardRef, () => {
+    setSelectActive(false);
+  });
+
+  return (
+    <div className="flex grow flex-col gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <div ref={boardRef} className="relative">
+          <button
+            className={`flex h-[42px] w-full items-center rounded-[5px] border border-[#cccccc] p-2 text-start sm:w-[150px] ${selectActive && 'rounded-[5px_5px_0_0]'}`}
+            onClick={() => {
+              setSelectActive(!selectActive);
+            }}
+          >
+            <span className="grow">{board.name}</span>
+            <span className="text-[12px] text-[#cccccc]">▼</span>
+          </button>
+          {selectActive && (
+            <div className="absolute z-40 max-h-[137px] w-full overflow-y-auto rounded-[0_0_5px_5px] border border-t-0 border-[#cccccc] bg-white p-1">
+              {boardList.map(item => (
+                <button
+                  key={`board_${item.name}`}
+                  className="w-full p-1 text-start hover:bg-gray-200"
+                  onClick={() => {
+                    setBoard({ id: item.id, name: item.name });
+                    setSelectActive(false);
+                  }}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        <input
+          ref={titleRef}
+          defaultValue={title}
+          onBlur={() => setTitle(titleRef.current?.value ?? '')}
+          type="text"
+          placeholder="제목"
+          className="grow rounded-[5px] border border-[#cccccc] p-2 font-bold focus:outline-none"
+        />
+      </div>
+      <textarea
+        ref={descriptionRef}
+        defaultValue={description}
+        onBlur={() => setDescription(descriptionRef.current?.value ?? '')}
+        placeholder="설명"
+        className="h-[42px] w-full resize-none rounded-[5px] border border-[#cccccc] p-1 font-bold focus:outline-none sm:grow"
+      />
+    </div>
+  );
+}

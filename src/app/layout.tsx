@@ -30,10 +30,7 @@ export default function RootLayout({
       <body className={`${dungGeunmoMo.className}`} spellCheck="false">
         <Header />
         <ClientLayout>
-          <main
-            className="font-[pretendard] max-w-[800px] mx-auto
-            px-6 pt-15 py-6"
-          >
+          <main className="mx-auto max-w-[800px] px-6 py-6 pt-15 font-[pretendard]">
             {children}
           </main>
         </ClientLayout>

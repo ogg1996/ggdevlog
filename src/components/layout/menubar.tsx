@@ -32,15 +32,10 @@ export default function Menubar() {
   }, []);
 
   return (
-    <div
-      className="pl-2 pr-2 min-h-[100vh] flex flex-col justify-self-start
-      bg-white fixed z-50 text-[16px] font-bold text-[#0099FF] gap-4
-      border-r-[2px] border-[#0099FF88]"
-    >
-      <div className="pr-6 flex items-center gap-2 h-[50px]">
+    <div className="fixed z-50 flex min-h-[100vh] flex-col gap-4 justify-self-start border-r-[2px] border-[#0099FF88] bg-white pr-2 pl-2 text-[16px] font-bold text-[#0099FF]">
+      <div className="flex h-[50px] items-center gap-2 pr-6">
         <button
-          className="w-[44px] h-[44px] flex justify-center items-center
-          cursor-pointer hover:bg-gray-200 hover:rounded-[5px]"
+          className="flex h-[44px] w-[44px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
           onClick={() => {
             setActive(false);
           }}
@@ -53,7 +48,7 @@ export default function Menubar() {
             priority
           />
         </button>
-        <Link className="h-[60px] flex items-center" href={'/'}>
+        <Link className="flex h-[60px] items-center" href={'/'}>
           <Image
             src="/logo.webp"
             alt="로고 아이콘"
@@ -68,8 +63,7 @@ export default function Menubar() {
         {adminState && (
           <div className="flex">
             <Link
-              className="w-[36px] h-[36px] flex justify-center items-center
-              cursor-pointer hover:bg-gray-200 hover:rounded-[5px]"
+              className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
               href={'/edit'}
               onClick={() => {
                 setActive(false);
@@ -84,8 +78,7 @@ export default function Menubar() {
               />
             </Link>
             <button
-              className={`w-[36px] h-[36px] flex justify-center items-center
-              cursor-pointer hover:bg-gray-200 hover:rounded-[5px]`}
+              className={`flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200`}
               onClick={() => {
                 setModalState('boardManagement');
                 setActive(false);
@@ -105,22 +98,21 @@ export default function Menubar() {
       <ul>
         {!boardList ? (
           <>
-            <li className="h-[40px] flex items-center">
-              <div className="block w-full h-[32px] bg-gray-200" />
+            <li className="flex h-[40px] items-center">
+              <div className="block h-[32px] w-full bg-gray-200" />
             </li>
-            <li className="h-[40px] flex items-center">
-              <div className="block w-full h-[32px] bg-gray-200" />
+            <li className="flex h-[40px] items-center">
+              <div className="block h-[32px] w-full bg-gray-200" />
             </li>
-            <li className="h-[40px] flex items-center">
-              <div className="block w-full h-[32px] bg-gray-200" />
+            <li className="flex h-[40px] items-center">
+              <div className="block h-[32px] w-full bg-gray-200" />
             </li>
           </>
         ) : (
           boardList.map(item => (
             <li className="h-[40px]" key={`menu_board_${item.name}`}>
               <Link
-                className={`block leading-[40px] text-[18px] text-center w-full h-full
-                cursor-pointer ${
+                className={`block h-full w-full cursor-pointer text-center text-[18px] leading-[40px] ${
                   pathName.includes(`/board/${item.name}/`)
                     ? 'bg-[#0099FF] text-white'
                     : 'hover:bg-gray-200'

@@ -1,0 +1,190 @@
+.tiptap {
+  font-size: 16px;
+  line-height: 1.75;
+  font-weight: 600;
+}
+
+.tiptap.editor {
+  height: 550px;
+  overflow-y: auto;
+}
+
+.tiptap p {
+  margin: 0.75rem 0;
+}
+
+.tiptap h1,
+.tiptap h2,
+.tiptap h3 {
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.tiptap h1 {
+  font-size: 2rem;
+}
+
+.tiptap h2 {
+  font-size: 1.75rem;
+}
+
+.tiptap h3 {
+  font-size: 1.5rem;
+}
+
+.tiptap blockquote {
+  font-style: normal;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-left: 4px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+}
+
+.tiptap blockquote p {
+  margin: 0;
+}
+
+.tiptap blockquote p::before,
+.tiptap blockquote p::after {
+  content: none;
+}
+
+.tiptap strong {
+  font-weight: 700;
+}
+
+.tiptap em {
+  font-style: italic;
+}
+
+.tiptap s {
+  text-decoration: line-through;
+}
+
+.tiptap u {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.tiptap ul,
+.tiptap ol {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.tiptap li {
+  margin: 0;
+}
+
+.tiptap li::marker {
+  color: #364153;
+  font-weight: 700;
+}
+
+.tiptap li > p {
+  margin: 0;
+}
+
+.tiptap ul {
+  list-style: disc;
+}
+.tiptap ol {
+  list-style: decimal;
+}
+
+.tiptap a {
+  color: #2563eb;
+  opacity: 0.7;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.tiptap a:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.tiptap div.ProseMirror-selectednode,
+.tiptap img.ProseMirror-selectednode {
+  margin-left: 4px;
+  width: 99%;
+  box-shadow: 0 0 0 4px #60a5fa;
+}
+
+.tiptap img {
+  margin-left: 4px;
+  max-width: 99%;
+  height: auto;
+}
+
+.tiptap iframe {
+  margin-left: 4px;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+.tiptap div.ProseMirror-selectednode iframe {
+  margin-left: 0;
+}
+
+.tiptap pre {
+  margin: 0.5rem 0;
+  padding: 0.9rem 1rem;
+  border-radius: 0.75rem;
+  color: #d4d4d4;
+  overflow-x: auto;
+}
+
+.tiptap pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.75rem;
+}
+
+.tiptap pre .hljs-comment,
+.tiptap pre .hljs-quote {
+  color: #6a9955;
+}
+
+.tiptap pre .hljs-keyword {
+  color: #c586c0;
+}
+.tiptap pre .hljs-regexp,
+.tiptap pre .hljs-symbol,
+.tiptap pre .hljs-literal,
+.tiptap pre .hljs-name {
+  color: #569cd6;
+}
+
+.tiptap pre .hljs-attr,
+.tiptap pre .hljs-attribute,
+.tiptap pre .hljs-property,
+.tiptap pre .hljs-params,
+.tiptap pre .hljs-variable {
+  color: #9cdcfe;
+}
+
+.tiptap pre .hljs-built_in {
+  color: #4ec9b0;
+}
+
+.tiptap pre .hljs-selector-id,
+.tiptap pre .hljs-selector-class,
+.tiptap pre .hljs-selector-pseudo {
+  color: #d7ba7d;
+}
+
+.tiptap pre .hljs-number {
+  color: #b5cea8;
+}
+
+.tiptap pre .hljs-string {
+  color: #ce9178;
+}
+
+.tiptap pre .function_,
+.tiptap pre .language-css .hljs-built_in {
+  color: #dcdcaa;
+}
