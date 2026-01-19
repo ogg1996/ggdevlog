@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
 
+import { ThemeProvider } from 'next-themes';
+
 import Instance from '@/api/instance';
 
 import useAdminStore from '@/stores/adminStore';
@@ -57,10 +59,10 @@ export default function ClientLayout({
   }, [modalState]);
 
   return (
-    <>
+    <ThemeProvider attribute="class" defaultTheme="system">
       {isActive && <Menubar />}
       <Modal />
       {children}
-    </>
+    </ThemeProvider>
   );
 }

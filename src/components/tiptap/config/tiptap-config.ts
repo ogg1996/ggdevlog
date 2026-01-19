@@ -5,7 +5,6 @@ import {
   Color,
   TextStyle
 } from '@tiptap/extension-text-style';
-import Underline from '@tiptap/extension-underline';
 import Youtube from '@tiptap/extension-youtube';
 import StarterKit from '@tiptap/starter-kit';
 
@@ -47,7 +46,6 @@ export const tiptapConfig = {
         keepAttributes: false
       }
     }),
-    Underline,
     TextStyle,
     Color,
     BackgroundColor,

@@ -3,6 +3,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
+import clsx from 'clsx';
+
 import Header from '@/components/layout/header';
 
 import ClientLayout from '@/app/client-layout';
@@ -26,11 +28,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className={`${dungGeunmoMo.className}`} spellCheck="false">
-        <Header />
+    <html lang="ko" suppressHydrationWarning>
+      <body
+        className={clsx(
+          dungGeunmoMo.className,
+          'bg-white text-black',
+          'dark:bg-zinc-900 dark:text-white'
+        )}
+        spellCheck="false"
+      >
         <ClientLayout>
-          <main className="mx-auto max-w-[800px] px-6 py-6 pt-15 font-[pretendard]">
+          <Header />
+          <main className="mx-auto max-w-[800px] p-6 pt-15 font-[pretendard]">
             {children}
           </main>
         </ClientLayout>
