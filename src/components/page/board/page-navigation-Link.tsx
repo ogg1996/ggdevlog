@@ -1,24 +1,24 @@
 import Link from 'next/link';
 
+import clsx from 'clsx';
+
 interface Props {
-  boardName: string;
-  nowPage: number;
-  page: number;
+  href: string;
+  highlight: boolean;
+  text: string;
 }
 
-export default function PageNavigationLink({
-  boardName,
-  nowPage,
-  page
-}: Props) {
+export default function PageNavigationLink({ href, text, highlight }: Props) {
   return (
     <Link
-      href={`/board/${boardName}/${page}`}
-      className={`h-6 w-6 text-center hover:border-b-2 ${
-        nowPage === page && 'text-[#333333]'
-      }`}
+      href={href}
+      className={clsx(
+        'h-6 w-6 text-center',
+        'hover:border-b-2',
+        highlight && 'text-slate-900 dark:text-white'
+      )}
     >
-      {page}
+      {text}
     </Link>
   );
 }

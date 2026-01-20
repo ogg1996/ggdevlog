@@ -1,6 +1,8 @@
 'use client';
 import Image from 'next/image';
 
+import clsx from 'clsx';
+
 import useMenubarStore from '@/stores/menubarStore';
 
 export default function MenubarButton() {
@@ -8,7 +10,11 @@ export default function MenubarButton() {
 
   return (
     <button
-      className="flex h-[44px] w-[44px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
+      className={clsx(
+        'h-11 w-11 cursor-pointer',
+        'flex items-center justify-center',
+        'hover:rounded-sm hover:bg-gray-200'
+      )}
       onClick={() => {
         setActive(true);
       }}

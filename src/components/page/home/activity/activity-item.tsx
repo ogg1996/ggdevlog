@@ -1,14 +1,13 @@
 import { useRef, useState } from 'react';
 
+import clsx from 'clsx';
+
+import { Item } from '@/components/page/home/activity/types/types';
+
 import Tooltip from '@/components/common/tooltip';
 
-type ActivityItem = {
-  date: string;
-  activityCount: number;
-};
-
 interface Props {
-  day: ActivityItem;
+  day: Item;
 }
 
 export default function ActivityItem({ day }: Props) {
@@ -30,13 +29,14 @@ export default function ActivityItem({ day }: Props) {
         onMouseLeave={() => setHover(false)}
       >
         <div
-          className={`h-5 w-5 rounded-sm ${
+          className={clsx(
+            'h-5 w-5 rounded-sm',
             day.activityCount > 2
               ? 'bg-blue-400'
               : day.activityCount > 0
                 ? 'bg-blue-300'
-                : 'bg-gray-600'
-          }`}
+                : 'bg-slate-600'
+          )}
         />
       </div>
       <Tooltip text={text} visible={hover} targetRect={rect} />

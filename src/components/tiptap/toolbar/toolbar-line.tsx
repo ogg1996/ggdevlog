@@ -1,3 +1,3 @@
 export default function ToolbarLine() {
-  return <div className="h-[24px] w-[2px] bg-[#999999]" />;
+  return <div className="h-6 w-0.5 bg-slate-300" />;
 }

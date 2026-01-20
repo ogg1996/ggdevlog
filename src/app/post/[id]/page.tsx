@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getPost } from '@/api/fetch';
 
 import dayjs from '@/components/common/utils/dayjs';
-import PostEditBox from '@/components/page/post/post-edit-box';
+import PostEditButtons from '@/components/page/post/post-edit-buttons';
 import TiptapViewer from '@/components/tiptap/tiptap-viewer';
 
 export async function generateMetadata({
@@ -48,7 +48,7 @@ export default async function Page({
 
   return (
     <>
-      <div className="relative mb-7 h-[200px]">
+      <div className="relative mb-7 h-50">
         <Image
           src={post.thumbnail?.image_url || '/post-thumbnail.webp'}
           alt="포스트 페이지 썸네일"
@@ -56,14 +56,12 @@ export default async function Page({
           fill
           priority
         />
-        <div className="absolute inset-0 flex flex-col justify-between bg-[#00000099] p-3">
-          <PostEditBox id={id} />
-          <h2 className="self-center text-center font-[duggeunmo] text-[24px] font-bold text-white">
+        <div className="absolute inset-0 flex flex-col justify-between bg-black/60 p-3 font-[duggeunmo] font-bold text-white">
+          <PostEditButtons id={id} />
+          <h2 className="self-center text-center text-[24px]">
             [{post.board.name}] {post.title}
           </h2>
-          <span className="font-[duggeunmo] font-bold text-white">
-            {created}
-          </span>
+          <span>{created}</span>
         </div>
       </div>
       <TiptapViewer content={post.content} />

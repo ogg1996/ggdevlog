@@ -9,8 +9,8 @@ import Instance from '@/api/instance';
 
 import useAdminStore from '@/stores/adminStore';
 
-import IntroduceEditor from '@/components/page/home/introduce-editor';
-import IntroduceViewer from '@/components/page/home/introduce-viewer';
+import IntroduceEditor from '@/components/page/home/introduce/introduce-editor';
+import IntroduceViewer from '@/components/page/home/introduce/introduce-viewer';
 
 export default function Introduce() {
   const { adminState } = useAdminStore();
@@ -28,13 +28,13 @@ export default function Introduce() {
 
   return (
     <div>
-      <div className="mb-2 flex items-center justify-between gap-2 rounded-[4px] bg-[#0099FF] px-2 py-1">
+      <div className="mb-2 flex items-center justify-between gap-2 rounded-sm bg-[#0099ff] px-2 py-1">
         <div className="font-[duggeunmo] text-[24px] font-bold text-white">
           Introduce
         </div>
         {adminState && !edit && (
           <button
-            className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
+            className="flex h-9 w-9 cursor-pointer items-center justify-center hover:rounded-sm hover:bg-gray-200"
             onClick={() => {
               setEdit(!edit);
             }}

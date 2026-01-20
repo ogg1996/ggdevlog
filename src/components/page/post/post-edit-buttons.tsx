@@ -8,7 +8,10 @@ import { myUpdateTag } from '@/api/revalidate';
 
 import useAdminStore from '@/stores/adminStore';
 
-export default function PostEditBox({ id }: { id: string }) {
+const buttonStyle =
+  'flex h-9 w-9 cursor-pointer items-center justify-center hover:rounded-sm hover:bg-gray-400';
+
+export default function PostEditButtons({ id }: { id: string }) {
   const { adminState } = useAdminStore();
   const router = useRouter();
 
@@ -38,13 +41,10 @@ export default function PostEditBox({ id }: { id: string }) {
   }
 
   return (
-    <div className="flex h-[36px] self-end">
+    <div className="flex h-9 self-end">
       {adminState && (
         <>
-          <Link
-            className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-400"
-            href={`/edit/${id}`}
-          >
+          <Link className={buttonStyle} href={`/edit/${id}`}>
             <Image
               src="/icon-update-edit.png"
               alt="글쓰기 아이콘"
@@ -53,10 +53,7 @@ export default function PostEditBox({ id }: { id: string }) {
               priority
             />
           </Link>
-          <button
-            className={`flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-400`}
-            onClick={handleDelete}
-          >
+          <button className={buttonStyle} onClick={handleDelete}>
             <Image
               src="/icon-delete.png"
               alt="설정 아이콘"

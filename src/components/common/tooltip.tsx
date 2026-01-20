@@ -1,6 +1,8 @@
 'use client';
 import { useMemo } from 'react';
 
+import clsx from 'clsx';
+
 import Portal from '@/components/common/portal';
 
 interface Props {
@@ -36,7 +38,14 @@ export default function Tooltip({ text, targetRect, visible }: Props) {
   return (
     <Portal>
       <div
-        className="fixed rounded-[5px] border border-[#999999] bg-white px-2 py-1 text-center font-[pretendard] text-[14px] font-bold whitespace-nowrap text-[#333333]"
+        className={clsx(
+          'font-[pretendard]',
+          'fixed px-2 py-1',
+          'rounded-sm border border-slate-500',
+          'text-center text-[14px] font-bold whitespace-nowrap',
+          'bg-white text-slate-700',
+          'dark:bg-slate-800 dark:text-white'
+        )}
         style={{
           left: pos.x,
           top: pos.y,

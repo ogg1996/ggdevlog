@@ -1,15 +1,23 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import clsx from 'clsx';
+
 import MenubarButton from '@/components/layout/menubar-button';
 import ThemeToggle from '@/components/layout/theme-toggle';
 
 export default function Header() {
   return (
-    <header className="fixed z-40 flex h-[50px] w-full items-center justify-between bg-white px-2 dark:bg-zinc-900">
+    <header
+      className={clsx(
+        'fixed z-40 h-12.5 w-full px-2',
+        'flex items-center justify-between',
+        'bg-white dark:bg-slate-900'
+      )}
+    >
       <div className="flex items-center gap-2">
         <MenubarButton />
-        <Link className="flex h-[60px] items-center" href={'/'}>
+        <Link className="flex h-15 items-center" href={'/'}>
           <Image
             src="/logo.webp"
             alt="로고 아이콘"

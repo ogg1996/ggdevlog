@@ -3,6 +3,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
+import clsx from 'clsx';
+
 import { getBoard } from '@/api/fetch';
 import Instance from '@/api/instance';
 import { myUpdateTag } from '@/api/revalidate';
@@ -134,11 +136,25 @@ export default function ModalBoardManagement() {
 
   if (visible)
     return (
-      <div className="z-50 flex h-[600px] w-[500px] flex-col gap-2 self-center justify-self-center rounded-[8px] bg-white p-4">
+      <div
+        className={clsx(
+          'self-center justify-self-center',
+          'z-50 mt-15 h-150 w-125 p-4',
+          'flex flex-col gap-2 rounded-lg',
+          'bg-white dark:bg-slate-900'
+        )}
+        onClick={e => {
+          e.stopPropagation();
+        }}
+      >
         <div className="flex w-full justify-between">
-          <h2 className="text-[24px] font-bold">보드관리</h2>
+          <h2 className="text-[24px] font-bold text-[#0099ff]">보드관리</h2>
           <button
-            className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
+            className={clsx(
+              'h-9 w-9 cursor-pointer',
+              'flex items-center justify-center',
+              'hover:rounded-sm hover:bg-gray-200'
+            )}
             onClick={() => {
               setModalState(null);
             }}
@@ -152,12 +168,18 @@ export default function ModalBoardManagement() {
             />
           </button>
         </div>
-        <ul className="w-full grow rounded-[5px] border-2 border-[#0099FF]">
+        <ul className="w-full grow rounded-sm border-2 border-[#0099ff]">
           {boardList &&
             boardList.map(item => (
               <li key={`board_management_${item.name}`}>
                 <button
-                  className={`h-full w-full cursor-pointer border-b px-3 py-1 text-start text-[18px] text-[#0099FF] nth-last-[n]:border-none ${selected?.id === item.id && 'bg-[#0099FF] text-white'}`}
+                  className={clsx(
+                    'h-full w-full cursor-pointer',
+                    'px-3 py-1',
+                    'text-start text-[18px] text-[#0099ff]',
+                    'border-b nth-last-[n]:border-none',
+                    selected?.id === item.id && 'bg-[#0099ff] text-white'
+                  )}
                   onClick={() => {
                     if (selected?.id === item.id) {
                       setSelected(null);
@@ -173,12 +195,12 @@ export default function ModalBoardManagement() {
               </li>
             ))}
         </ul>
-        <div className="h-[30px] w-full text-[20px] text-[#0099FF]">
+        <div className="h-7.5 w-full text-[20px] text-[#0099ff]">
           {selected && `Selected: ${selected.name}`}
         </div>
         <div className="flex w-full gap-2">
           <input
-            className="disabled grow rounded-[5px] border border-[#cccccc] p-2 font-bold"
+            className="grow rounded-sm border border-slate-300 p-2 font-bold"
             type="text"
             inputMode="text"
             ref={inputRef}
@@ -199,10 +221,14 @@ export default function ModalBoardManagement() {
               setInput(filtered);
             }}
           />
-          <div className="flex gap-1">
+          <div className="flex gap-1 font-[duggeunmo]">
             {selected ? (
               <button
-                className="w-16 cursor-pointer rounded-lg bg-blue-400 px-4 py-2 font-[duggeunmo] text-white transition hover:bg-blue-600"
+                className={clsx(
+                  'w-16 cursor-pointer text-white',
+                  'rounded-lg px-4 py-2',
+                  'bg-blue-400 hover:bg-blue-600'
+                )}
                 onClick={() => {
                   updateBoard(selected.id, input);
                 }}
@@ -211,7 +237,11 @@ export default function ModalBoardManagement() {
               </button>
             ) : (
               <button
-                className="w-16 cursor-pointer rounded-lg bg-blue-400 px-4 py-2 font-[duggeunmo] text-white transition hover:bg-blue-600"
+                className={clsx(
+                  'w-16 cursor-pointer text-white',
+                  'rounded-lg px-4 py-2',
+                  'bg-blue-400 hover:bg-blue-600'
+                )}
                 onClick={() => {
                   addBoard(input);
                 }}
@@ -222,7 +252,11 @@ export default function ModalBoardManagement() {
 
             {selected && (
               <button
-                className="w-16 cursor-pointer rounded-lg bg-red-400 px-4 py-2 font-[duggeunmo] text-white transition hover:bg-red-500"
+                className={clsx(
+                  'w-16 cursor-pointer text-white',
+                  'rounded-lg px-4 py-2',
+                  'bg-red-400 hover:bg-red-500'
+                )}
                 onClick={() => {
                   deleteBoard(selected.id);
                 }}

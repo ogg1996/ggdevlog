@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import PageNavigationLink from '@/components/page/board/page-navigation-Link';
 
 interface Props {
@@ -30,46 +28,45 @@ export default function PageNavigationBox({
     nowPageGroup === totalPageGroup ? totalPage % PAGE_LIMIT : PAGE_LIMIT;
 
   return (
-    <div className="flex justify-center font-bold text-[#999999]">
+    <div className="flex justify-center font-bold text-slate-700 dark:text-slate-400">
       {totalPageGroup > 2 && nowPageGroup !== 1 && (
-        <Link
+        <PageNavigationLink
           href={`/board/${boardName}/${1}`}
-          className="h-6 w-6 text-center hover:border-b-2"
-        >
-          {'<<'}
-        </Link>
+          text="<<"
+          highlight={false}
+        />
       )}
       {nowPageGroup !== 1 && (
-        <Link
-          href={`/board/${boardName}/${(nowPageGroup - 2) * PAGE_LIMIT + 1}`}
-          className="h-6 w-6 text-center hover:border-b-2"
-        >
-          {'<'}
-        </Link>
-      )}
-      {Array.from({ length: nowPageGroupCount }).map((_, index) => (
         <PageNavigationLink
-          key={`${boardName}-page-${nowPageGroupStartIndex + index}`}
-          boardName={boardName}
-          nowPage={nowPage}
-          page={nowPageGroupStartIndex + index}
+          href={`/board/${boardName}/${(nowPageGroup - 2) * PAGE_LIMIT + 1}`}
+          text="<"
+          highlight={false}
         />
-      ))}
+      )}
+      {Array.from({ length: nowPageGroupCount }).map((_, index) => {
+        const page = nowPageGroupStartIndex + index;
+        return (
+          <PageNavigationLink
+            key={`${boardName}-page-${page}`}
+            href={`/board/${boardName}/${page}`}
+            text={String(page)}
+            highlight={nowPage === page}
+          />
+        );
+      })}
       {nowPageGroup !== totalPageGroup && (
-        <Link
+        <PageNavigationLink
           href={`/board/${boardName}/${nowPageGroup * PAGE_LIMIT + 1}`}
-          className="h-6 w-6 text-center hover:border-b-2"
-        >
-          {'>'}
-        </Link>
+          text=">"
+          highlight={false}
+        />
       )}
       {totalPageGroup > 2 && nowPageGroup !== totalPageGroup && (
-        <Link
+        <PageNavigationLink
           href={`/board/${boardName}/${(totalPageGroup - 1) * PAGE_LIMIT + 1}`}
-          className="h-6 w-6 text-center hover:border-b-2"
-        >
-          {'>>'}
-        </Link>
+          text=">>"
+          highlight={false}
+        />
       )}
     </div>
   );

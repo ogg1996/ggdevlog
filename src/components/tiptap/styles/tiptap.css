@@ -1,7 +1,7 @@
 .tiptap {
   font-size: 16px;
   line-height: 1.75;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .tiptap.editor {
@@ -37,9 +37,9 @@
   font-style: normal;
   margin: 1rem 0;
   padding: 0.5rem;
-  border-left: 4px solid #cbd5e1;
-  background: #f8fafc;
-  color: #334155;
+  border-left: 4px solid #64748b;
+  background: #f1f5f9;
+  color: #1e293b;
 }
 
 .tiptap blockquote p {
@@ -95,8 +95,8 @@
 }
 
 .tiptap a {
-  color: #2563eb;
-  opacity: 0.7;
+  color: #9333ea;
+  opacity: 0.8;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -187,4 +187,19 @@
 .tiptap pre .function_,
 .tiptap pre .language-css .hljs-built_in {
   color: #dcdcaa;
+}
+
+html.dark .tiptap,
+html.dark .tiptap h1,
+html.dark .tiptap h2,
+html.dark .tiptap h3,
+html.dark .tiptap p strong,
+html.dark .tiptap li::marker {
+  color: #f1f5f9;
+}
+
+html.dark .tiptap blockquote {
+  background: #1e293b66;
+  border-left-color: #94a3b866;
+  color: #e5e7eb;
 }

@@ -44,7 +44,7 @@ export default function ColorDropdown({
     <Portal>
       <div
         ref={ref}
-        className="absolute z-40 grid w-[176px] grid-cols-6 gap-2 rounded-[5px] border border-[#cccccc] bg-white p-2"
+        className="absolute z-40 grid w-44 grid-cols-6 gap-2 rounded-sm border border-slate-300 bg-white p-2"
         style={{
           left: pos.x,
           top: pos.y
@@ -66,9 +66,9 @@ export default function ColorDropdown({
             onSelect(null);
             setActive(false);
           }}
-          className="relative h-5 w-5 cursor-pointer rounded-full border-[3px] border-[#cccccc]"
+          className="relative h-5 w-5 cursor-pointer rounded-full border-[3px] border-slate-300"
         >
-          <div className="h-[2px] w-[16px] rotate-45 bg-[#cccccc]" />
+          <div className="h-0.5 w-4 rotate-45 bg-slate-300" />
         </button>
       </div>
     </Portal>

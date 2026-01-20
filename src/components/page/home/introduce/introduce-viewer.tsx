@@ -1,10 +1,10 @@
 'use client';
-
 import { useEffect, useRef, useState } from 'react';
 
 import { JSONContent } from '@tiptap/react';
 
 import TiptapViewer from '@/components/tiptap/tiptap-viewer';
+import clsx from 'clsx';
 
 interface Props {
   content: JSONContent;
@@ -35,12 +35,24 @@ export default function IntroduceViewer({ content }: Props) {
       >
         <TiptapViewer content={content} />
         {!open && (
-          <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-30 bg-gradient-to-t from-white to-transparent" />
+          <div
+            className={clsx(
+              'absolute right-0 bottom-0 left-0 h-30',
+              'pointer-events-none bg-linear-to-t to-transparent',
+              'from-white dark:from-slate-900'
+            )}
+          />
         )}
       </div>
       {open ? (
         <button
-          className="h-12 w-full cursor-pointer rounded-[5px] text-[18px] font-bold text-[#999999] hover:bg-[#eeeeee] hover:text-[#333333]"
+          className={clsx(
+            'h-12 w-full rounded-sm',
+            'cursor-pointer text-[18px] font-bold',
+            'text-gray-500 dark:text-gray-400',
+            'hover:bg-gray-100 dark:hover:bg-slate-800',
+            'hover:text-gray-800 dark:hover:text-gray-100'
+          )}
           onClick={() => {
             setOpen(!open);
           }}
@@ -49,7 +61,13 @@ export default function IntroduceViewer({ content }: Props) {
         </button>
       ) : (
         <button
-          className="h-12 w-full cursor-pointer rounded-[5px] text-[18px] font-bold text-[#999999] hover:bg-[#eeeeee] hover:text-[#333333]"
+          className={clsx(
+            'h-12 w-full rounded-sm',
+            'cursor-pointer text-[18px] font-bold',
+            'text-gray-500 dark:text-gray-400',
+            'hover:bg-gray-100 dark:hover:bg-slate-800',
+            'hover:text-gray-800 dark:hover:text-gray-100'
+          )}
           onClick={() => {
             setOpen(!open);
           }}
