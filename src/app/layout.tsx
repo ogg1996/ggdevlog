@@ -33,13 +33,13 @@ export default function RootLayout({
         className={clsx(
           dungGeunmoMo.className,
           'bg-white text-black',
-          'dark:bg-zinc-900 dark:text-white'
+          'dark:bg-slate-900 dark:text-white'
         )}
         spellCheck="false"
       >
         <ClientLayout>
           <Header />
-          <main className="mx-auto max-w-[800px] p-6 pt-15 font-[pretendard]">
+          <main className="mx-auto max-w-200 p-6 pt-15 font-[pretendard]">
             {children}
           </main>
         </ClientLayout>

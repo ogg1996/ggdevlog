@@ -1,7 +1,9 @@
 'use client';
+import { useEffect, useState } from 'react';
+
+import clsx from 'clsx';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
@@ -13,7 +15,11 @@ export default function ThemeToggle() {
 
   return (
     <button
-      className="flex h-[44px] w-[44px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
+      className={clsx(
+        'h-[44px] w-[44px] cursor-pointer',
+        'flex items-center justify-center',
+        'hover:rounded-[5px] hover:bg-gray-200'
+      )}
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
       {resolvedTheme === 'dark' ? (

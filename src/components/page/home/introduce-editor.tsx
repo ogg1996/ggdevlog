@@ -1,6 +1,6 @@
 'use client';
 
-import { useEditor, JSONContent } from '@tiptap/react';
+import { JSONContent, useEditor } from '@tiptap/react';
 
 import Instance from '@/api/instance';
 

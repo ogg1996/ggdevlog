@@ -29,11 +29,11 @@ const textColors: string[] = [
 ];
 
 const bgColors: string[] = [
-  '#FDE047',
-  '#93C5FD',
-  '#D1D5DB',
-  '#F9A8D4',
-  '#86EFAC'
+  '#EAB308',
+  '#3B82F6',
+  '#A855F7',
+  '#EC4899',
+  '#22C55E'
 ];
 
 const headingToolbarItems: ToolbarItem[] = [

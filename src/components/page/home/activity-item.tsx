@@ -35,7 +35,7 @@ export default function ActivityItem({ day }: Props) {
               ? 'bg-blue-400'
               : day.activityCount > 0
                 ? 'bg-blue-300'
-                : 'bg-gray-600'
+                : 'bg-slate-600'
           }`}
         />
       </div>

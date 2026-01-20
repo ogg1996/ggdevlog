@@ -80,7 +80,7 @@ export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
       onClick={handleClickRemoveThumbnail}
     >
       <Image
-        className="z-10 h-full w-full object-cover object-center opacity-100 group-hover:opacity-60"
+        className="h-full w-full object-cover object-center opacity-100 group-hover:opacity-60"
         src={thumbnail.image_url}
         alt="썸네일 이미지"
         fill

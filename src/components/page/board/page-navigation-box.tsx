@@ -30,7 +30,7 @@ export default function PageNavigationBox({
     nowPageGroup === totalPageGroup ? totalPage % PAGE_LIMIT : PAGE_LIMIT;
 
   return (
-    <div className="flex justify-center font-bold text-[#999999]">
+    <div className="flex justify-center font-bold text-slate-700 dark:text-slate-400">
       {totalPageGroup > 2 && nowPageGroup !== 1 && (
         <Link
           href={`/board/${boardName}/${1}`}

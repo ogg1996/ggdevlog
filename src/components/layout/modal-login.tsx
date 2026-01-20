@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
+import clsx from 'clsx';
+
 import Instance from '@/api/instance';
 
 import useAdminStore from '@/stores/adminStore';
@@ -48,15 +50,25 @@ export default function ModalLogin() {
 
   return (
     <div
-      className="flex h-[250px] w-[300px] flex-col items-center justify-between gap-2 self-center justify-self-center rounded-[8px] bg-white p-4"
+      className={clsx(
+        'self-center justify-self-center',
+        'z-50 mt-[60px] h-[250px] w-[300px] p-4',
+        'flex flex-col items-center justify-between gap-2',
+        'rounded-[8px] bg-white',
+        'dark:bg-slate-900'
+      )}
       onClick={e => {
         e.stopPropagation();
       }}
     >
       <div className="flex w-full justify-between">
-        <h2 className="text-[24px] font-bold">로그인</h2>
+        <h2 className="text-[24px] font-bold text-[#0099FF]">로그인</h2>
         <button
-          className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center hover:rounded-[5px] hover:bg-gray-200"
+          className={clsx(
+            'h-[36px] w-[36px] cursor-pointer',
+            'flex items-center justify-center',
+            'hover:rounded-[5px] hover:bg-gray-200'
+          )}
           onClick={() => {
             setModalState(null);
           }}
@@ -93,13 +105,21 @@ export default function ModalLogin() {
       </div>
       <div className="flex gap-4">
         <button
-          className="w-20 cursor-pointer rounded-lg bg-blue-400 px-4 py-2 font-bold text-white transition hover:bg-blue-600"
+          className={clsx(
+            'w-20 cursor-pointer text-white',
+            'rounded-lg px-4 py-2',
+            'bg-blue-400 hover:bg-blue-600'
+          )}
           onClick={handleLogin}
         >
           로그인
         </button>
         <button
-          className="w-20 cursor-pointer rounded-lg bg-red-400 px-4 py-2 font-bold text-white transition hover:bg-red-500"
+          className={clsx(
+            'w-20 cursor-pointer text-white',
+            'rounded-lg px-4 py-2',
+            'bg-red-400 hover:bg-red-500'
+          )}
           onClick={() => setModalState(null)}
         >
           취소

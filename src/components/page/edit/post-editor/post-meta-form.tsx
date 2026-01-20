@@ -2,8 +2,11 @@
 
 import { useRef, useState } from 'react';
 
-import { Board } from '@/components/common/types/types';
+import clsx from 'clsx';
+
 import useOnClickOutside from '@/hooks/useOnCilckOutside';
+
+import { Board } from '@/components/common/types/types';
 
 interface Props {
   boardList: Board[];
@@ -48,11 +51,18 @@ export default function PostMetaForm({
             <span className="text-[12px] text-[#cccccc]">▼</span>
           </button>
           {selectActive && (
-            <div className="absolute z-40 max-h-[137px] w-full overflow-y-auto rounded-[0_0_5px_5px] border border-t-0 border-[#cccccc] bg-white p-1">
+            <div
+              className={clsx(
+                'absolute z-40 overflow-y-auto',
+                'max-h-[137px] w-full p-1',
+                'rounded-[0_0_5px_5px] border border-t-0 border-[#cccccc]',
+                'bg-white dark:bg-slate-900'
+              )}
+            >
               {boardList.map(item => (
                 <button
                   key={`board_${item.name}`}
-                  className="w-full p-1 text-start hover:bg-gray-200"
+                  className="w-full p-1 text-start hover:bg-slate-200 dark:hover:bg-slate-700"
                   onClick={() => {
                     setBoard({ id: item.id, name: item.name });
                     setSelectActive(false);
