@@ -1,7 +1,7 @@
 .tiptap {
   font-size: 16px;
   line-height: 1.75;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .tiptap.editor {
@@ -193,6 +193,7 @@ html.dark .tiptap,
 html.dark .tiptap h1,
 html.dark .tiptap h2,
 html.dark .tiptap h3,
+html.dark .tiptap p strong,
 html.dark .tiptap li::marker {
   color: #f1f5f9;
 }

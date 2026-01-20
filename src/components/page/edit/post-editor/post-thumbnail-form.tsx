@@ -1,6 +1,7 @@
 'use client';
-
 import Image from 'next/image';
+
+import clsx from 'clsx';
 
 import Instance from '@/api/instance';
 
@@ -11,6 +12,11 @@ interface Props {
   thumbnail: Thumbnail | null;
   setThumbnail: React.Dispatch<React.SetStateAction<Thumbnail | null>>;
 }
+
+const buttonStyle =
+  'group relative flex h-35.5 w-35.5 cursor-pointer items-center justify-center overflow-hidden rounded-sm border border-slate-300';
+const overlayIconStyle = 'absolute z-10 opacity-0 group-hover:opacity-100';
+const overlayStyle = 'absolute inset-0 opacity-0 group-hover:opacity-60';
 
 export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
   async function handleClickAddThumbnail() {
@@ -57,26 +63,23 @@ export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
 
   if (thumbnail === null)
     return (
-      <button
-        className="group relative flex h-[142px] w-[142px] cursor-pointer items-center justify-center overflow-hidden rounded-[5px] border border-[#cccccc]"
-        onClick={handleClickAddThumbnail}
-      >
-        <p className="text-2xl font-bold text-[#cccccc]">썸네일</p>
+      <button className={buttonStyle} onClick={handleClickAddThumbnail}>
+        <p className="text-2xl font-bold text-slate-300">썸네일</p>
         <Image
-          className="absolute z-10 opacity-0 group-hover:opacity-100"
+          className={overlayIconStyle}
           src="/icon-plus.png"
           alt="background"
           width={96}
           height={96}
           priority
         />
-        <div className="absolute inset-0 bg-green-500 opacity-0 transition group-hover:opacity-60" />
+        <div className={clsx(overlayStyle, 'bg-green-500')} />
       </button>
     );
 
   return (
     <button
-      className="group relative flex h-[142px] w-[142px] cursor-pointer items-center justify-center overflow-hidden rounded-[5px] border border-[#cccccc] px-1"
+      className={clsx(buttonStyle, 'p-1')}
       onClick={handleClickRemoveThumbnail}
     >
       <Image
@@ -87,14 +90,14 @@ export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
         priority
       />
       <Image
-        className="absolute z-10 opacity-0 group-hover:opacity-100"
+        className={overlayIconStyle}
         src="/icon-minus.png"
         alt="background"
         width={96}
         height={96}
         priority
       />
-      <div className="absolute inset-0 bg-red-500 opacity-0 transition group-hover:opacity-60" />
+      <div className={clsx(overlayStyle, 'bg-red-500')} />
     </button>
   );
 }

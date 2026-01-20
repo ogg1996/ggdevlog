@@ -16,9 +16,9 @@ export default function ThemeToggle() {
   return (
     <button
       className={clsx(
-        'h-[44px] w-[44px] cursor-pointer',
+        'h-11 w-11 cursor-pointer',
         'flex items-center justify-center',
-        'hover:rounded-[5px] hover:bg-gray-200'
+        'hover:rounded-sm hover:bg-gray-200'
       )}
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >

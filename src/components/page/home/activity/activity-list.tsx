@@ -5,16 +5,13 @@ import Instance from '@/api/instance';
 
 import dayjs from '@/components/common/utils/dayjs';
 
-import ActivityItem from '@/components/page/home/activity-item';
+import { Item } from '@/components/page/home/activity/types/types';
 
-type ActivityItem = {
-  date: string;
-  activityCount: number;
-};
+import ActivityItem from '@/components/page/home/activity/activity-item';
 
 export default function ActivityList() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [activity, setActivity] = useState<ActivityItem[][]>([]);
+  const [activity, setActivity] = useState<Item[][]>([]);
 
   useEffect(() => {
     async function init() {
@@ -29,7 +26,7 @@ export default function ActivityList() {
       const start = dayjs.tz('2026-01-12');
       const end = dayjs();
 
-      const resultArr: ActivityItem[][] = [];
+      const resultArr: Item[][] = [];
 
       let weekIndex = 0;
       let dayIndex = 0;
@@ -68,7 +65,7 @@ export default function ActivityList() {
   }, [activity]);
 
   return (
-    <div className="flex max-w-[600px] overflow-x-auto" ref={scrollRef}>
+    <div className="flex max-w-150 overflow-x-auto" ref={scrollRef}>
       {activity.map((week, weekIndex) => (
         <div key={`week-${weekIndex}`} className="grid grid-rows-7">
           {week.map((day, dayIndex) => (

@@ -10,15 +10,14 @@ export default function Header() {
   return (
     <header
       className={clsx(
-        'fixed z-40 h-[50px] w-full px-2',
+        'fixed z-40 h-12.5 w-full px-2',
         'flex items-center justify-between',
-        'bg-white',
-        'dark:bg-slate-900'
+        'bg-white dark:bg-slate-900'
       )}
     >
       <div className="flex items-center gap-2">
         <MenubarButton />
-        <Link className="flex h-[60px] items-center" href={'/'}>
+        <Link className="flex h-15 items-center" href={'/'}>
           <Image
             src="/logo.webp"
             alt="로고 아이콘"

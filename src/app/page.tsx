@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
-import Activity from '@/components/page/home/activity';
-import Introduce from '@/components/page/home/introduce';
+import Activity from '@/components/page/home/activity/activity';
+import Introduce from '@/components/page/home/introduce/introduce';
 
 export const metadata: Metadata = {
   title: 'GGDevLog - home',

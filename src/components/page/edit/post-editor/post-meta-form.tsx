@@ -1,5 +1,4 @@
 'use client';
-
 import { useRef, useState } from 'react';
 
 import clsx from 'clsx';
@@ -42,20 +41,25 @@ export default function PostMetaForm({
       <div className="flex flex-col gap-2 sm:flex-row">
         <div ref={boardRef} className="relative">
           <button
-            className={`flex h-[42px] w-full items-center rounded-[5px] border border-[#cccccc] p-2 text-start sm:w-[150px] ${selectActive && 'rounded-[5px_5px_0_0]'}`}
+            className={clsx(
+              'h-10.5 w-full p-2 sm:w-37.5',
+              'flex items-center',
+              'rounded-sm border border-slate-300 text-start',
+              selectActive && 'rounded-[5px_5px_0_0]'
+            )}
             onClick={() => {
               setSelectActive(!selectActive);
             }}
           >
             <span className="grow">{board.name}</span>
-            <span className="text-[12px] text-[#cccccc]">▼</span>
+            <span className="text-[12px] text-slate-300">▼</span>
           </button>
           {selectActive && (
             <div
               className={clsx(
                 'absolute z-40 overflow-y-auto',
-                'max-h-[137px] w-full p-1',
-                'rounded-[0_0_5px_5px] border border-t-0 border-[#cccccc]',
+                'max-h-34.25 w-full p-1',
+                'rounded-[0_0_5px_5px] border border-t-0 border-slate-300',
                 'bg-white dark:bg-slate-900'
               )}
             >
@@ -80,7 +84,7 @@ export default function PostMetaForm({
           onBlur={() => setTitle(titleRef.current?.value ?? '')}
           type="text"
           placeholder="제목"
-          className="grow rounded-[5px] border border-[#cccccc] p-2 font-bold focus:outline-none"
+          className="grow rounded-sm border border-slate-300 p-2 font-bold focus:outline-none"
         />
       </div>
       <textarea
@@ -88,7 +92,7 @@ export default function PostMetaForm({
         defaultValue={description}
         onBlur={() => setDescription(descriptionRef.current?.value ?? '')}
         placeholder="설명"
-        className="h-[42px] w-full resize-none rounded-[5px] border border-[#cccccc] p-1 font-bold focus:outline-none sm:grow"
+        className="h-10.5 w-full resize-none rounded-sm border border-slate-300 p-1 font-bold focus:outline-none sm:grow"
       />
     </div>
   );

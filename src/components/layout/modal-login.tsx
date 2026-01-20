@@ -52,9 +52,9 @@ export default function ModalLogin() {
     <div
       className={clsx(
         'self-center justify-self-center',
-        'z-50 mt-[60px] h-[250px] w-[300px] p-4',
+        'z-50 mt-15 h-62.5 w-75 p-4',
         'flex flex-col items-center justify-between gap-2',
-        'rounded-[8px] bg-white',
+        'rounded-lg bg-white',
         'dark:bg-slate-900'
       )}
       onClick={e => {
@@ -62,12 +62,12 @@ export default function ModalLogin() {
       }}
     >
       <div className="flex w-full justify-between">
-        <h2 className="text-[24px] font-bold text-[#0099FF]">로그인</h2>
+        <h2 className="text-[24px] font-bold text-[#0099ff]">로그인</h2>
         <button
           className={clsx(
-            'h-[36px] w-[36px] cursor-pointer',
+            'h-9 w-9 cursor-pointer',
             'flex items-center justify-center',
-            'hover:rounded-[5px] hover:bg-gray-200'
+            'hover:rounded-sm hover:bg-gray-200'
           )}
           onClick={() => {
             setModalState(null);
@@ -99,9 +99,7 @@ export default function ModalLogin() {
             }
           }}
         />
-        <p className="h-[27px] text-center text-[16px] text-red-600">
-          {message}
-        </p>
+        <p className="h-6.75 text-center text-[16px] text-red-600">{message}</p>
       </div>
       <div className="flex gap-4">
         <button

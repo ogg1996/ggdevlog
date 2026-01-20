@@ -139,22 +139,21 @@ export default function ModalBoardManagement() {
       <div
         className={clsx(
           'self-center justify-self-center',
-          'z-50 mt-[60px] h-[600px] w-[500px] p-4',
-          'flex flex-col gap-2',
-          'rounded-[8px] bg-white',
-          'dark:bg-slate-900'
+          'z-50 mt-15 h-150 w-125 p-4',
+          'flex flex-col gap-2 rounded-lg',
+          'bg-white dark:bg-slate-900'
         )}
         onClick={e => {
           e.stopPropagation();
         }}
       >
         <div className="flex w-full justify-between">
-          <h2 className="text-[24px] font-bold text-[#0099FF]">보드관리</h2>
+          <h2 className="text-[24px] font-bold text-[#0099ff]">보드관리</h2>
           <button
             className={clsx(
-              'h-[36px] w-[36px] cursor-pointer',
+              'h-9 w-9 cursor-pointer',
               'flex items-center justify-center',
-              'hover:rounded-[5px] hover:bg-gray-200'
+              'hover:rounded-sm hover:bg-gray-200'
             )}
             onClick={() => {
               setModalState(null);
@@ -169,7 +168,7 @@ export default function ModalBoardManagement() {
             />
           </button>
         </div>
-        <ul className="w-full grow rounded-[5px] border-2 border-[#0099FF]">
+        <ul className="w-full grow rounded-sm border-2 border-[#0099ff]">
           {boardList &&
             boardList.map(item => (
               <li key={`board_management_${item.name}`}>
@@ -177,9 +176,9 @@ export default function ModalBoardManagement() {
                   className={clsx(
                     'h-full w-full cursor-pointer',
                     'px-3 py-1',
-                    'text-start text-[18px] text-[#0099FF]',
+                    'text-start text-[18px] text-[#0099ff]',
                     'border-b nth-last-[n]:border-none',
-                    selected?.id === item.id && 'bg-[#0099FF] text-white'
+                    selected?.id === item.id && 'bg-[#0099ff] text-white'
                   )}
                   onClick={() => {
                     if (selected?.id === item.id) {
@@ -196,12 +195,12 @@ export default function ModalBoardManagement() {
               </li>
             ))}
         </ul>
-        <div className="h-[30px] w-full text-[20px] text-[#0099FF]">
+        <div className="h-7.5 w-full text-[20px] text-[#0099ff]">
           {selected && `Selected: ${selected.name}`}
         </div>
         <div className="flex w-full gap-2">
           <input
-            className="grow rounded-[5px] border border-[#cccccc] p-2 font-bold"
+            className="grow rounded-sm border border-slate-300 p-2 font-bold"
             type="text"
             inputMode="text"
             ref={inputRef}

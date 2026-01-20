@@ -41,9 +41,9 @@ export default function Tooltip({ text, targetRect, visible }: Props) {
         className={clsx(
           'font-[pretendard]',
           'fixed px-2 py-1',
-          'rounded-[5px] border-[#999999]',
+          'rounded-sm border border-slate-500',
           'text-center text-[14px] font-bold whitespace-nowrap',
-          'border bg-white text-[#333333]',
+          'bg-white text-slate-700',
           'dark:bg-slate-800 dark:text-white'
         )}
         style={{

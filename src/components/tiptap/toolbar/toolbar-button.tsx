@@ -27,7 +27,7 @@ export default function ToolbarButton({
     <>
       <button
         ref={ref}
-        className="flex h-[24px] w-[24px] cursor-pointer items-center justify-center"
+        className="flex h-6 w-6 cursor-pointer items-center justify-center"
         onClick={onClick}
         onMouseEnter={() => {
           if (ref.current) setRect(ref.current.getBoundingClientRect());
