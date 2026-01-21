@@ -21,19 +21,19 @@ import addImage from '@/components/tiptap/utils/add-image';
 import { ToolbarItem } from '@/components/tiptap/types/types';
 
 const textColors: string[] = [
-  '#EF4444',
-  '#3B82F6',
-  '#10B981',
-  '#8B5CF6',
+  '#ef4444',
+  '#3b82f6',
+  '#10b981',
+  '#8b5cf6',
   '#EC4899'
 ];
 
 const bgColors: string[] = [
-  '#EAB308',
-  '#3B82F6',
-  '#A855F7',
-  '#EC4899',
-  '#22C55E'
+  '#eaB308',
+  '#3b82f6',
+  '#a855f7',
+  '#ec4899',
+  '#22c55e'
 ];
 
 const headingToolbarItems: ToolbarItem[] = [

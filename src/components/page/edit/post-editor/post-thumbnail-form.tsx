@@ -2,6 +2,7 @@
 import Image from 'next/image';
 
 import clsx from 'clsx';
+import { CircleMinus, CirclePlus } from 'lucide-react';
 
 import Instance from '@/api/instance';
 
@@ -65,14 +66,7 @@ export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
     return (
       <button className={buttonStyle} onClick={handleClickAddThumbnail}>
         <p className="text-2xl font-bold text-slate-300">썸네일</p>
-        <Image
-          className={overlayIconStyle}
-          src="/icon-plus.png"
-          alt="background"
-          width={96}
-          height={96}
-          priority
-        />
+        <CirclePlus size={96} color="#ffffff" className={overlayIconStyle} />
         <div className={clsx(overlayStyle, 'bg-green-500')} />
       </button>
     );
@@ -89,14 +83,7 @@ export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
         fill
         priority
       />
-      <Image
-        className={overlayIconStyle}
-        src="/icon-minus.png"
-        alt="background"
-        width={96}
-        height={96}
-        priority
-      />
+      <CircleMinus size={96} color="#ffffff" className={overlayIconStyle} />
       <div className={clsx(overlayStyle, 'bg-red-500')} />
     </button>
   );

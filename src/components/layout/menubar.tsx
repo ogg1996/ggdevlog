@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import clsx from 'clsx';
+import { Pencil, Settings, X } from 'lucide-react';
 
 import { getBoard } from '@/api/fetch';
 
@@ -53,13 +54,7 @@ export default function Menubar() {
             setActive(false);
           }}
         >
-          <Image
-            src="/icon-close.png"
-            alt="닫기 아이콘"
-            width={36}
-            height={36}
-            priority
-          />
+          <X size={36} color="#0099ff" />
         </button>
         <Link className="flex h-15 items-center" href={'/'}>
           <Image
@@ -86,13 +81,7 @@ export default function Menubar() {
                 setActive(false);
               }}
             >
-              <Image
-                src="/icon-edit.png"
-                alt="글쓰기 아이콘"
-                width={28}
-                height={28}
-                priority
-              />
+              <Pencil size={24} color="#0099ff" />
             </Link>
             <button
               className={clsx(
@@ -105,13 +94,7 @@ export default function Menubar() {
                 setActive(false);
               }}
             >
-              <Image
-                src="/icon-setting.png"
-                alt="설정 아이콘"
-                width={28}
-                height={28}
-                priority
-              />
+              <Settings size={24} color="#0099ff" />
             </button>
           </div>
         )}

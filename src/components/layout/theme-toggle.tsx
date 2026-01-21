@@ -23,9 +23,9 @@ export default function ThemeToggle() {
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
       {resolvedTheme === 'dark' ? (
-        <Moon size={36} color="#0099FF" />
+        <Moon size={36} color="#0099ff" />
       ) : (
-        <Sun size={36} color="#0099FF" />
+        <Sun size={36} color="#0099ff" />
       )}
     </button>
   );

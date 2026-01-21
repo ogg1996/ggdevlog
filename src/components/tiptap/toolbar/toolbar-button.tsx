@@ -35,7 +35,7 @@ export default function ToolbarButton({
         }}
         onMouseLeave={() => setHover(false)}
       >
-        <Icon size={size} color={isActive ? '#0099FF' : '#999999'} />
+        <Icon size={size} color={isActive ? '#0099ff' : '#999999'} />
       </button>
       <Tooltip text={title} visible={hover} targetRect={rect} />
     </>

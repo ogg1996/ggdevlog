@@ -1,9 +1,8 @@
 'use client';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-import Image from 'next/image';
-
 import clsx from 'clsx';
+import { X } from 'lucide-react';
 
 import { getBoard } from '@/api/fetch';
 import Instance from '@/api/instance';
@@ -159,13 +158,7 @@ export default function ModalBoardManagement() {
               setModalState(null);
             }}
           >
-            <Image
-              src="/icon-close.png"
-              alt="닫기 아이콘"
-              width={36}
-              height={36}
-              priority
-            />
+            <X size={36} color="#0099ff" />
           </button>
         </div>
         <ul className="w-full grow rounded-sm border-2 border-[#0099ff]">
