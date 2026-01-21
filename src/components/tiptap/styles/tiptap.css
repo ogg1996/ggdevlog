@@ -13,6 +13,10 @@
   margin: 0.75rem 0;
 }
 
+.tiptap strong {
+  color: inherit;
+}
+
 .tiptap h1,
 .tiptap h2,
 .tiptap h3 {
@@ -193,7 +197,6 @@ html.dark .tiptap,
 html.dark .tiptap h1,
 html.dark .tiptap h2,
 html.dark .tiptap h3,
-html.dark .tiptap p strong,
 html.dark .tiptap li::marker {
   color: #f1f5f9;
 }
