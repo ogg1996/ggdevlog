@@ -1,9 +1,10 @@
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { getPost } from '@/api/fetch';
 
 import dayjs from '@/components/common/utils/dayjs';
+
+import SectionTitle from '@/components/common/SectionTitle';
 import PostEditButtons from '@/components/page/post/post-edit-buttons';
 import TiptapViewer from '@/components/tiptap/tiptap-viewer';
 
@@ -48,22 +49,17 @@ export default async function Page({
 
   return (
     <>
-      <div className="relative mb-7 h-50">
-        <Image
-          src={post.thumbnail?.image_url || '/post-thumbnail.webp'}
-          alt="포스트 페이지 썸네일"
-          className="object-cover object-center"
-          fill
-          priority
-        />
-        <div className="absolute inset-0 flex flex-col justify-between bg-black/60 p-3 font-[duggeunmo] font-bold text-white">
+      <SectionTitle
+        imageSrc={post.thumbnail?.image_url || '/post-thumbnail.webp'}
+      >
+        <div className="flex h-full w-full flex-col justify-between p-3">
           <PostEditButtons id={id} />
           <h2 className="self-center text-center text-[24px]">
             [{post.board.name}] {post.title}
           </h2>
           <span>{created}</span>
         </div>
-      </div>
+      </SectionTitle>
       <TiptapViewer content={post.content} />
     </>
   );
