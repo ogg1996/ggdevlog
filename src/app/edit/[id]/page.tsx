@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import { getBoard, getPost } from '@/api/fetch';
+import { getPost } from '@/api/fetch';
 
 import PostEditor from '@/components/page/edit/post-editor/post-editor';
 
@@ -14,7 +14,5 @@ export default async function Page({
   const post = await getPost(id);
   if (!post) notFound();
 
-  const boardList = await getBoard();
-
-  return <PostEditor boardList={boardList} post={post} />;
+  return <PostEditor post={post} />;
 }

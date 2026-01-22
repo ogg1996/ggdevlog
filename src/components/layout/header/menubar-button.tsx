@@ -1,7 +1,7 @@
 'use client';
-import Image from 'next/image';
 
 import clsx from 'clsx';
+import { Menu } from 'lucide-react';
 
 import useMenubarStore from '@/stores/menubarStore';
 
@@ -19,13 +19,7 @@ export default function MenubarButton() {
         setActive(true);
       }}
     >
-      <Image
-        src="/icon-menu.png"
-        alt="메뉴바 아이콘"
-        width={36}
-        height={36}
-        priority
-      />
+      <Menu size={36} color="#0099ff" />
     </button>
   );
 }

@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { getPosts } from '@/api/fetch';
 
+import SectionTitle from '@/components/common/SectionTitle';
 import PageNavigationBox from '@/components/page/board/page-navigation-box';
 import PostList from '@/components/page/board/post-list';
 
@@ -44,20 +44,11 @@ export default async function Page({
 
   return (
     <>
-      <div className="relative mb-7 h-50">
-        <Image
-          src="/board-thumbnail.webp"
-          alt="보드 페이지 썸네일"
-          className="object-cover object-center"
-          fill
-          priority
-        />
-        <div className="absolute inset-0 flex items-center justify-center bg-black/60">
-          <h2 className="font-[duggeunmo] text-[32px] font-bold text-white">
-            {name}({posts.total})
-          </h2>
-        </div>
-      </div>
+      <SectionTitle imageSrc="/board-thumbnail.webp">
+        <h2 className="text-[32px]">
+          {name}({posts.total})
+        </h2>
+      </SectionTitle>
       {posts.total !== 0 ? (
         <>
           <PostList data={posts.data} />

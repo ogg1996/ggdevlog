@@ -1,9 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-import Image from 'next/image';
-
 import { JSONContent } from '@tiptap/react';
+import { Pencil } from 'lucide-react';
 
 import Instance from '@/api/instance';
 
@@ -39,13 +38,7 @@ export default function Introduce() {
               setEdit(!edit);
             }}
           >
-            <Image
-              src="/icon-edit.png"
-              alt="글쓰기 아이콘"
-              width={28}
-              height={28}
-              priority
-            />
+            <Pencil size={24} color="#0099ff" />
           </button>
         )}
       </div>

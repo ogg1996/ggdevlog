@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -7,6 +6,7 @@ import Instance from '@/api/instance';
 import { myUpdateTag } from '@/api/revalidate';
 
 import useAdminStore from '@/stores/adminStore';
+import { Eraser, Trash2 } from 'lucide-react';
 
 const buttonStyle =
   'flex h-9 w-9 cursor-pointer items-center justify-center hover:rounded-sm hover:bg-gray-400';
@@ -45,22 +45,10 @@ export default function PostEditButtons({ id }: { id: string }) {
       {adminState && (
         <>
           <Link className={buttonStyle} href={`/edit/${id}`}>
-            <Image
-              src="/icon-update-edit.png"
-              alt="글쓰기 아이콘"
-              width={28}
-              height={28}
-              priority
-            />
+            <Eraser size={28} color="#ffffff" />
           </Link>
           <button className={buttonStyle} onClick={handleDelete}>
-            <Image
-              src="/icon-delete.png"
-              alt="설정 아이콘"
-              width={28}
-              height={28}
-              priority
-            />
+            <Trash2 size={28} color="#ffffff" />
           </button>
         </>
       )}

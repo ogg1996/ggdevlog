@@ -1,9 +1,8 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-import Image from 'next/image';
-
 import clsx from 'clsx';
+import { X } from 'lucide-react';
 
 import Instance from '@/api/instance';
 
@@ -73,13 +72,7 @@ export default function ModalLogin() {
             setModalState(null);
           }}
         >
-          <Image
-            src="/icon-close.png"
-            alt="닫기 아이콘"
-            width={36}
-            height={36}
-            priority
-          />
+          <X size={36} color="#0099ff" />
         </button>
       </div>
       <div>

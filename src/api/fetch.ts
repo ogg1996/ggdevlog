@@ -1,12 +1,7 @@
 const api_url = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getBoard() {
-  const res = await fetch(`${api_url}/board`, {
-    next: {
-      tags: ['board'],
-      revalidate: false
-    }
-  })
+  const res = await fetch(`${api_url}/board`)
     .then(res => res.json())
     .then(res => res.data);
 

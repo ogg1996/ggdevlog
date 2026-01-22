@@ -18,14 +18,16 @@ import PostThumbnailForm from '@/components/page/edit/post-editor/post-thumbnail
 import TiptapEditor from '@/components/tiptap/tiptap-editor';
 
 interface Props {
-  boardList: Board[];
   post?: Post;
 }
 
-export default function PostEditor({ boardList, post }: Props) {
+export default function PostEditor({ post }: Props) {
   const router = useRouter();
 
-  const editor = useEditor(tiptapConfig);
+  const editor = useEditor({
+    ...tiptapConfig,
+    content: post ? post.content : '<p></p>'
+  });
 
   const [board, setBoard] = useState<Board>({ id: 1, name: 'Unspecified' });
   const [title, setTitle] = useState('');
@@ -39,12 +41,8 @@ export default function PostEditor({ boardList, post }: Props) {
       setTitle(post.title);
       setDescription(post.description);
       setThumbnail(post.thumbnail || null);
-
-      if (editor && post.content) {
-        editor.commands.setContent(post.content);
-      }
     }
-  }, [post, editor]);
+  }, [post]);
 
   function validatePost(): string | null {
     if (!title.trim()) return '제목을 작성해야 합니다.';
@@ -118,7 +116,6 @@ export default function PostEditor({ boardList, post }: Props) {
     <div>
       <div className="mb-4 flex gap-2">
         <PostMetaForm
-          boardList={boardList}
           board={board}
           title={title}
           description={description}
