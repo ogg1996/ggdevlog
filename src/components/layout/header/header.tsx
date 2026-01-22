@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 import clsx from 'clsx';
 
-import MenubarButton from '@/components/layout/menubar-button';
-import ThemeToggle from '@/components/layout/theme-toggle';
+import MenubarButton from '@/components/layout/header/menubar-button';
+import ThemeToggle from '@/components/layout/header/theme-toggle';
 
 export default function Header() {
   return (

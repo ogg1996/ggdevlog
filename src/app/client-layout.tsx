@@ -8,13 +8,14 @@ import { ThemeProvider } from 'next-themes';
 import Instance from '@/api/instance';
 
 import useAdminStore from '@/stores/adminStore';
+import useBoardStore from '@/stores/boardStore';
 import useMenubarStore from '@/stores/menubarStore';
 import useModalStore from '@/stores/modalStore';
 
-const Modal = dynamic(() => import('@/components/layout/modal'), {
+const Modal = dynamic(() => import('@/components/layout/modal/modal'), {
   ssr: false
 });
-const Menubar = dynamic(() => import('@/components/layout/menubar'), {
+const Menubar = dynamic(() => import('@/components/layout/menubar/menubar'), {
   ssr: false
 });
 
@@ -23,6 +24,7 @@ export default function ClientLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { boardList, fetchBoardList } = useBoardStore();
   const { adminState, setAdminState } = useAdminStore();
   const { modalState, setModalState } = useModalStore();
   const { isActive } = useMenubarStore();
@@ -53,6 +55,10 @@ export default function ClientLayout({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [adminState, modalState]);
+
+  useEffect(() => {
+    if (!boardList) fetchBoardList();
+  }, []);
 
   useEffect(() => {
     document.body.style.overflowY = modalState ? 'hidden' : 'auto';

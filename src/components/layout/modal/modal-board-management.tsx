@@ -4,32 +4,24 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { X } from 'lucide-react';
 
-import { getBoard } from '@/api/fetch';
 import Instance from '@/api/instance';
 import { myUpdateTag } from '@/api/revalidate';
 
+import useBoardStore from '@/stores/boardStore';
 import useModalStore from '@/stores/modalStore';
 
-type board = { id: number; name: string };
-type boardList = board[];
+import { Board } from '@/components/common/types/types';
 
 export default function ModalBoardManagement() {
+  const { boardList, fetchBoardList } = useBoardStore();
   const { setModalState } = useModalStore();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [visible, setVisible] = useState(false);
 
-  const [selected, setSelected] = useState<board | null>(null);
+  const [selected, setSelected] = useState<Board | null>(null);
   const [input, setInput] = useState('');
-  const [boardList, setBoardList] = useState<boardList | null>(null);
-
-  async function getMenubarBoardList() {
-    const data = await getBoard();
-
-    const filterdData = data.filter((item: board) => item.id !== 1);
-    setBoardList(filterdData);
-  }
 
   useEffect(() => {
     async function init() {
@@ -38,7 +30,6 @@ export default function ModalBoardManagement() {
       );
 
       if (access) {
-        getMenubarBoardList();
         setVisible(true);
       } else {
         alert('접근권한이 없습니다.');
@@ -69,10 +60,9 @@ export default function ModalBoardManagement() {
         });
         if (res.data.success) {
           setInput('');
-          getMenubarBoardList();
+          fetchBoardList();
         }
         alert(res.data.message);
-        myUpdateTag('board');
       } else {
         alert('접근 권한이 없습니다.');
       }
@@ -99,10 +89,9 @@ export default function ModalBoardManagement() {
         if (res.data.success) {
           setInput('');
           setSelected(null);
-          getMenubarBoardList();
+          fetchBoardList();
         }
         alert(res.data.message);
-        myUpdateTag('board');
       } else {
         alert('접근 권한이 없습니다.');
       }
@@ -120,10 +109,10 @@ export default function ModalBoardManagement() {
 
         if (access) {
           const res = await Instance.delete(`/board/${id}`);
-          getMenubarBoardList();
+          fetchBoardList();
           setSelected(null);
           alert(res.data.message);
-          myUpdateTag('board');
+          myUpdateTag('posts');
         } else {
           alert('접근 권한이 없습니다.');
         }
@@ -162,31 +151,33 @@ export default function ModalBoardManagement() {
           </button>
         </div>
         <ul className="w-full grow rounded-sm border-2 border-[#0099ff]">
-          {boardList &&
-            boardList.map(item => (
-              <li key={`board_management_${item.name}`}>
-                <button
-                  className={clsx(
-                    'h-full w-full cursor-pointer',
-                    'px-3 py-1',
-                    'text-start text-[18px] text-[#0099ff]',
-                    'border-b nth-last-[n]:border-none',
-                    selected?.id === item.id && 'bg-[#0099ff] text-white'
-                  )}
-                  onClick={() => {
-                    if (selected?.id === item.id) {
-                      setSelected(null);
-                    } else {
-                      setSelected(item);
-                    }
-                    setInput('');
-                    inputRef.current?.focus();
-                  }}
-                >
-                  {item.name}
-                </button>
-              </li>
-            ))}
+          {boardList?.map(
+            item =>
+              item.id !== 1 && (
+                <li key={`board_management_${item.name}`}>
+                  <button
+                    className={clsx(
+                      'h-full w-full cursor-pointer',
+                      'px-3 py-1',
+                      'text-start text-[18px] text-[#0099ff]',
+                      'border-b nth-last-[n]:border-none',
+                      selected?.id === item.id && 'bg-[#0099ff] text-white'
+                    )}
+                    onClick={() => {
+                      if (selected?.id === item.id) {
+                        setSelected(null);
+                      } else {
+                        setSelected(item);
+                      }
+                      setInput('');
+                      inputRef.current?.focus();
+                    }}
+                  >
+                    {item.name}
+                  </button>
+                </li>
+              )
+          )}
         </ul>
         <div className="h-7.5 w-full text-[20px] text-[#0099ff]">
           {selected && `Selected: ${selected.name}`}

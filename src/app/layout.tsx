@@ -5,7 +5,7 @@ import localFont from 'next/font/local';
 
 import clsx from 'clsx';
 
-import Header from '@/components/layout/header';
+import Header from '@/components/layout/header/header';
 
 import ClientLayout from '@/app/client-layout';
 

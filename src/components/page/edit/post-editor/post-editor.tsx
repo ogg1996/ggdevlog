@@ -8,6 +8,8 @@ import { useEditor } from '@tiptap/react';
 import Instance from '@/api/instance';
 import { myUpdateTag } from '@/api/revalidate';
 
+import useBoardStore from '@/stores/boardStore';
+
 import { Board, Post, Thumbnail } from '@/components/common/types/types';
 import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
 import { extractImages } from '@/components/tiptap/utils/extract-images';
@@ -18,12 +20,13 @@ import PostThumbnailForm from '@/components/page/edit/post-editor/post-thumbnail
 import TiptapEditor from '@/components/tiptap/tiptap-editor';
 
 interface Props {
-  boardList: Board[];
   post?: Post;
 }
 
-export default function PostEditor({ boardList, post }: Props) {
+export default function PostEditor({ post }: Props) {
   const router = useRouter();
+
+  const { boardList } = useBoardStore();
 
   const editor = useEditor(tiptapConfig);
 
@@ -118,7 +121,7 @@ export default function PostEditor({ boardList, post }: Props) {
     <div>
       <div className="mb-4 flex gap-2">
         <PostMetaForm
-          boardList={boardList}
+          boardList={boardList!}
           board={board}
           title={title}
           description={description}
