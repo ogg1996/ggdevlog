@@ -80,8 +80,8 @@ export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
         className="h-full w-full object-cover object-center opacity-100 group-hover:opacity-60"
         src={thumbnail.image_url}
         alt="썸네일 이미지"
+        sizes="142px"
         fill
-        priority
       />
       <CircleMinus size={96} color="#ffffff" className={overlayIconStyle} />
       <div className={clsx(overlayStyle, 'bg-red-500')} />

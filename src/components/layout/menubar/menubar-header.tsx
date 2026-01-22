@@ -27,10 +27,10 @@ export default function MenubarHeader() {
       <Link className="flex h-15 items-center" href={'/'}>
         <Image
           src="/logo.webp"
-          alt="로고 아이콘"
+          alt="로고"
           width={130}
           height={30}
-          priority
+          style={{ width: 130, height: 30 }}
         />
       </Link>
     </div>
