@@ -15,7 +15,7 @@ export default function TiptapViewer({ content }: Props) {
 
   return (
     <div
-      className="tiptap prose max-w-none focus:outline-none"
+      className="tiptap prose max-w-none select-text focus:outline-none"
       dangerouslySetInnerHTML={{ __html: htmlCodeHighlight(html) }}
     />
   );

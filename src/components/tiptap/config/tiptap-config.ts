@@ -61,7 +61,6 @@ export const tiptapConfig = {
       tabSize: 2
     })
   ],
-  content: '<p></p>',
   immediatelyRender: false,
   editorProps: {
     attributes: {

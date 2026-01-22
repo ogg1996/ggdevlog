@@ -8,8 +8,6 @@ import { useEditor } from '@tiptap/react';
 import Instance from '@/api/instance';
 import { myUpdateTag } from '@/api/revalidate';
 
-import useBoardStore from '@/stores/boardStore';
-
 import { Board, Post, Thumbnail } from '@/components/common/types/types';
 import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
 import { extractImages } from '@/components/tiptap/utils/extract-images';
@@ -26,9 +24,10 @@ interface Props {
 export default function PostEditor({ post }: Props) {
   const router = useRouter();
 
-  const { boardList } = useBoardStore();
-
-  const editor = useEditor(tiptapConfig);
+  const editor = useEditor({
+    ...tiptapConfig,
+    content: post ? post.content : '<p></p>'
+  });
 
   const [board, setBoard] = useState<Board>({ id: 1, name: 'Unspecified' });
   const [title, setTitle] = useState('');
@@ -42,12 +41,8 @@ export default function PostEditor({ post }: Props) {
       setTitle(post.title);
       setDescription(post.description);
       setThumbnail(post.thumbnail || null);
-
-      if (editor && post.content) {
-        editor.commands.setContent(post.content);
-      }
     }
-  }, [post, editor]);
+  }, [post]);
 
   function validatePost(): string | null {
     if (!title.trim()) return '제목을 작성해야 합니다.';
@@ -121,7 +116,6 @@ export default function PostEditor({ post }: Props) {
     <div>
       <div className="mb-4 flex gap-2">
         <PostMetaForm
-          boardList={boardList!}
           board={board}
           title={title}
           description={description}

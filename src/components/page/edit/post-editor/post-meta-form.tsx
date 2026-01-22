@@ -6,9 +6,9 @@ import clsx from 'clsx';
 import useOnClickOutside from '@/hooks/useOnCilckOutside';
 
 import { Board } from '@/components/common/types/types';
+import useBoardStore from '@/stores/boardStore';
 
 interface Props {
-  boardList: Board[];
   board: Board;
   title: string;
   description: string;
@@ -16,9 +16,7 @@ interface Props {
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
 }
-
 export default function PostMetaForm({
-  boardList,
   board,
   title,
   description,
@@ -26,6 +24,8 @@ export default function PostMetaForm({
   setTitle,
   setDescription
 }: Props) {
+  const { boardList } = useBoardStore();
+
   const boardRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
@@ -63,7 +63,7 @@ export default function PostMetaForm({
                 'bg-white dark:bg-slate-900'
               )}
             >
-              {boardList.map(item => (
+              {boardList?.map(item => (
                 <button
                   key={`board_${item.name}`}
                   className="w-full p-1 text-start hover:bg-slate-200 dark:hover:bg-slate-700"
