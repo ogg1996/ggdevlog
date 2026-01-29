@@ -21,8 +21,12 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
   - SSR 기반으로 구축하여 SEO를 고려하고 초기 로딩 성능을 개선하기 위해 사용하였습니다.
 - TypeScript
   - 안정적인 코드 작성과 유지 보수를 위해 사용하였습니다.
+
+### 🎨 스타일링 & UI 시스템
 - Tailwind CSS
   - 빠르고 일관된 스타일링을 위해 사용하였습니다.
+- next-themes
+  - 시스템 테마 감지 및 사용자 설정 유지 기능을 통해 다크모드를 구현하기 위해 사용하였습니다.
 
 ### ✍️ 에디터
 
@@ -110,12 +114,16 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 | --- |
 | ![](https://github.com/ogg1996/readmeResource/blob/main/ggdevlog/ggdevlog_post.gif) |
 
+| Tiptap 에디터 적용 후 |
+| --- |
+| ![](https://github.com/ogg1996/readmeResource/blob/main/ggdevlog/ggdevlog_post2.gif) |
+
 ### 🙋‍♂️ 다크모드 기능
-> Next Themes을 활용해서 다크모드를 구현했습니다.
+> next-themes + Tailwind CSS를 활용해 전역 다크 테마 시스템을 구축했습니다.
 
 | 다크모드 |
 | --- |
-| ![](https://github.com/ogg1996/readmeResource/blob/main/ggdevlog/ggdevlog_post.gif) |
+| ![](https://github.com/ogg1996/readmeResource/blob/main/ggdevlog/ggdevlog_dark_mode.gif) |
 <br>
 
 ## 🚧 실행 환경 및 제약 사항
@@ -129,4 +137,5 @@ Next.js 기반의 SSR 환경으로 구축하였습니다.
 <br>
 
 ### [🔗 GGDevLog 서버 Github](https://github.com/ogg1996/ggdevlog-server)
+
 
