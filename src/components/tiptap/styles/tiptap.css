@@ -17,6 +17,11 @@
   color: inherit;
 }
 
+.tiptap span[style*='background-color'],
+.tiptap strong[style*='background-color'] {
+  color: #f1f5f9;
+}
+
 .tiptap h1,
 .tiptap h2,
 .tiptap h3 {
