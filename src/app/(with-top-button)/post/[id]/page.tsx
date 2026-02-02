@@ -4,7 +4,7 @@ import { getPost } from '@/api/fetch';
 
 import dayjs from '@/components/common/utils/dayjs';
 
-import SectionTitle from '@/components/common/SectionTitle';
+import SectionTitle from '@/components/common/section-title';
 import PostEditButtons from '@/components/page/post/post-edit-buttons';
 import TiptapViewer from '@/components/tiptap/tiptap-viewer';
 

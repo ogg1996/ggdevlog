@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 
 import { getPosts } from '@/api/fetch';
 
-import SectionTitle from '@/components/common/SectionTitle';
+import SectionTitle from '@/components/common/section-title';
 import PageNavigationBox from '@/components/page/board/page-navigation-box';
 import PostList from '@/components/page/board/post-list';
 
