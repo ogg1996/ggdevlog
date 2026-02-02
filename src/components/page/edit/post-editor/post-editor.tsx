@@ -29,7 +29,7 @@ export default function PostEditor({ post }: Props) {
     content: post ? post.content : '<p></p>'
   });
 
-  const [board, setBoard] = useState<Board>({ id: 1, name: 'Unspecified' });
+  const [board, setBoard] = useState<Board>({ id: 1, name: 'ETC' });
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [thumbnail, setThumbnail] = useState<Thumbnail | null>(null);
