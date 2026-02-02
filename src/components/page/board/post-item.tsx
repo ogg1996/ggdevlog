@@ -60,7 +60,7 @@ export default function PostItem({
             className="h-full w-full object-cover object-center"
             src={thumbnailUrl}
             alt="썸네일 이미지"
-            sizes="120px"
+            sizes="360px"
             fill
           />
         ) : (
