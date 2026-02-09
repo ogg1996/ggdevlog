@@ -8,7 +8,6 @@ import {
 import Youtube from '@tiptap/extension-youtube';
 import StarterKit from '@tiptap/starter-kit';
 
-import bash from 'highlight.js/lib/languages/bash';
 import js from 'highlight.js/lib/languages/javascript';
 import ts from 'highlight.js/lib/languages/typescript';
 import html from 'highlight.js/lib/languages/xml';
@@ -16,7 +15,6 @@ import { all, createLowlight } from 'lowlight';
 
 const lowlight = createLowlight(all);
 
-lowlight.register('bash', bash);
 lowlight.register('html', html);
 lowlight.register('js', js);
 lowlight.register('ts', ts);
