@@ -115,10 +115,14 @@
   cursor: pointer;
 }
 
-.tiptap div.ProseMirror-selectednode,
-.tiptap img.ProseMirror-selectednode {
+.tiptap div.ProseMirror-selectednode {
   margin-left: 4px;
   width: 99%;
+  box-shadow: 0 0 0 4px #60a5fa;
+}
+.tiptap img.ProseMirror-selectednode {
+  margin-left: 4px;
+  max-width: 99%;
   box-shadow: 0 0 0 4px #60a5fa;
 }
 
