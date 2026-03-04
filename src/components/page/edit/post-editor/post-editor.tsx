@@ -1,21 +1,18 @@
 'use client';
-import { useEffect, useState } from 'react';
-
-import { useRouter } from 'next/navigation';
-
-import { useEditor } from '@tiptap/react';
-
-import Instance from '@/api/instance';
-import { myUpdateTag } from '@/api/revalidate';
 
 import { Board, Post, Thumbnail } from '@/components/common/types/types';
-import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
-import { extractImages } from '@/components/tiptap/utils/extract-images';
+import { useEffect, useState } from 'react';
 
+import Instance from '@/api/instance';
 import PostActionButtons from '@/components/page/edit/post-editor/post-action-buttons';
 import PostMetaForm from '@/components/page/edit/post-editor/post-meta-form';
 import PostThumbnailForm from '@/components/page/edit/post-editor/post-thumbnail-form';
 import TiptapEditor from '@/components/tiptap/tiptap-editor';
+import { extractImages } from '@/components/tiptap/utils/extract-images';
+import { myUpdateTag } from '@/api/revalidate';
+import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
+import { useEditor } from '@tiptap/react';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   post?: Post;
@@ -91,10 +88,9 @@ export default function PostEditor({ post }: Props) {
 
       if (post) {
         myUpdateTag(`post-${post.id}`);
-      } else {
-        await Instance.post('/activity');
       }
 
+      await Instance.post('/activity');
       myUpdateTag('posts');
       alert(res.data.message);
       router.push(`/post/${res.data.data.post_id}`);
