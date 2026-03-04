@@ -1,21 +1,14 @@
 'use client';
-import { useEffect } from 'react';
-
-import dynamic from 'next/dynamic';
-
-import { ThemeProvider } from 'next-themes';
 
 import Instance from '@/api/instance';
-
 import useAdminStore from '@/stores/adminStore';
 import useBoardStore from '@/stores/boardStore';
-import useMenubarStore from '@/stores/menubarStore';
 import useModalStore from '@/stores/modalStore';
+import { ThemeProvider } from 'next-themes';
+import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
 
 const Modal = dynamic(() => import('@/components/layout/modal/modal'), {
-  ssr: false
-});
-const Menubar = dynamic(() => import('@/components/layout/menubar/menubar'), {
   ssr: false
 });
 
@@ -27,11 +20,10 @@ export default function ClientLayout({
   const { boardList, fetchBoardList } = useBoardStore();
   const { adminState, setAdminState } = useAdminStore();
   const { modalState, setModalState } = useModalStore();
-  const { isActive } = useMenubarStore();
 
   useEffect(() => {
     async function handleKeyDown(e: KeyboardEvent) {
-      if (modalState) return;
+      if (modalState === 'login') return;
       if (e.ctrlKey && e.altKey && e.shiftKey && e.key === '~') {
         if (adminState) {
           if (confirm('관리자 권한을 해제 하시겠습니까?')) {
@@ -66,7 +58,6 @@ export default function ClientLayout({
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system">
-      {isActive && <Menubar />}
       <Modal />
       {children}
     </ThemeProvider>

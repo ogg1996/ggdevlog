@@ -1,14 +1,13 @@
 'use client';
+
+import useModalStore from '@/stores/modalStore';
+import clsx from 'clsx';
+import { X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import clsx from 'clsx';
-import { X } from 'lucide-react';
-
-import useMenubarStore from '@/stores/menubarStore';
-
 export default function MenubarHeader() {
-  const { setActive } = useMenubarStore();
+  const { setModalState } = useModalStore();
 
   return (
     <div className="flex h-12.5 items-center gap-2 pr-6">
@@ -19,7 +18,7 @@ export default function MenubarHeader() {
           'hover:rounded-sm hover:bg-gray-200'
         )}
         onClick={() => {
-          setActive(false);
+          setModalState(null);
         }}
       >
         <X size={36} color="#0099ff" />

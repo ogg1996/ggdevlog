@@ -1,16 +1,14 @@
 'use client';
-import Link from 'next/link';
 
-import clsx from 'clsx';
 import { Pencil, Settings } from 'lucide-react';
 
 import useAdminStore from '@/stores/adminStore';
-import useMenubarStore from '@/stores/menubarStore';
 import useModalStore from '@/stores/modalStore';
+import clsx from 'clsx';
+import Link from 'next/link';
 
 export default function MenubarTitle() {
   const { adminState } = useAdminStore();
-  const { setActive } = useMenubarStore();
   const { setModalState } = useModalStore();
 
   return (
@@ -26,7 +24,7 @@ export default function MenubarTitle() {
             )}
             href={'/edit'}
             onClick={() => {
-              setActive(false);
+              setModalState(null);
             }}
           >
             <Pencil size={24} color="#0099ff" />
@@ -39,7 +37,7 @@ export default function MenubarTitle() {
             )}
             onClick={() => {
               setModalState('boardManagement');
-              setActive(false);
+              setModalState(null);
             }}
           >
             <Settings size={24} color="#0099ff" />
