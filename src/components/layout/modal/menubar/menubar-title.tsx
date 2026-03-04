@@ -37,7 +37,6 @@ export default function MenubarTitle() {
             )}
             onClick={() => {
               setModalState('boardManagement');
-              setModalState(null);
             }}
           >
             <Settings size={24} color="#0099ff" />

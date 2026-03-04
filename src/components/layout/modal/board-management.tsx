@@ -1,18 +1,16 @@
 'use client';
+
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-import clsx from 'clsx';
-import { X } from 'lucide-react';
-
+import { Board } from '@/components/common/types/types';
 import Instance from '@/api/instance';
+import { X } from 'lucide-react';
+import clsx from 'clsx';
 import { myUpdateTag } from '@/api/revalidate';
-
 import useBoardStore from '@/stores/boardStore';
 import useModalStore from '@/stores/modalStore';
 
-import { Board } from '@/components/common/types/types';
-
-export default function ModalBoardManagement() {
+export default function BoardManagement() {
   const { boardList, fetchBoardList } = useBoardStore();
   const { setModalState } = useModalStore();
 
@@ -126,8 +124,8 @@ export default function ModalBoardManagement() {
     return (
       <div
         className={clsx(
-          'self-center justify-self-center',
-          'z-50 mt-15 h-150 w-125 p-4',
+          'fixed z-50 h-150 w-125 p-4',
+          'top-15 left-1/2 -translate-x-1/2',
           'flex flex-col gap-2 rounded-lg',
           'bg-white dark:bg-slate-900'
         )}
@@ -233,7 +231,6 @@ export default function ModalBoardManagement() {
                 추가
               </button>
             )}
-
             {selected && (
               <button
                 className={clsx(
