@@ -1,15 +1,14 @@
 'use client';
+
 import { useEffect, useRef, useState } from 'react';
 
+import Instance from '@/api/instance';
+import useAdminStore from '@/stores/adminStore';
+import useModalStore from '@/stores/modalStore';
 import clsx from 'clsx';
 import { X } from 'lucide-react';
 
-import Instance from '@/api/instance';
-
-import useAdminStore from '@/stores/adminStore';
-import useModalStore from '@/stores/modalStore';
-
-export default function ModalLogin() {
+export default function Login() {
   const { setAdminState } = useAdminStore();
   const { setModalState } = useModalStore();
 
@@ -50,8 +49,8 @@ export default function ModalLogin() {
   return (
     <div
       className={clsx(
-        'self-center justify-self-center',
-        'z-50 mt-15 h-62.5 w-75 p-4',
+        'fixed z-50 h-62.5 w-75 p-4',
+        'top-15 left-1/2 -translate-x-1/2',
         'flex flex-col items-center justify-between gap-2',
         'rounded-lg bg-white',
         'dark:bg-slate-900'

@@ -1,12 +1,11 @@
 'use client';
 
+import useModalStore from '@/stores/modalStore';
 import clsx from 'clsx';
 import { Menu } from 'lucide-react';
 
-import useMenubarStore from '@/stores/menubarStore';
-
 export default function MenubarButton() {
-  const { setActive } = useMenubarStore();
+  const { setModalState } = useModalStore();
 
   return (
     <button
@@ -16,7 +15,7 @@ export default function MenubarButton() {
         'hover:rounded-sm hover:bg-gray-200'
       )}
       onClick={() => {
-        setActive(true);
+        setModalState('menubar');
       }}
     >
       <Menu size={36} color="#0099ff" />

@@ -1,16 +1,14 @@
 'use client';
 
+import useBoardStore from '@/stores/boardStore';
+import useModalStore from '@/stores/modalStore';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import clsx from 'clsx';
-
-import useBoardStore from '@/stores/boardStore';
-import useMenubarStore from '@/stores/menubarStore';
-
 export default function MenubarList() {
   const { boardList } = useBoardStore();
-  const { setActive } = useMenubarStore();
+  const { setModalState } = useModalStore();
   const pathName = usePathname();
 
   return (
@@ -27,7 +25,7 @@ export default function MenubarList() {
             )}
             href={`/board/${item.name}/1`}
             onClick={() => {
-              setActive(false);
+              setModalState(null);
             }}
           >
             {item.name}
