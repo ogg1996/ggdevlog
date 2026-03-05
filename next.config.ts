@@ -3,6 +3,7 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: false,
+
   images: {
     remotePatterns: [
       {
@@ -11,6 +12,11 @@ const nextConfig: NextConfig = {
         pathname: '/storage/v1/object/public/**'
       }
     ]
+  },
+  logging: {
+    fetches: {
+      fullUrl: true
+    }
   }
 };
 

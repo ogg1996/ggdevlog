@@ -1,9 +1,9 @@
 'use client';
+
 import { useEffect, useRef, useState } from 'react';
 
-import { JSONContent } from '@tiptap/react';
-
 import TiptapViewer from '@/components/tiptap/tiptap-viewer';
+import { JSONContent } from '@tiptap/react';
 import clsx from 'clsx';
 
 interface Props {

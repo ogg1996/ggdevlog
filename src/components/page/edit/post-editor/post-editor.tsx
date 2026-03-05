@@ -4,13 +4,13 @@ import { Board, Post, Thumbnail } from '@/components/common/types/types';
 import { useEffect, useState } from 'react';
 
 import Instance from '@/api/instance';
+import { myUpdateTag } from '@/api/revalidate';
 import PostActionButtons from '@/components/page/edit/post-editor/post-action-buttons';
 import PostMetaForm from '@/components/page/edit/post-editor/post-meta-form';
 import PostThumbnailForm from '@/components/page/edit/post-editor/post-thumbnail-form';
+import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
 import TiptapEditor from '@/components/tiptap/tiptap-editor';
 import { extractImages } from '@/components/tiptap/utils/extract-images';
-import { myUpdateTag } from '@/api/revalidate';
-import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
 import { useEditor } from '@tiptap/react';
 import { useRouter } from 'next/navigation';
 
@@ -92,6 +92,7 @@ export default function PostEditor({ post }: Props) {
 
       await Instance.post('/activity');
       myUpdateTag('posts');
+      myUpdateTag('activity');
       alert(res.data.message);
       router.push(`/post/${res.data.data.post_id}`);
     } catch {

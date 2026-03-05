@@ -11,7 +11,12 @@ interface Props {
 }
 
 export default function TiptapEditor({ editor }: Props) {
-  if (!editor) return <div>에이터 로딩중...</div>;
+  if (!editor)
+    return (
+      <div className="flex h-151.25 w-full items-center justify-center rounded-sm border border-slate-300 text-[32px]">
+        에디터 로딩중...
+      </div>
+    );
 
   return (
     <div className="relative w-full rounded-sm border border-slate-300 p-2 select-text">
