@@ -2,6 +2,8 @@ import Activity from '@/components/page/home/activity/activity';
 import Introduce from '@/components/page/home/introduce/introduce';
 import { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'GGDevLog - home',
   description: 'GGDevLog - 나의 개발 기록 저장소',

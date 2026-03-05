@@ -18,7 +18,7 @@ export async function getActivity() {
   );
 
   const start = dayjs.tz('2026-01-26');
-  const end = dayjs();
+  const end = dayjs().tz();
 
   const resultArr: Item[][] = [];
 
