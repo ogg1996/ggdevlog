@@ -1,10 +1,10 @@
+'use client';
+
 import { useRef, useState } from 'react';
 
-import clsx from 'clsx';
-
-import { Item } from '@/components/page/home/activity/types/types';
-
 import Tooltip from '@/components/common/tooltip';
+import { Item } from '@/components/page/home/activity/types/types';
+import clsx from 'clsx';
 
 interface Props {
   day: Item;

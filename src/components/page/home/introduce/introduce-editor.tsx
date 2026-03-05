@@ -3,11 +3,10 @@
 import { JSONContent, useEditor } from '@tiptap/react';
 
 import Instance from '@/api/instance';
-
+import { myUpdateTag } from '@/api/revalidate';
 import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
-import { extractImages } from '@/components/tiptap/utils/extract-images';
-
 import TiptapEditor from '@/components/tiptap/tiptap-editor';
+import { extractImages } from '@/components/tiptap/utils/extract-images';
 import clsx from 'clsx';
 
 interface Props {
@@ -48,6 +47,7 @@ export default function IntroduceEditor({
         }).then(res => res.data);
 
         alert(res.message);
+        myUpdateTag('introduce');
         setContent(res.data.content);
         setEdit(false);
       } else {
