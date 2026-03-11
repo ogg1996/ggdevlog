@@ -55,9 +55,6 @@ export default function Login() {
         'rounded-lg bg-white',
         'dark:bg-slate-900'
       )}
-      onClick={e => {
-        e.stopPropagation();
-      }}
     >
       <div className="flex w-full justify-between">
         <h2 className="text-[24px] font-bold text-[#0099ff]">로그인</h2>

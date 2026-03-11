@@ -2,13 +2,13 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-import { Board } from '@/components/common/types/types';
 import Instance from '@/api/instance';
-import { X } from 'lucide-react';
-import clsx from 'clsx';
 import { myUpdateTag } from '@/api/revalidate';
+import { Board } from '@/components/common/types/types';
 import useBoardStore from '@/stores/boardStore';
 import useModalStore from '@/stores/modalStore';
+import clsx from 'clsx';
+import { X } from 'lucide-react';
 
 export default function BoardManagement() {
   const { boardList, fetchBoardList } = useBoardStore();
@@ -129,9 +129,6 @@ export default function BoardManagement() {
           'flex flex-col gap-2 rounded-lg',
           'bg-white dark:bg-slate-900'
         )}
-        onClick={e => {
-          e.stopPropagation();
-        }}
       >
         <div className="flex w-full justify-between">
           <h2 className="text-[24px] font-bold text-[#0099ff]">보드관리</h2>

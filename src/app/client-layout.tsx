@@ -1,6 +1,7 @@
 'use client';
 
 import Instance from '@/api/instance';
+import { Toaster } from '@/components/ui/sonner';
 import useAdminStore from '@/stores/adminStore';
 import useBoardStore from '@/stores/boardStore';
 import useModalStore from '@/stores/modalStore';
@@ -59,6 +60,7 @@ export default function ClientLayout({
   return (
     <ThemeProvider attribute="class" defaultTheme="system">
       <Modal />
+      <Toaster position="top-center" duration={1500} />
       {children}
     </ThemeProvider>
   );
