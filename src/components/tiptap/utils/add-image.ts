@@ -6,7 +6,6 @@ export default function addImage(): Promise<
       img_url: string;
     }
   | string
-  | null
 > {
   return new Promise(resolve => {
     const input = document.createElement('input');
@@ -16,7 +15,7 @@ export default function addImage(): Promise<
 
     input.addEventListener('change', async () => {
       if (!input.files || input.files.length === 0) {
-        resolve(null);
+        resolve('업로드 실패');
         return;
       }
 

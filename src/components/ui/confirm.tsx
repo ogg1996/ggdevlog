@@ -22,7 +22,7 @@ export function Confirm({ title, description, children, onClick }: Props) {
     <AlertDialog>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent
-        className="top-1/7 bg-white font-[pretendard] text-black dark:bg-slate-900"
+        className="top-1/2 bg-white font-[pretendard] text-black dark:bg-slate-900"
         size="sm"
       >
         <AlertDialogHeader>

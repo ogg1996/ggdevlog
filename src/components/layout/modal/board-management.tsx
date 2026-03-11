@@ -9,6 +9,7 @@ import useBoardStore from '@/stores/boardStore';
 import useModalStore from '@/stores/modalStore';
 import clsx from 'clsx';
 import { X } from 'lucide-react';
+import { toast } from 'sonner';
 
 export default function BoardManagement() {
   const { boardList, fetchBoardList } = useBoardStore();
@@ -20,6 +21,7 @@ export default function BoardManagement() {
 
   const [selected, setSelected] = useState<Board | null>(null);
   const [input, setInput] = useState('');
+  const [pending, setPending] = useState(false);
 
   useEffect(() => {
     async function init() {
@@ -30,7 +32,7 @@ export default function BoardManagement() {
       if (access) {
         setVisible(true);
       } else {
-        alert('접근권한이 없습니다.');
+        toast.error('권한 없음');
         setModalState(null);
       }
     }
@@ -44,79 +46,121 @@ export default function BoardManagement() {
 
   async function addBoard(name: string) {
     if (!input.trim()) {
-      alert('텍스트를 입력해 주세요!');
+      toast.warning('텍스트를 입력해 주세요.');
       return;
     }
-    try {
-      const access = await Instance.get('/auth/accessCheck').then(
-        res => res.data.success
-      );
 
-      if (access) {
+    setPending(true);
+
+    toast.promise(
+      async () => {
+        const access = await Instance.get('/auth/accessCheck').then(
+          res => res.data.success
+        );
+        if (!access) {
+          setPending(false);
+          throw new Error('권한 없음');
+        }
+
         const res = await Instance.post('/board', {
           name
         });
-        if (res.data.success) {
-          setInput('');
-          fetchBoardList();
+
+        if (!res.data.success) {
+          setPending(false);
+          throw new Error(res.data.message ?? '요청 실패');
         }
-        alert(res.data.message);
-      } else {
-        alert('접근 권한이 없습니다.');
+
+        setInput('');
+        fetchBoardList();
+        setPending(false);
+
+        return res.data.message ?? '요청 성공';
+      },
+      {
+        loading: '처리 중...',
+        success: message => message,
+        error: err => err.message ?? '서버 오류'
       }
-    } catch (error) {
-      alert('서버 오류');
-    }
+    );
   }
 
   async function updateBoard(id: number, name: string) {
     if (!input.trim()) {
-      alert('텍스트를 입력해 주세요!');
+      toast.warning('텍스트를 입력해 주세요.');
       return;
     }
-    try {
-      const access = await Instance.get('/auth/accessCheck').then(
-        res => res.data.success
-      );
+    setPending(true);
 
-      if (access) {
+    toast.promise(
+      async () => {
+        const access = await Instance.get('/auth/accessCheck').then(
+          res => res.data.success
+        );
+        if (!access) {
+          setPending(false);
+          throw new Error('권한 없음');
+        }
+
         const res = await Instance.put(`/board/${id}`, {
           name
         });
 
-        if (res.data.success) {
-          setInput('');
-          setSelected(null);
-          fetchBoardList();
+        if (!res.data.success) {
+          setPending(false);
+          throw new Error(res.data.message ?? '요청 실패');
         }
-        alert(res.data.message);
-      } else {
-        alert('접근 권한이 없습니다.');
+
+        setSelected(null);
+        setInput('');
+        fetchBoardList();
+        setPending(false);
+
+        return res.data.message ?? '요청 성공';
+      },
+      {
+        loading: '처리 중...',
+        success: message => message,
+        error: err => err.message ?? '서버 오류'
       }
-    } catch (error) {
-      alert('서버 오류');
-    }
+    );
   }
 
   async function deleteBoard(id: number) {
     if (confirm('정말로 삭제하시겠습니까?')) {
-      try {
-        const access = await Instance.get('/auth/accessCheck').then(
-          res => res.data.success
-        );
+      setPending(true);
 
-        if (access) {
+      toast.promise(
+        async () => {
+          const access = await Instance.get('/auth/accessCheck').then(
+            res => res.data.success
+          );
+          if (!access) {
+            setPending(false);
+            throw new Error('권한 없음');
+          }
+
           const res = await Instance.delete(`/board/${id}`);
-          fetchBoardList();
+
+          if (!res.data.success) {
+            setPending(false);
+            throw new Error(res.data.message ?? '요청 실패');
+          }
+
           setSelected(null);
-          alert(res.data.message);
+          setInput('');
+          fetchBoardList();
           myUpdateTag('posts');
-        } else {
-          alert('접근 권한이 없습니다.');
+          setPending(false);
+
+          return res.data.message ?? '요청 성공';
+        },
+        {
+          loading: '처리 중...',
+          success: message => message,
+          error: err => err.message ?? '서버 오류'
         }
-      } catch (error) {
-        alert('서버 오류');
-      }
+      );
     }
   }
 
@@ -125,7 +169,7 @@ export default function BoardManagement() {
       <div
         className={clsx(
           'fixed z-50 h-150 w-125 p-4',
-          'top-15 left-1/2 -translate-x-1/2',
+          'top-25 left-1/2 -translate-x-1/2',
           'flex flex-col gap-2 rounded-lg',
           'bg-white dark:bg-slate-900'
         )}
@@ -203,10 +247,12 @@ export default function BoardManagement() {
           <div className="flex gap-1 font-[duggeunmo]">
             {selected ? (
               <button
+                disabled={pending}
                 className={clsx(
                   'w-16 cursor-pointer text-white',
                   'rounded-lg px-4 py-2',
-                  'bg-blue-400 hover:bg-blue-600'
+                  'bg-blue-400 hover:bg-blue-600',
+                  'disabled:bg-gray-400 disabled:hover:bg-gray-400'
                 )}
                 onClick={() => {
                   updateBoard(selected.id, input);
@@ -216,10 +262,12 @@ export default function BoardManagement() {
               </button>
             ) : (
               <button
+                disabled={pending}
                 className={clsx(
                   'w-16 cursor-pointer text-white',
                   'rounded-lg px-4 py-2',
-                  'bg-blue-400 hover:bg-blue-600'
+                  'bg-blue-400 hover:bg-blue-600',
+                  'disabled:bg-gray-400 disabled:hover:bg-gray-400'
                 )}
                 onClick={() => {
                   addBoard(input);
@@ -230,10 +278,12 @@ export default function BoardManagement() {
             )}
             {selected && (
               <button
+                disabled={pending}
                 className={clsx(
                   'w-16 cursor-pointer text-white',
                   'rounded-lg px-4 py-2',
-                  'bg-red-400 hover:bg-red-500'
+                  'bg-red-400 hover:bg-red-500',
+                  'disabled:bg-gray-400 disabled:hover:bg-gray-400'
                 )}
                 onClick={() => {
                   deleteBoard(selected.id);

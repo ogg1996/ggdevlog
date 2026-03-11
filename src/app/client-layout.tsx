@@ -8,6 +8,7 @@ import useModalStore from '@/stores/modalStore';
 import { ThemeProvider } from 'next-themes';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 const Modal = dynamic(() => import('@/components/layout/modal/modal'), {
   ssr: false
@@ -28,16 +29,23 @@ export default function ClientLayout({
       if (e.ctrlKey && e.altKey && e.shiftKey && e.key === '~') {
         if (adminState) {
           if (confirm('관리자 권한을 해제 하시겠습니까?')) {
-            try {
-              const res = await Instance.post('/auth/logout');
+            toast.promise(
+              async () => {
+                const res = await Instance.post('/auth/logout');
 
-              if (res.data.success) {
-                alert(res.data.message);
+                if (!res.data.success) {
+                  throw new Error('로그아웃 실패');
+                }
+
                 setAdminState(false);
+                return res.data.message ?? '로그아웃 성공';
+              },
+              {
+                loading: '처리 중...',
+                success: message => message,
+                error: err => err.message ?? '서버 오류'
               }
-            } catch {
-              alert('서버 오류');
-            }
+            );
           }
         } else {
           setModalState('login');

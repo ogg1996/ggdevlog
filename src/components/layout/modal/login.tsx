@@ -7,6 +7,7 @@ import useAdminStore from '@/stores/adminStore';
 import useModalStore from '@/stores/modalStore';
 import clsx from 'clsx';
 import { X } from 'lucide-react';
+import { toast } from 'sonner';
 
 export default function Login() {
   const { setAdminState } = useAdminStore();
@@ -15,7 +16,7 @@ export default function Login() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [passward, setPassward] = useState('');
-  const [message, setMessage] = useState('');
+  const [pending, setPending] = useState(false);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -24,33 +25,43 @@ export default function Login() {
   async function handleLogin() {
     if (passward.length === 0) {
       inputRef.current?.focus();
-      setMessage('비밀번호를 입력하세요.');
+      toast.warning('비밀번호를 입력하세요.');
       return;
     }
-    try {
-      const res = await Instance.post('/auth/login', {
-        pw: passward
-      });
 
-      if (res.data.success) {
-        alert(res.data.message);
+    setPending(true);
+
+    toast.promise(
+      async () => {
+        const res = await Instance.post('/auth/login', {
+          pw: passward
+        });
+
+        if (!res.data.success) {
+          inputRef.current?.focus();
+          setPassward('');
+          setPending(false);
+          throw new Error(res.data.message);
+        }
+
         setModalState(null);
         setAdminState(true);
-      } else {
-        setMessage(res.data.message);
-        inputRef.current?.focus();
-        setPassward('');
+        setPending(false);
+        return res.data.message ?? '요청 성공';
+      },
+      {
+        loading: '처리 중...',
+        success: message => message,
+        error: err => err.message ?? '서버 오류'
       }
-    } catch {
-      setMessage('서버 오류');
-    }
+    );
   }
 
   return (
     <div
       className={clsx(
         'fixed z-50 h-62.5 w-75 p-4',
-        'top-15 left-1/2 -translate-x-1/2',
+        'top-25 left-1/2 -translate-x-1/2',
         'flex flex-col items-center justify-between gap-2',
         'rounded-lg bg-white',
         'dark:bg-slate-900'
@@ -77,7 +88,6 @@ export default function Login() {
           ref={inputRef}
           onChange={e => {
             setPassward(e.target.value);
-            setMessage('');
           }}
           type="password"
           placeholder="비밀번호를 입력하세요.."
@@ -88,10 +98,10 @@ export default function Login() {
             }
           }}
         />
-        <p className="h-6.75 text-center text-[16px] text-red-600">{message}</p>
       </div>
       <div className="flex gap-4">
         <button
+          disabled={pending}
           className={clsx(
             'w-20 cursor-pointer text-white',
             'rounded-lg px-4 py-2',
@@ -102,6 +112,7 @@ export default function Login() {
           로그인
         </button>
         <button
+          disabled={pending}
           className={clsx(
             'w-20 cursor-pointer text-white',
             'rounded-lg px-4 py-2',
