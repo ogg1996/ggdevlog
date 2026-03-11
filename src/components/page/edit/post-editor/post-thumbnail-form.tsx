@@ -8,6 +8,8 @@ import Instance from '@/api/instance';
 
 import { Thumbnail } from '@/components/common/types/types';
 import addImage from '@/components/tiptap/utils/add-image';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 interface Props {
   thumbnail: Thumbnail | null;
@@ -20,51 +22,76 @@ const overlayIconStyle = 'absolute z-10 opacity-0 group-hover:opacity-100';
 const overlayStyle = 'absolute inset-0 opacity-0 group-hover:opacity-60';
 
 export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
-  async function handleClickAddThumbnail() {
-    try {
-      const access = await Instance.get('/auth/accessCheck').then(
-        res => res.data.success
-      );
+  const [pending, setPending] = useState(false);
 
-      if (access) {
+  async function handleClickAddThumbnail() {
+    setPending(true);
+
+    toast.promise(
+      async () => {
+        const access = await Instance.get('/auth/accessCheck').then(
+          res => res.data.success
+        );
+        if (!access) {
+          setPending(false);
+          throw new Error('권한 없음');
+        }
+
         const result = await addImage();
 
-        if (result === null) return;
         if (typeof result === 'string') {
-          alert(result);
-          return;
+          setPending(false);
+          throw new Error(result);
         }
 
         setThumbnail({
           image_name: result.img_name,
           image_url: result.img_url
         });
-      } else {
-        alert('접근 권한이 없습니다.');
+        setPending(false);
+
+        return '썸네일 추가 성공';
+      },
+      {
+        loading: '처리 중...',
+        success: message => message,
+        error: err => err.message ?? '서버 오류'
       }
-    } catch {
-      alert('서버 오류');
-    }
+    );
   }
 
   async function handleClickRemoveThumbnail() {
-    try {
-      const access = await Instance.get('/auth/accessCheck').then(
-        res => res.data.success
-      );
-      if (access) {
+    setPending(true);
+
+    toast.promise(
+      async () => {
+        const access = await Instance.get('/auth/accessCheck').then(
+          res => res.data.success
+        );
+        if (!access) {
+          setPending(false);
+          throw new Error('권한 없음');
+        }
+
         setThumbnail(null);
-      } else {
-        alert('접근 권한이 없습니다.');
+
+        return '썸네일 삭제 성공';
+      },
+      {
+        loading: '처리 중...',
+        success: message => message,
+        error: err => err.message ?? '서버 오류'
       }
-    } catch {
-      alert('서버 오류');
-    }
+    );
   }
 
   if (thumbnail === null)
     return (
-      <button className={buttonStyle} onClick={handleClickAddThumbnail}>
+      <button
+        disabled={pending}
+        className={buttonStyle}
+        onClick={handleClickAddThumbnail}
+      >
         <p className="text-2xl font-bold text-slate-300">썸네일</p>
         <CirclePlus size={96} color="#ffffff" className={overlayIconStyle} />
         <div className={clsx(overlayStyle, 'bg-green-500')} />
@@ -73,6 +100,7 @@ export default function PostThumbnailForm({ thumbnail, setThumbnail }: Props) {
 
   return (
     <button
+      disabled={pending}
       className={clsx(buttonStyle, 'p-1')}
       onClick={handleClickRemoveThumbnail}
     >

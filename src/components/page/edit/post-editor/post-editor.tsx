@@ -13,6 +13,7 @@ import TiptapEditor from '@/components/tiptap/tiptap-editor';
 import { extractImages } from '@/components/tiptap/utils/extract-images';
 import { useEditor } from '@tiptap/react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 interface Props {
   post?: Post;
@@ -30,8 +31,9 @@ export default function PostEditor({ post }: Props) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [thumbnail, setThumbnail] = useState<Thumbnail | null>(null);
+  const [pending, setPending] = useState(false);
 
-  // 수정시 데이터 로드 로직
+  // 수정 시 데이터 로드 로직
   useEffect(() => {
     if (post) {
       setBoard({ id: post.board.id, name: post.board.name });
@@ -49,64 +51,71 @@ export default function PostEditor({ post }: Props) {
   }
 
   async function handleSave() {
-    try {
-      const access = await Instance.get('/auth/accessCheck').then(
-        res => res.data.success
-      );
+    setPending(true);
 
-      if (!access) {
-        alert('접근 권한이 없습니다.');
-        return;
+    toast.promise(
+      async () => {
+        const access = await Instance.get('/auth/accessCheck').then(
+          res => res.data.success
+        );
+        if (!access) {
+          setPending(false);
+          throw new Error('권한 없음');
+        }
+
+        const validateResult = validatePost();
+
+        if (validateResult) {
+          setPending(false);
+          throw new Error(validateResult);
+        }
+
+        const content = editor.getJSON();
+        const images: string[] = [];
+
+        extractImages(content, images);
+
+        const postData = {
+          board_id: board.id,
+          title,
+          thumbnail,
+          description,
+          content,
+          images
+        };
+
+        const res = post
+          ? await Instance.put(`/post/${post.id}`, postData)
+          : await Instance.post('/post', postData);
+
+        if (!res.data.success) {
+          setPending(false);
+          throw new Error(res.data.message ?? '요청 실패');
+        }
+
+        if (post) {
+          myUpdateTag(`post-${post.id}`);
+        }
+
+        await Instance.post('/activity');
+        myUpdateTag('posts');
+        myUpdateTag('activity');
+        setPending(false);
+        router.push(`/post/${res.data.data.post_id}`);
+
+        return res.data.message ?? '요청 성공';
+      },
+      {
+        loading: '처리 중...',
+        success: message => message,
+        error: err => err.message ?? '서버 오류'
       }
-
-      if (!confirm('게시글 작성을 완료 하시겠습니까?')) return;
-
-      const validateResult = validatePost();
-
-      if (validateResult) {
-        alert(validateResult);
-        return;
-      }
-
-      const content = editor.getJSON();
-      const images: string[] = [];
-
-      extractImages(content, images);
-
-      const postData = {
-        board_id: board.id,
-        title,
-        thumbnail,
-        description,
-        content,
-        images
-      };
-
-      const res = post
-        ? await Instance.put(`/post/${post.id}`, postData)
-        : await Instance.post('/post', postData);
-
-      if (post) {
-        myUpdateTag(`post-${post.id}`);
-      }
-
-      await Instance.post('/activity');
-      myUpdateTag('posts');
-      myUpdateTag('activity');
-      alert(res.data.message);
-      router.push(`/post/${res.data.data.post_id}`);
-    } catch {
-      alert('작성 실패');
-    }
+    );
   }
 
   async function handleCancel() {
-    if (
-      confirm('작성 중인 내용이 전부 사라집니다.\n정말로 취소하시겠습니까?')
-    ) {
-      alert('취소되었습니다.');
-      router.back();
-    }
+    toast.success('취소되었습니다.');
+    router.back();
   }
 
   return (
@@ -125,6 +134,7 @@ export default function PostEditor({ post }: Props) {
       <TiptapEditor editor={editor} />
       <PostActionButtons
         post={post}
+        pending={pending}
         handleSave={handleSave}
         handleCancel={handleCancel}
       />

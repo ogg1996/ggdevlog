@@ -19,6 +19,7 @@ import Instance from '@/api/instance';
 import addImage from '@/components/tiptap/utils/add-image';
 
 import { ToolbarItem } from '@/components/tiptap/types/types';
+import { toast } from 'sonner';
 
 const textColors: string[] = [
   '#ef4444',
@@ -113,7 +114,7 @@ const mediaToolbarItems: ToolbarItem[] = [
         editor.chain().focus().extendMarkRange('link').unsetLink().run();
       } else {
         if (editor.state.selection.empty) {
-          alert('텍스트 영역을 지정해야 합니다.');
+          toast.error('텍스트 영역을 지정해야 합니다.');
           return;
         }
 
@@ -133,29 +134,31 @@ const mediaToolbarItems: ToolbarItem[] = [
     text: '이미지',
     icon: Image,
     action: async editor => {
-      try {
-        const access = await Instance.get('/auth/accessCheck').then(
-          res => res.data.success
-        );
+      toast.promise(
+        async () => {
+          const access = await Instance.get('/auth/accessCheck').then(
+            res => res.data.success
+          );
+          if (!access) {
+            throw new Error('권한 없음');
+          }
 
-        if (access) {
           const result = await addImage();
 
-          if (result === null) {
-            return;
-          }
           if (typeof result === 'string') {
-            alert(result);
-            return;
+            throw new Error(result);
           }
 
           editor.chain().focus().setImage({ src: result.img_url }).run();
-        } else {
-          alert('접근 권한이 없습니다.');
+
+          return '이미지 추가 성공';
+        },
+        {
+          loading: '처리 중...',
+          success: message => message,
+          error: err => err.message ?? '서버 오류'
         }
-      } catch {
-        alert('서버 오류');
-      }
+      );
     }
   },
   {

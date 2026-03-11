@@ -9,6 +9,10 @@ import Footer from '@/components/layout/footer';
 import Header from '@/components/layout/header/header';
 
 import ClientLayout from '@/app/client-layout';
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const dungGeunmoMo = localFont({
   src: '../../public/fonts/DungGeunMo.woff2',
@@ -29,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
       <body
         className={clsx(
           dungGeunmoMo.className,
