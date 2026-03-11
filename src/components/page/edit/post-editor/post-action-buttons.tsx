@@ -2,6 +2,7 @@
 import clsx from 'clsx';
 
 import { Post } from '@/components/common/types/types';
+import { Confirm } from '@/components/ui/confirm';
 
 interface Props {
   post?: Post;
@@ -21,17 +22,22 @@ export default function PostActionButtons({
 }: Props) {
   return (
     <div className="mt-5 flex justify-end gap-2">
-      <button
-        disabled={pending}
+      <Confirm
+        title={`게시글 ${!post ? '작성' : '수정'} 취소`}
+        description={`${!post ? '작성' : '수정'} 중인 변경사항이 모두 사라집니다.`}
         onClick={handleCancel}
-        className={clsx(
-          buttonStyle,
-          'bg-red-400 hover:bg-red-500',
-          'disabled:bg-gray-400 disabled:hover:bg-gray-400'
-        )}
       >
-        {!post ? '작성취소' : '수정취소'}
-      </button>
+        <button
+          disabled={pending}
+          className={clsx(
+            buttonStyle,
+            'bg-red-400 hover:bg-red-500',
+            'disabled:bg-gray-400 disabled:hover:bg-gray-400'
+          )}
+        >
+          {!post ? '작성취소' : '수정취소'}
+        </button>
+      </Confirm>
       <button
         disabled={pending}
         onClick={handleSave}

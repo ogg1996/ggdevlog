@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Instance from '@/api/instance';
 import { myUpdateTag } from '@/api/revalidate';
 import { Board } from '@/components/common/types/types';
+import { Confirm } from '@/components/ui/confirm';
 import useBoardStore from '@/stores/boardStore';
 import useModalStore from '@/stores/modalStore';
 import clsx from 'clsx';
@@ -46,7 +47,7 @@ export default function BoardManagement() {
 
   async function addBoard(name: string) {
     if (!input.trim()) {
-      toast.warning('텍스트를 입력해 주세요.');
+      toast.error('텍스트를 입력해 주세요.');
       return;
     }
 
@@ -87,7 +88,7 @@ export default function BoardManagement() {
 
   async function updateBoard(id: number, name: string) {
     if (!input.trim()) {
-      toast.warning('텍스트를 입력해 주세요.');
+      toast.error('텍스트를 입력해 주세요.');
       return;
     }
     setPending(true);
@@ -127,41 +128,39 @@ export default function BoardManagement() {
   }
 
   async function deleteBoard(id: number) {
-    if (confirm('정말로 삭제하시겠습니까?')) {
-      setPending(true);
+    setPending(true);
 
-      toast.promise(
-        async () => {
-          const access = await Instance.get('/auth/accessCheck').then(
-            res => res.data.success
-          );
-          if (!access) {
-            setPending(false);
-            throw new Error('권한 없음');
-          }
-
-          const res = await Instance.delete(`/board/${id}`);
-
-          if (!res.data.success) {
-            setPending(false);
-            throw new Error(res.data.message ?? '요청 실패');
-          }
-
-          setSelected(null);
-          setInput('');
-          fetchBoardList();
-          myUpdateTag('posts');
+    toast.promise(
+      async () => {
+        const access = await Instance.get('/auth/accessCheck').then(
+          res => res.data.success
+        );
+        if (!access) {
           setPending(false);
-
-          return res.data.message ?? '요청 성공';
-        },
-        {
-          loading: '처리 중...',
-          success: message => message,
-          error: err => err.message ?? '서버 오류'
+          throw new Error('권한 없음');
         }
-      );
-    }
+
+        const res = await Instance.delete(`/board/${id}`);
+
+        if (!res.data.success) {
+          setPending(false);
+          throw new Error(res.data.message ?? '요청 실패');
+        }
+
+        setSelected(null);
+        setInput('');
+        fetchBoardList();
+        myUpdateTag('posts');
+        setPending(false);
+
+        return res.data.message ?? '요청 성공';
+      },
+      {
+        loading: '처리 중...',
+        success: message => message,
+        error: err => err.message ?? '서버 오류'
+      }
+    );
   }
 
   if (visible)
@@ -277,20 +276,25 @@ export default function BoardManagement() {
               </button>
             )}
             {selected && (
-              <button
-                disabled={pending}
-                className={clsx(
-                  'w-16 cursor-pointer text-white',
-                  'rounded-lg px-4 py-2',
-                  'bg-red-400 hover:bg-red-500',
-                  'disabled:bg-gray-400 disabled:hover:bg-gray-400'
-                )}
+              <Confirm
+                title="게시판 삭제"
+                description="해당 게시판의 게시글은 [ETC]게시판으로 이동합니다."
                 onClick={() => {
                   deleteBoard(selected.id);
                 }}
               >
-                삭제
-              </button>
+                <button
+                  disabled={pending}
+                  className={clsx(
+                    'w-16 cursor-pointer text-white',
+                    'rounded-lg px-4 py-2',
+                    'bg-red-400 hover:bg-red-500',
+                    'disabled:bg-gray-400 disabled:hover:bg-gray-400'
+                  )}
+                >
+                  삭제
+                </button>
+              </Confirm>
             )}
           </div>
         </div>

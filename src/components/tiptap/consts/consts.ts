@@ -114,7 +114,7 @@ const mediaToolbarItems: ToolbarItem[] = [
         editor.chain().focus().extendMarkRange('link').unsetLink().run();
       } else {
         if (editor.state.selection.empty) {
-          toast.warning('텍스트 영역을 지정해야 합니다.');
+          toast.error('텍스트 영역을 지정해야 합니다.');
           return;
         }
 

@@ -25,7 +25,7 @@ export default function Login() {
   async function handleLogin() {
     if (passward.length === 0) {
       inputRef.current?.focus();
-      toast.warning('비밀번호를 입력하세요.');
+      toast.error('비밀번호를 입력하세요.');
       return;
     }
 

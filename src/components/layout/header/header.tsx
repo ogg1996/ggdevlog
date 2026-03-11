@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import clsx from 'clsx';
 
+import LogoutButton from '@/components/layout/header/logout-button';
 import MenubarButton from '@/components/layout/header/menubar-button';
 import ThemeToggle from '@/components/layout/header/theme-toggle';
 
@@ -28,7 +29,10 @@ export default function Header() {
           />
         </Link>
       </div>
-      <ThemeToggle />
+      <div className="flex items-center gap-2">
+        <LogoutButton />
+        <ThemeToggle />
+      </div>
     </header>
   );
 }

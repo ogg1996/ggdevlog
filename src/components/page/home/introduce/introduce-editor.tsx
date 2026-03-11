@@ -7,6 +7,7 @@ import { myUpdateTag } from '@/api/revalidate';
 import { tiptapConfig } from '@/components/tiptap/config/tiptap-config';
 import TiptapEditor from '@/components/tiptap/tiptap-editor';
 import { extractImages } from '@/components/tiptap/utils/extract-images';
+import { Confirm } from '@/components/ui/confirm';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -76,10 +77,8 @@ export default function IntroduceEditor({
   }
 
   function handleCancel() {
-    if (confirm('작성 중인 내용이 전부 사라집니다.')) {
-      setEdit(false);
-      toast.success('취소 되었습니다.');
-    }
+    setEdit(false);
+    toast.success('취소 되었습니다.');
   }
 
   return (
@@ -88,15 +87,30 @@ export default function IntroduceEditor({
         <TiptapEditor editor={editor} />
       </div>
       <div className="mt-5 flex justify-end gap-2">
-        <button
+        <Confirm
+          title="자기소개 수정 취소"
+          description="수정 중인 변경사항이 모두 사라집니다."
           onClick={handleCancel}
-          className={clsx(buttonStyle, 'bg-red-400 hover:bg-red-500')}
         >
-          취소
-        </button>
+          <button
+            disabled={pending}
+            className={clsx(
+              buttonStyle,
+              'bg-red-400 hover:bg-red-500',
+              'disabled:bg-gray-400 disabled:hover:bg-gray-400'
+            )}
+          >
+            취소
+          </button>
+        </Confirm>
         <button
+          disabled={pending}
           onClick={handleSave}
-          className={clsx(buttonStyle, 'bg-blue-400 hover:bg-blue-600')}
+          className={clsx(
+            buttonStyle,
+            'bg-blue-400 hover:bg-blue-600',
+            'disabled:bg-gray-400 disabled:hover:bg-gray-400'
+          )}
         >
           완료
         </button>
