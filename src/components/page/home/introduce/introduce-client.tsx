@@ -3,6 +3,7 @@
 import IntroduceEditButton from '@/components/page/home/introduce/introduce-edit-button';
 import IntroduceEditor from '@/components/page/home/introduce/introduce-editor';
 import { JSONContent } from '@tiptap/react';
+import { Loader2Icon } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
@@ -10,7 +11,7 @@ const IntroduceViewer = dynamic(() => import('./introduce-viewer'), {
   ssr: false,
   loading: () => (
     <div className="flex h-105 items-center justify-center text-[32px]">
-      Loading...
+      <Loader2Icon className="size-20 animate-spin" color="#0099ff" />
     </div>
   )
 });
