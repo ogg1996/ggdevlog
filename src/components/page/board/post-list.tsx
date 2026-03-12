@@ -19,7 +19,7 @@ interface Props {
 
 export default function PostList({ data }: Props) {
   return (
-    <div>
+    <ul className="">
       {data.map(item => (
         <PostItem
           key={`post-${item.id}`}
@@ -30,6 +30,6 @@ export default function PostList({ data }: Props) {
           thumbnailUrl={item.thumbnail?.image_url}
         />
       ))}
-    </div>
+    </ul>
   );
 }
