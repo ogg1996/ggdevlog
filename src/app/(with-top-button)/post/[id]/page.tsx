@@ -57,6 +57,9 @@ export default async function Page({
           <span>{created}</span>
         </div>
       </SectionTitle>
+      <div className="rounded-sm bg-gray-200 p-4 select-text dark:bg-slate-700">
+        {post.description}
+      </div>
       <TiptapViewer content={post.content} />
     </>
   );

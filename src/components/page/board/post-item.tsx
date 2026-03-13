@@ -38,8 +38,8 @@ export default function PostItem({
       <div className="grow p-3 md:p-0">
         <h2
           className={clsx(
-            'mb-1 h-7.5 truncate md:mb-3',
-            'text-[20px] font-bold',
+            'mb-1 md:mb-3',
+            'line-clamp-1 text-[20px] font-bold',
             'underline-offset-6 md:group-hover:underline',
             'text-slate-700 dark:text-slate-300',
             'group-hover:text-slate-900 dark:group-hover:text-white'
@@ -49,9 +49,9 @@ export default function PostItem({
         </h2>
         <p
           className={clsx(
-            'mb-3 h-10.5 md:mb-5 md:h-15.75',
-            'overflow-hidden text-[14px] text-ellipsis',
-            'text-slate-600 dark:dark:text-slate-400'
+            'mb-3 min-h-10.5 md:mb-5 md:min-h-16.5',
+            'text-[14px] text-slate-600 dark:text-slate-400',
+            'line-clamp-2 md:line-clamp-3'
           )}
         >
           {description}
