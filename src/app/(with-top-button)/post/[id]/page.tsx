@@ -1,8 +1,8 @@
 import { getPost } from '@/api/fetch';
 import SectionTitle from '@/components/common/section-title';
-import dayjs from '@/components/common/utils/dayjs';
-import PostEditButtons from '@/components/page/post/post-edit-buttons';
-import TiptapViewer from '@/components/tiptap/tiptap-viewer';
+import PostActionButtons from '@/components/page/post/post-action-buttons';
+import TiptapViewer from '@/tiptap/components/tiptap-viewer';
+import dayjs from '@/utils/dayjs';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({
@@ -50,7 +50,7 @@ export default async function Page({
         imageSrc={post.thumbnail?.image_url || '/post-thumbnail.webp'}
       >
         <div className="flex h-full w-full flex-col justify-between p-3">
-          <PostEditButtons id={id} />
+          <PostActionButtons id={id} />
           <h2 className="self-center text-center text-[24px]">
             [{post.board.name}] {post.title}
           </h2>

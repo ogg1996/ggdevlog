@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import clsx from 'clsx';
 
-import dayjs from '@/components/common/utils/dayjs';
+import dayjs from '@/utils/dayjs';
 
 interface Props {
   id: number;

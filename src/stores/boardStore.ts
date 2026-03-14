@@ -1,5 +1,5 @@
 import { getBoard } from '@/api/fetch';
-import { Board } from '@/components/common/types/types';
+import { Board } from '@/types/post';
 import { create } from 'zustand';
 
 interface BoardState {

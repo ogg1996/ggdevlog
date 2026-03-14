@@ -6,13 +6,13 @@ import localFont from 'next/font/local';
 import clsx from 'clsx';
 
 import Footer from '@/components/layout/footer';
-import Header from '@/components/layout/header/header';
+import Header from '@/components/layout/header';
 
 import ClientLayout from '@/app/client-layout';
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { cn } from '@/shadcn-ui/lib/utils';
+import { Geist } from 'next/font/google';
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 const dungGeunmoMo = localFont({
   src: '../../public/fonts/DungGeunMo.woff2',
@@ -33,7 +33,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
+    <html
+      lang="ko"
+      suppressHydrationWarning
+      className={cn('font-sans', geist.variable)}
+    >
       <body
         className={clsx(
           dungGeunmoMo.className,

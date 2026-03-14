@@ -1,6 +1,6 @@
 'use client';
 
-import scrollToTop from '@/components/common/utils/scorll-to-top';
+import scrollToTop from '@/utils/scroll-to-top';
 import { MoveUp } from 'lucide-react';
 
 export default function TopButton() {

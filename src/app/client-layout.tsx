@@ -1,6 +1,6 @@
 'use client';
 
-import { Toaster } from '@/components/ui/sonner';
+import { Toaster } from '@/shadcn-ui/ui/sonner';
 import useAdminStore from '@/stores/adminStore';
 import useBoardStore from '@/stores/boardStore';
 import useModalStore from '@/stores/modalStore';

@@ -1,7 +1,7 @@
 'use client';
 
-import BoardManagement from '@/components/layout/modal/board-management';
-import Login from '@/components/layout/modal/login';
+import BoardManagementModal from '@/components/layout/modal/board-management-modal';
+import LoginModal from '@/components/layout/modal/login-modal';
 import Menubar from '@/components/layout/modal/menubar/menubar';
 import useModalStore from '@/stores/modalStore';
 import { useEffect } from 'react';
@@ -24,8 +24,8 @@ export default function Modal() {
   return (
     <>
       <Menubar />
-      {modalState === 'login' && <Login />}
-      {modalState === 'boardManagement' && <BoardManagement />}
+      {modalState === 'login' && <LoginModal />}
+      {modalState === 'boardManagement' && <BoardManagementModal />}
       {modalState && (
         <div
           className="fixed inset-0 z-49 h-full w-full bg-black/30"
