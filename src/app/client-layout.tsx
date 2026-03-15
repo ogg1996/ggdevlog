@@ -37,10 +37,6 @@ export default function ClientLayout({
     if (!boardList) fetchBoardList();
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflowY = modalState ? 'hidden' : 'auto';
-  }, [modalState]);
-
   return (
     <ThemeProvider attribute="class" defaultTheme="system">
       <Modal />

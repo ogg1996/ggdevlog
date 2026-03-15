@@ -1,18 +1,16 @@
 'use client';
 
 import useBoardStore from '@/stores/boardStore';
-import useModalStore from '@/stores/modalStore';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function MenubarList() {
+export default function MenubarList({ onClick }: { onClick: () => void }) {
   const { boardList } = useBoardStore();
-  const { setModalState } = useModalStore();
   const pathName = usePathname();
 
   return (
-    <ul>
+    <ul className="grow">
       {boardList?.map(item => (
         <li className="h-10" key={`menu_board_${item.name}`}>
           <Link
@@ -24,9 +22,7 @@ export default function MenubarList() {
                 : 'hover:bg-gray-200'
             )}
             href={`/board/${item.name}/1`}
-            onClick={() => {
-              setModalState(null);
-            }}
+            onClick={onClick}
           >
             {item.name}
           </Link>

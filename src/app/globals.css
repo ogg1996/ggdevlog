@@ -21,8 +21,18 @@ body {
   min-height: 100vh;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   user-select: none;
+}
+
+h1,
+h2,
+h3 {
+  scroll-margin-top: 60px;
 }
 
 :root {

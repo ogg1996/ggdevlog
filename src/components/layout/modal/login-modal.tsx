@@ -60,11 +60,12 @@ export default function LoginModal() {
   return (
     <div
       className={clsx(
-        'fixed z-50 h-62.5 w-75 p-4',
+        'fixed z-52 h-62.5 w-75 p-4',
         'top-25 left-1/2 -translate-x-1/2',
         'flex flex-col items-center justify-between gap-2',
-        'rounded-lg bg-white',
-        'dark:bg-slate-900'
+        'rounded-lg',
+        'overflow-y-hidden overscroll-none',
+        'bg-white dark:bg-slate-900'
       )}
     >
       <div className="flex w-full justify-between">

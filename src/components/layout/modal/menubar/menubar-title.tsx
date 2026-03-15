@@ -7,7 +7,7 @@ import useModalStore from '@/stores/modalStore';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-export default function MenubarTitle() {
+export default function MenubarTitle({ onClick }: { onClick: () => void }) {
   const { adminState } = useAdminStore();
   const { setModalState } = useModalStore();
 
@@ -23,9 +23,7 @@ export default function MenubarTitle() {
               'hover:rounded-sm hover:bg-gray-200'
             )}
             href={'/edit'}
-            onClick={() => {
-              setModalState(null);
-            }}
+            onClick={onClick}
           >
             <Pencil size={24} color="#0099ff" />
           </Link>
@@ -36,6 +34,7 @@ export default function MenubarTitle() {
               'hover:rounded-sm hover:bg-gray-200'
             )}
             onClick={() => {
+              onClick();
               setModalState('boardManagement');
             }}
           >

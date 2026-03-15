@@ -9,6 +9,7 @@ import Footer from '@/components/layout/footer';
 import Header from '@/components/layout/header';
 
 import ClientLayout from '@/app/client-layout';
+import Menubar from '@/components/layout/modal/menubar/menubar';
 import { cn } from '@/shadcn-ui/lib/utils';
 import { Geist } from 'next/font/google';
 
@@ -47,6 +48,7 @@ export default function RootLayout({
         spellCheck="false"
       >
         <ClientLayout>
+          <Menubar />
           <Header />
           <main className="mx-auto min-h-screen max-w-200 p-6 pt-15 font-[pretendard]">
             {children}

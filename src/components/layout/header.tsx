@@ -4,20 +4,20 @@ import Link from 'next/link';
 import clsx from 'clsx';
 
 import HeaderLogoutButton from '@/components/layout/header-logout-button';
-import HeaderMenubarButton from '@/components/layout/header-menubar-button';
 import HeaderThemeToggle from '@/components/layout/header-theme-toggle';
 
 export default function Header() {
   return (
     <header
       className={clsx(
-        'fixed z-40 h-12.5 w-full px-2',
+        'fixed z-50 h-12.5 w-full px-2',
         'flex items-center justify-between',
-        'bg-white dark:bg-slate-900'
+        'bg-white dark:bg-slate-900',
+        'overflow-y-hidden overscroll-y-none',
+        'border-b-2 border-gray-100 dark:border-slate-800'
       )}
     >
       <div className="flex items-center gap-2">
-        <HeaderMenubarButton />
         <Link className="flex h-15 items-center" href={'/'}>
           <Image
             src="/logo.webp"
