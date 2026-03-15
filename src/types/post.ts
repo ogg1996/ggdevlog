@@ -16,7 +16,7 @@ type Post = {
   title: string;
   description: string;
   thumbnail?: Thumbnail;
-  content?: JSONContent;
+  content: JSONContent;
   images: string[];
   created_at: Date;
   updated_at: Date;

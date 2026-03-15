@@ -2,6 +2,8 @@ import { getPost } from '@/api/fetch';
 import SectionTitle from '@/components/common/section-title';
 import PostActionButtons from '@/components/page/post/post-action-buttons';
 import TiptapViewer from '@/tiptap/components/tiptap-viewer';
+import { addIdsToContent } from '@/tiptap/utils/add-ids-to-content';
+import { Post } from '@/types/post';
 import dayjs from '@/utils/dayjs';
 import { notFound } from 'next/navigation';
 
@@ -39,10 +41,13 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const post = await getPost(id);
+  const post: Post = await getPost(id);
 
   if (!post) notFound();
+
   const created = dayjs(post.created_at).tz().format('YYYY. MM. DD');
+
+  const contentWithHeadingIds = addIdsToContent(post.content);
 
   return (
     <>
@@ -60,7 +65,7 @@ export default async function Page({
       <div className="rounded-sm bg-gray-200 p-4 select-text dark:bg-slate-700">
         {post.description}
       </div>
-      <TiptapViewer content={post.content} />
+      <TiptapViewer content={contentWithHeadingIds} />
     </>
   );
 }

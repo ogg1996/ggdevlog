@@ -1,3 +1,4 @@
+import CustomHeading from '@/tiptap/extentions/custom-heading';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import Image from '@tiptap/extension-image';
 import {
@@ -25,9 +26,7 @@ export const tiptapConfig = {
   extensions: [
     StarterKit.configure({
       codeBlock: false,
-      heading: {
-        levels: [1, 2, 3]
-      },
+      heading: false,
       link: {
         openOnClick: false,
         autolink: false,
@@ -47,6 +46,9 @@ export const tiptapConfig = {
         keepMarks: true,
         keepAttributes: false
       }
+    }),
+    CustomHeading.configure({
+      levels: [1, 2, 3]
     }),
     TextStyle,
     Color,
