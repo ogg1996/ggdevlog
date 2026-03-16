@@ -57,7 +57,7 @@ export default function PostEditorMetaForm({
           {selectActive && (
             <div
               className={clsx(
-                'absolute z-40 overflow-y-auto',
+                'absolute z-10 overflow-y-auto',
                 'max-h-34.25 w-full p-1',
                 'rounded-[0_0_5px_5px] border border-t-0 border-slate-300',
                 'bg-white dark:bg-slate-900'

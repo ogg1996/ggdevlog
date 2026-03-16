@@ -1,5 +1,5 @@
 import { getPost } from '@/api/fetch';
-import Toc from '@/components/layout/toc';
+import Toc from '@/components/layout/sidebar/toc';
 import { addIdsToContent } from '@/tiptap/utils/add-ids-to-content';
 import { extractToc } from '@/tiptap/utils/extract-toc';
 import { Post } from '@/types/post';

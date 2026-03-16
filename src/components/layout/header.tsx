@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header
       className={clsx(
-        'fixed z-50 h-12.5 w-full px-2',
+        'fixed z-100 h-12.5 w-full px-2',
         'flex items-center justify-between',
         'bg-white dark:bg-slate-900',
         'overflow-y-hidden overscroll-y-none',

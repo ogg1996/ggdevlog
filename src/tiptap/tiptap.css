@@ -205,10 +205,6 @@
   color: #b5cea8;
 }
 
-.tiptap pre .hljs-string {
-  color: #ce9178;
-}
-
 .tiptap pre .function_,
 .tiptap pre .language-css .hljs-built_in {
   color: #dcdcaa;

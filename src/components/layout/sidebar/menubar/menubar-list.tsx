@@ -10,7 +10,7 @@ export default function MenubarList({ onClick }: { onClick: () => void }) {
   const pathName = usePathname();
 
   return (
-    <ul className="grow">
+    <ul className="no-scrollbar mb-3 grow overflow-y-auto border-b-2 pt-1.5">
       {boardList?.map(item => (
         <li className="h-10" key={`menu_board_${item.name}`}>
           <Link

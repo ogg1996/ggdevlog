@@ -1,8 +1,8 @@
 'use client';
 
 import Dimd from '@/components/layout/dimd';
-import MenubarList from '@/components/layout/modal/menubar/menubar-list';
-import MenubarTitle from '@/components/layout/modal/menubar/menubar-title';
+import MenubarList from '@/components/layout/sidebar/menubar/menubar-list';
+import MenubarTitle from '@/components/layout/sidebar/menubar/menubar-title';
 import clsx from 'clsx';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
@@ -13,13 +13,13 @@ export default function Menubar() {
     <>
       <div
         className={clsx(
-          'fixed top-0 left-0 z-45 mt-12.5 w-55.5',
+          'fixed top-0 left-0 z-80 mt-12.5 w-60',
           'text-[16px] font-bold text-[#0099ff]',
           'bg-white dark:bg-slate-900',
           'border-r-2 border-gray-100 dark:border-slate-800',
           'transform transition-transform duration-200 ease-out will-change-transform',
           open ? 'translate-x-0' : '-translate-x-full',
-          open && 'z-50'
+          open && 'z-100'
         )}
       >
         <button
@@ -37,7 +37,7 @@ export default function Menubar() {
         </button>
         <div
           className={clsx(
-            'flex h-[calc(100vh-3.125rem)] flex-col gap-2 p-2',
+            'flex h-[calc(100vh-3.125rem)] flex-col px-3 py-2',
             'overflow-y-auto overscroll-y-none'
           )}
         >

@@ -13,10 +13,10 @@ export default function Dimd({
   return (
     <div
       className={clsx(
-        'fixed inset-0 z-49',
+        'fixed inset-0 z-90',
         'h-full w-full bg-black/30',
         scrollLock && 'overflow-y-hidden overscroll-none',
-        modalstate && 'z-51'
+        modalstate && 'z-110'
       )}
       onClick={onClick}
     />

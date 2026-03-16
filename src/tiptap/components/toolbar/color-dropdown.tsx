@@ -44,7 +44,7 @@ export default function ColorDropdown({
     <Portal>
       <div
         ref={ref}
-        className="absolute z-40 grid w-44 grid-cols-6 gap-2 rounded-sm border border-slate-300 bg-white p-2"
+        className="absolute z-10 grid w-44 grid-cols-6 gap-2 rounded-sm border border-slate-300 bg-white p-2 dark:bg-slate-900"
         style={{
           left: pos.x,
           top: pos.y

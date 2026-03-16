@@ -60,7 +60,7 @@ export default function LoginModal() {
   return (
     <div
       className={clsx(
-        'fixed z-52 h-62.5 w-75 p-4',
+        'fixed z-120 h-62.5 w-75 p-4',
         'top-25 left-1/2 -translate-x-1/2',
         'flex flex-col items-center justify-between gap-2',
         'rounded-lg',

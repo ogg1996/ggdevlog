@@ -167,7 +167,7 @@ export default function BoardManagementModal() {
     return (
       <div
         className={clsx(
-          'fixed z-52 h-150 w-125 p-4',
+          'fixed z-120 h-150 w-125 p-4',
           'top-25 left-1/2 -translate-x-1/2',
           'flex flex-col gap-2 rounded-lg',
           'overflow-y-hidden overscroll-none',

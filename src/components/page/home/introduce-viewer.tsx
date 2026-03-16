@@ -21,7 +21,7 @@ export default function IntroduceViewer({ content }: Props) {
       if (open) {
         el.style.maxHeight = el.scrollHeight + 'px';
       } else {
-        el.style.maxHeight = '420px';
+        el.style.maxHeight = '400px';
       }
     }
   }, [open]);
@@ -31,7 +31,7 @@ export default function IntroduceViewer({ content }: Props) {
       <div
         ref={wrapperRef}
         className="relative overflow-y-hidden transition-all duration-200"
-        style={{ maxHeight: '420px' }}
+        style={{ maxHeight: '400px' }}
       >
         <TiptapViewer content={content} />
         {!open && (
