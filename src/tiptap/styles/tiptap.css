@@ -154,62 +154,6 @@
   margin-left: 0;
 }
 
-.tiptap pre {
-  margin: 0.5rem 0;
-  padding: 0.9rem 1rem;
-  border-radius: 0.75rem;
-  overflow-x: auto;
-}
-
-.tiptap pre code {
-  background: transparent;
-  padding: 0;
-  color: #d4d4d4;
-  font-size: 0.75rem;
-}
-
-.tiptap pre .hljs-comment,
-.tiptap pre .hljs-quote {
-  color: #6a9955;
-}
-
-.tiptap pre .hljs-keyword {
-  color: #c586c0;
-}
-.tiptap pre .hljs-regexp,
-.tiptap pre .hljs-symbol,
-.tiptap pre .hljs-literal,
-.tiptap pre .hljs-name {
-  color: #569cd6;
-}
-
-.tiptap pre .hljs-attr,
-.tiptap pre .hljs-attribute,
-.tiptap pre .hljs-property,
-.tiptap pre .hljs-params,
-.tiptap pre .hljs-variable {
-  color: #9cdcfe;
-}
-
-.tiptap pre .hljs-built_in {
-  color: #4ec9b0;
-}
-
-.tiptap pre .hljs-selector-id,
-.tiptap pre .hljs-selector-class,
-.tiptap pre .hljs-selector-pseudo {
-  color: #d7ba7d;
-}
-
-.tiptap pre .hljs-number {
-  color: #b5cea8;
-}
-
-.tiptap pre .function_,
-.tiptap pre .language-css .hljs-built_in {
-  color: #dcdcaa;
-}
-
 html.dark .tiptap,
 html.dark .tiptap h1,
 html.dark .tiptap h2,

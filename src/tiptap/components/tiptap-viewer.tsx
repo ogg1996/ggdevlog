@@ -1,4 +1,5 @@
-import '@/tiptap/tiptap.css';
+import '@/tiptap/styles/code-highlight.css';
+import '@/tiptap/styles/tiptap.css';
 
 import { tiptapConfig } from '@/tiptap/config';
 import { htmlCodeHighlight } from '@/tiptap/utils/html-code-highlight';
