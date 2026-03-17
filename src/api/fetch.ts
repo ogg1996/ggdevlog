@@ -1,4 +1,4 @@
-import { Item } from '@/components/page/home/activity';
+import { ActivityRecord } from '@/types/home';
 import dayjs from '@/utils/dayjs';
 
 const api_url = process.env.NEXT_PUBLIC_API_URL;
@@ -20,7 +20,7 @@ export async function getActivity() {
   const start = dayjs.tz('2026-01-26');
   const end = dayjs().tz();
 
-  const resultArr: Item[][] = [];
+  const resultArr: ActivityRecord[][] = [];
 
   let weekIndex = 0;
   let dayIndex = 0;
