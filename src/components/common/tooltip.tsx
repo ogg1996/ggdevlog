@@ -40,7 +40,7 @@ export default function Tooltip({ text, targetRect, visible }: Props) {
       <div
         className={clsx(
           'font-[pretendard]',
-          'fixed px-2 py-1',
+          'fixed z-90 px-2 py-1',
           'rounded-sm border border-slate-500',
           'text-center text-[14px] font-bold whitespace-nowrap',
           'bg-white text-slate-700',

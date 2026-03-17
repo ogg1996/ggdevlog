@@ -1,8 +1,10 @@
 import { getPost } from '@/api/fetch';
 import SectionTitle from '@/components/common/section-title';
-import dayjs from '@/components/common/utils/dayjs';
-import PostEditButtons from '@/components/page/post/post-edit-buttons';
-import TiptapViewer from '@/components/tiptap/tiptap-viewer';
+import PostActionButtons from '@/components/page/post/post-action-buttons';
+import TiptapViewer from '@/tiptap/components/tiptap-viewer';
+import { addIdsToContent } from '@/tiptap/utils/add-ids-to-content';
+import { Post } from '@/types/post';
+import dayjs from '@/utils/dayjs';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({
@@ -39,10 +41,13 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const post = await getPost(id);
+  const post: Post = await getPost(id);
 
   if (!post) notFound();
+
   const created = dayjs(post.created_at).tz().format('YYYY. MM. DD');
+
+  const contentWithHeadingIds = addIdsToContent(post.content);
 
   return (
     <>
@@ -50,14 +55,17 @@ export default async function Page({
         imageSrc={post.thumbnail?.image_url || '/post-thumbnail.webp'}
       >
         <div className="flex h-full w-full flex-col justify-between p-3">
-          <PostEditButtons id={id} />
+          <PostActionButtons id={id} />
           <h2 className="self-center text-center text-[24px]">
             [{post.board.name}] {post.title}
           </h2>
           <span>{created}</span>
         </div>
       </SectionTitle>
-      <TiptapViewer content={post.content} />
+      <div className="rounded-sm bg-gray-200 p-4 select-text dark:bg-slate-700">
+        {post.description}
+      </div>
+      <TiptapViewer content={contentWithHeadingIds} />
     </>
   );
 }

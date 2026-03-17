@@ -1,6 +1,6 @@
 'use client';
 
-import { Toaster } from '@/components/ui/sonner';
+import { Toaster } from '@/shadcn-ui/ui/sonner';
 import useAdminStore from '@/stores/adminStore';
 import useBoardStore from '@/stores/boardStore';
 import useModalStore from '@/stores/modalStore';
@@ -36,10 +36,6 @@ export default function ClientLayout({
   useEffect(() => {
     if (!boardList) fetchBoardList();
   }, []);
-
-  useEffect(() => {
-    document.body.style.overflowY = modalState ? 'hidden' : 'auto';
-  }, [modalState]);
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system">

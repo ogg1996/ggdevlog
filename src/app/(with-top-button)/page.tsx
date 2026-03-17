@@ -1,5 +1,5 @@
-import Activity from '@/components/page/home/activity/activity';
-import Introduce from '@/components/page/home/introduce/introduce';
+import Activity from '@/components/page/home/activity';
+import Introduce from '@/components/page/home/introduce';
 import { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';

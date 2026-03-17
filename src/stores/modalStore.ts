@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type Modal = null | 'boardManagement' | 'login' | 'menubar';
+type Modal = null | 'boardManagement' | 'login';
 
 interface ModalState {
   modalState: Modal;

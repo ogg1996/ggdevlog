@@ -15,7 +15,7 @@ export default function SectionTitle({ imageSrc, children }: Props) {
         sizes="1600px"
         fill
       />
-      <div className="absolute inset-0 flex items-center justify-center rounded-sm bg-black/60 font-[duggeunmo] font-bold text-white">
+      <div className="absolute inset-0 z-10 flex items-center justify-center rounded-sm bg-black/60 font-[duggeunmo] font-bold text-white">
         {children}
       </div>
     </div>

@@ -1,5 +1,5 @@
-import dayjs from '@/components/common/utils/dayjs';
-import { Item } from '@/components/page/home/activity/types/types';
+import { Item } from '@/components/page/home/activity';
+import dayjs from '@/utils/dayjs';
 
 const api_url = process.env.NEXT_PUBLIC_API_URL;
 
