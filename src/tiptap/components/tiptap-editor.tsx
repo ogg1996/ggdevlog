@@ -1,6 +1,6 @@
 'use client';
 
-import '@/tiptap/tiptap.css';
+import '@/tiptap/styles/tiptap.css';
 
 import { Editor, EditorContent } from '@tiptap/react';
 
