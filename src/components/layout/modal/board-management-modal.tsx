@@ -244,7 +244,7 @@ export default function BoardManagementModal() {
               setInput(filtered);
             }}
           />
-          <div className="flex gap-1 font-[duggeunmo]">
+          <div className="flex gap-1">
             {selected ? (
               <button
                 disabled={pending}

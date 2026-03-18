@@ -2,7 +2,6 @@
 
 import Dimd from '@/components/layout/dimd';
 import MenubarList from '@/components/layout/sidebar/menubar/menubar-list';
-import MenubarTitle from '@/components/layout/sidebar/menubar/menubar-title';
 import clsx from 'clsx';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
@@ -14,7 +13,7 @@ export default function Menubar() {
       <div
         className={clsx(
           'fixed top-0 left-0 z-80 mt-12.5 w-60',
-          'text-[16px] font-bold text-[#0099ff]',
+          'text-[16px] font-bold',
           'bg-white dark:bg-slate-900',
           'border-r-2 border-gray-100 dark:border-slate-800',
           'transform transition-transform duration-200 ease-out will-change-transform',
@@ -41,11 +40,7 @@ export default function Menubar() {
             'overflow-y-auto overscroll-y-none'
           )}
         >
-          <MenubarTitle
-            onClick={() => {
-              setOpen(false);
-            }}
-          />
+          <div className="mb-2 text-[20px] text-[#0099ff]">게시판</div>
           <MenubarList
             onClick={() => {
               setOpen(false);

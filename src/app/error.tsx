@@ -6,12 +6,12 @@ const buttonStyle =
 
 export default function Error({ reset }: { error: Error; reset: () => void }) {
   return (
-    <div className="flex h-125 flex-col items-center justify-center font-[duggeunmo]">
+    <div className="font-duggeunmo flex h-125 flex-col items-center justify-center">
       <h1 className="text-[30px] font-bold text-red-500">Error</h1>
       <p className="mb-5 text-[20px] font-bold">
         알수없는 문제가 발생했습니다.
       </p>
-      <div className="flex gap-3">
+      <div className="font-pretendard flex gap-3">
         <Link href={'/'} className={buttonStyle}>
           홈페이지
         </Link>

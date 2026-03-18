@@ -60,15 +60,14 @@ export default function LoginModal() {
   return (
     <div
       className={clsx(
-        'fixed z-120 h-62.5 w-75 p-4',
+        'fixed z-120 w-75 p-4',
         'top-25 left-1/2 -translate-x-1/2',
-        'flex flex-col items-center justify-between gap-2',
-        'rounded-lg',
+        'flex flex-col items-center rounded-lg',
         'overflow-y-hidden overscroll-none',
         'bg-white dark:bg-slate-900'
       )}
     >
-      <div className="flex w-full justify-between">
+      <div className="mb-4 flex w-full justify-between">
         <h2 className="text-[24px] font-bold text-[#0099ff]">로그인</h2>
         <button
           className={clsx(
@@ -83,7 +82,7 @@ export default function LoginModal() {
           <X size={36} color="#0099ff" />
         </button>
       </div>
-      <div>
+      <div className="mb-8">
         <input
           value={passward}
           ref={inputRef}
@@ -92,7 +91,7 @@ export default function LoginModal() {
           }}
           type="password"
           placeholder="비밀번호를 입력하세요.."
-          className="mb-1 w-full border-b p-2"
+          className="w-full border-b p-2"
           onKeyDown={e => {
             if (e.key === 'Enter') {
               handleLogin();
@@ -105,7 +104,7 @@ export default function LoginModal() {
           disabled={pending}
           className={clsx(
             'w-20 cursor-pointer text-white',
-            'rounded-lg px-4 py-2',
+            'rounded-lg px-4 py-1',
             'bg-blue-400 hover:bg-blue-600'
           )}
           onClick={handleLogin}
@@ -116,7 +115,7 @@ export default function LoginModal() {
           disabled={pending}
           className={clsx(
             'w-20 cursor-pointer text-white',
-            'rounded-lg px-4 py-2',
+            'rounded-lg px-4 py-1',
             'bg-red-400 hover:bg-red-500'
           )}
           onClick={() => setModalState(null)}
