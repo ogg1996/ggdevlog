@@ -3,7 +3,7 @@ import ActivityList from '@/components/page/home/activity-list';
 export default function Activity() {
   return (
     <div>
-      <div className="mb-5 rounded-sm bg-[#0099ff] px-2 py-1 font-[duggeunmo] text-[24px] font-bold text-white">
+      <div className="font-duggeunmo mb-5 rounded-sm bg-[#0099ff] px-2 py-1 text-[24px] font-bold text-white">
         Activity
       </div>
       <div className="mb-5 rounded-sm bg-slate-800 p-3.75">

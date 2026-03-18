@@ -7,8 +7,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        duggeunmo: ['duggeunmo'],
-        pretendard: ['pretendard']
+        pretendard: ['pretendard'],
+        duggeunmo: ['duggeunmo']
       }
     }
   },

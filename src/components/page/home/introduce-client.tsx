@@ -27,7 +27,7 @@ export default function IntroduceClient({ introduce }: Props) {
   return (
     <div>
       <div className="mb-2 flex items-center justify-between gap-2 rounded-sm bg-[#0099ff] px-2 py-1">
-        <div className="font-[duggeunmo] text-[24px] font-bold text-white">
+        <div className="font-duggeunmo text-[24px] font-bold text-white">
           Introduce
         </div>
         <IntroduceEditButton setEdit={setEdit} />

@@ -15,12 +15,12 @@ import { Geist } from 'next/font/google';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
-const dungGeunmoMo = localFont({
-  src: '../../public/fonts/DungGeunMo.woff2',
+const pretendard = localFont({
+  src: '../../public/fonts/pretendardVariable.woff2',
   display: 'swap',
   preload: true,
   weight: '400 900',
-  variable: '--font-dungGeunMo'
+  variable: '--font-pretendard'
 });
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export default function RootLayout({
     >
       <body
         className={clsx(
-          dungGeunmoMo.className,
+          pretendard.className,
           'bg-white text-black',
           'dark:bg-slate-900 dark:text-white'
         )}
@@ -50,7 +50,7 @@ export default function RootLayout({
         <ClientLayout>
           <Menubar />
           <Header />
-          <main className="mx-auto min-h-screen max-w-200 p-6 pt-30 font-[pretendard]">
+          <main className="mx-auto min-h-screen max-w-200 p-6 pt-30">
             {children}
           </main>
           <Footer />

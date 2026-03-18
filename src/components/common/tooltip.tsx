@@ -39,7 +39,6 @@ export default function Tooltip({ text, targetRect, visible }: Props) {
     <Portal>
       <div
         className={clsx(
-          'font-[pretendard]',
           'fixed z-90 px-2 py-1',
           'rounded-sm border border-slate-500',
           'text-center text-[14px] font-bold whitespace-nowrap',

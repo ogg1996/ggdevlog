@@ -18,8 +18,7 @@ interface Props {
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const buttonStyle =
-  'w-24 cursor-pointer rounded-lg px-4 py-2 font-[duggeunmo] text-white';
+const buttonStyle = 'w-24 cursor-pointer rounded-lg px-4 py-2 text-white';
 
 export default function IntroduceEditor({
   content,
