@@ -16,7 +16,7 @@ import { Geist } from 'next/font/google';
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 const pretendard = localFont({
-  src: '../../public/fonts/pretendardVariable.woff2',
+  src: '../../public/fonts/PretendardVariable.woff2',
   display: 'swap',
   preload: true,
   weight: '400 900',
