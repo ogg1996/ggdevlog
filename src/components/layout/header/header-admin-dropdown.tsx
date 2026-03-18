@@ -45,7 +45,7 @@ export default function HeaderAdimDropdown() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="flex h-11 w-11 cursor-pointer items-center justify-center hover:rounded-sm hover:bg-gray-200">
+          <button className="flex h-11 w-11 cursor-pointer items-center justify-center hover:rounded-sm hover:bg-gray-200 dark:hover:bg-slate-800">
             <User size={36} color="#0099ff" />
           </button>
         </DropdownMenuTrigger>
