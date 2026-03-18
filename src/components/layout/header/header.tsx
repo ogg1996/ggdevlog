@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 import clsx from 'clsx';
 
-import HeaderLogoutButton from '@/components/layout/header-logout-button';
-import HeaderThemeToggle from '@/components/layout/header-theme-toggle';
+import HeaderAdimDropdown from '@/components/layout/header/header-admin-dropdown';
+import HeaderThemeToggle from '@/components/layout/header/header-theme-toggle';
 
 export default function Header() {
   return (
@@ -30,7 +30,7 @@ export default function Header() {
         </Link>
       </div>
       <div className="flex items-center gap-2">
-        <HeaderLogoutButton />
+        <HeaderAdimDropdown />
         <HeaderThemeToggle />
       </div>
     </header>
