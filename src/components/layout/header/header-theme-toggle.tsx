@@ -18,7 +18,7 @@ export default function HeaderThemeToggle() {
       className={clsx(
         'h-11 w-11 cursor-pointer',
         'flex items-center justify-center',
-        'hover:rounded-sm hover:bg-gray-200'
+        'hover:rounded-sm hover:bg-gray-200 dark:hover:bg-slate-800'
       )}
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
