@@ -42,7 +42,7 @@
   font-size: 1.5rem;
 }
 
-.tiptap code {
+.tiptap :not(pre) > code {
   color: #eb5757;
   padding: 4px 6px;
   background-color: #87837830;
@@ -52,6 +52,13 @@
 .tiptap code::before,
 .tiptap code::after {
   content: none;
+}
+
+.tiptap pre {
+  margin: 0.5rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  background-color: #1e2939 !important;
 }
 
 .tiptap blockquote {

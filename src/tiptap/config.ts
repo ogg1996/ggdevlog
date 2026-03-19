@@ -7,14 +7,12 @@ import {
 } from '@tiptap/extension-text-style';
 import Youtube from '@tiptap/extension-youtube';
 import StarterKit from '@tiptap/starter-kit';
+import CodeBlockShiki from 'tiptap-extension-code-block-shiki';
 
 export const tiptapConfig = {
   extensions: [
     StarterKit.configure({
-      codeBlock: {
-        enableTabIndentation: true,
-        tabSize: 2
-      },
+      codeBlock: false,
       heading: false,
       link: {
         openOnClick: false,
@@ -47,6 +45,11 @@ export const tiptapConfig = {
       inline: false,
       nocookie: true,
       interfaceLanguage: 'kr'
+    }),
+    CodeBlockShiki.configure({
+      defaultTheme: 'dark-plus',
+      enableTabIndentation: true,
+      tabSize: 2
     })
   ],
   immediatelyRender: false,
