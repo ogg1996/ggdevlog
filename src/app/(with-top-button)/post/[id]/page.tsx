@@ -1,7 +1,7 @@
 import { getPost } from '@/api/fetch';
 import SectionTitle from '@/components/common/section-title';
 import PostActionButtons from '@/components/page/post/post-action-buttons';
-import TiptapViewer from '@/tiptap/components/tiptap-viewer';
+import PostViewer from '@/components/page/post/post-viewer';
 import { addIdsToContent } from '@/tiptap/utils/add-ids-to-content';
 import { Post } from '@/types/post';
 import dayjs from '@/utils/dayjs';
@@ -65,7 +65,7 @@ export default async function Page({
       <div className="rounded-sm bg-gray-200 p-4 select-text dark:bg-slate-700">
         {post.description}
       </div>
-      <TiptapViewer content={contentWithHeadingIds} />
+      <PostViewer content={contentWithHeadingIds} />
     </>
   );
 }

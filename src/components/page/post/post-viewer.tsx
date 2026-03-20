@@ -1,4 +1,4 @@
-import '@/tiptap/styles/code-highlight.css';
+import '@/tiptap/styles/shiki.css';
 import '@/tiptap/styles/tiptap.css';
 
 import { tiptapConfig } from '@/tiptap/config';
@@ -10,13 +10,14 @@ interface Props {
   content: JSONContent;
 }
 
-export default function TiptapViewer({ content }: Props) {
+export default async function PostViewer({ content }: Props) {
   const html = generateHTML(content, tiptapConfig.extensions);
+  const highlightHtml = await htmlCodeHighlight(html);
 
   return (
     <div
       className="tiptap prose max-w-none select-text focus:outline-none"
-      dangerouslySetInnerHTML={{ __html: htmlCodeHighlight(html) }}
+      dangerouslySetInnerHTML={{ __html: highlightHtml }}
     />
   );
 }

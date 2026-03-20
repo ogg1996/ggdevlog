@@ -1,51 +1,82 @@
-import Prism from 'prismjs';
-
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-markup';
-import 'prismjs/components/prism-tsx';
-import 'prismjs/components/prism-typescript';
+import {
+  transformerNotationDiff,
+  transformerNotationErrorLevel,
+  transformerNotationFocus
+} from '@shikijs/transformers';
+import { addCopyButton } from 'shiki-transformer-copy-button';
 
 import { fromHtml } from 'hast-util-from-html';
 import { selectAll } from 'hast-util-select';
 import { toHtml } from 'hast-util-to-html';
+import { codeToHtml } from 'shiki';
 
-export function htmlCodeHighlight(html: string): string {
+import type { Element, Text } from 'hast';
+
+export async function htmlCodeHighlight(html: string): Promise<string> {
   const tree = fromHtml(html, { fragment: true });
-  const codeBlocks = selectAll('pre > code', tree) as Array<{
-    properties?: { className?: string[] };
-    children?: Array<{ type: string; value?: string }>;
-  }>;
+  const pres = selectAll('pre', tree) as Element[];
 
-  codeBlocks.forEach(code => {
-    const classNames = code.properties?.className ?? [];
+  for (const pre of pres) {
+    const code = pre.children?.find(
+      (child): child is Element =>
+        child.type === 'element' && child.tagName === 'code'
+    );
+
+    if (!code) continue;
+
+    const classNames = (code.properties?.className ?? []) as string[];
+
     const languageClass =
-      classNames.find(className => className.startsWith('language-')) ??
-      'language-tsx';
+      classNames.find((className: string) =>
+        className.startsWith('language-')
+      ) ?? 'language-tsx';
 
     const language = languageClass.replace('language-', '');
-    const grammar = Prism.languages[language];
-
-    if (!grammar) return;
-
-    const text = code.children?.map(child => child.value ?? '').join('') ?? '';
+    const text =
+      code.children
+        ?.filter((child): child is Text => child.type === 'text')
+        .map(child => child.value ?? '')
+        .join('') ?? '';
 
     try {
-      const highlightedHtml = Prism.highlight(text, grammar, language);
-      const highlightedTree = fromHtml(highlightedHtml, { fragment: true });
+      const highlightedHtml = await codeToHtml(text, {
+        lang: language,
+        theme: 'dark-plus',
+        meta: { __raw: `fileType="${language.toUpperCase()}"` },
+        transformers: [
+          transformerNotationDiff(),
+          transformerNotationFocus(),
+          transformerNotationErrorLevel(),
+          addCopyButton({
+            toggle: 3000
+          }),
+          {
+            name: 'add-file-type',
+            pre(node) {
+              const match =
+                this.options.meta?.__raw?.match(/fileType="([^"]+)"/);
 
-      code.children = highlightedTree.children as typeof code.children;
-      code.properties = {
-        ...code.properties,
-        className: ['language-' + language]
-      };
+              if (match) {
+                node.properties ??= {};
+                node.properties['data-title'] = match[1];
+              }
+            }
+          }
+        ]
+      });
+
+      const highlightedTree = fromHtml(highlightedHtml, { fragment: true });
+      const newPre = highlightedTree.children?.[0];
+
+      if (newPre && newPre.type === 'element') {
+        pre.tagName = newPre.tagName;
+        pre.properties = newPre.properties;
+        pre.children = newPre.children;
+      }
     } catch {
       // noop
     }
-  });
+  }
 
   return toHtml(tree);
 }

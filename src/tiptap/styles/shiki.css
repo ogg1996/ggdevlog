@@ -1,0 +1,101 @@
+.tiptap pre.shiki {
+  position: relative;
+  margin: 1rem 0;
+  padding: 3rem 0.75rem 0.75rem;
+  background-color: #1e2939 !important;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+}
+
+.tiptap pre.shiki[data-title]::before {
+  font-family: 'pretendard';
+  content: attr(data-title);
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  line-height: 1;
+}
+
+.shiki .line {
+  display: inline-block;
+  width: 100%;
+}
+
+.shiki .line.diff.add {
+  background-color: rgba(16, 185, 129, 0.16);
+}
+
+.shiki .line.diff.remove {
+  background-color: rgba(239, 68, 68, 0.16);
+}
+
+.shiki .line.focused {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+code {
+  counter-reset: step;
+  counter-increment: step 0;
+}
+
+.shiki code .line::before {
+  content: counter(step);
+  counter-increment: step;
+  width: 1.5rem;
+  margin-right: 1rem;
+  display: inline-block;
+  text-align: right;
+  color: rgba(115, 138, 148, 0.4);
+}
+
+pre:has(code) {
+  position: relative;
+}
+
+pre button.copy {
+  user-select: none;
+  cursor: pointer;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  height: 2rem;
+  width: 2rem;
+  padding: 0.25rem;
+  display: flex;
+  border-radius: 0.25rem;
+  overflow: visible;
+
+  & span {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  & .ready {
+    background-image: url('/copy.svg');
+  }
+
+  & .success {
+    display: none;
+    background-image: url('/check.svg');
+  }
+
+  &.copied {
+    & .success {
+      display: block;
+    }
+
+    & .ready {
+      display: none;
+    }
+  }
+}
+
+pre button.copy:hover {
+  background-color: #45556c;
+}
