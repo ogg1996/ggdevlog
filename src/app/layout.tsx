@@ -37,6 +37,7 @@ export default function RootLayout({
     <html
       lang="ko"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={cn('font-sans', geist.variable)}
     >
       <body
