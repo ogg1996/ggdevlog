@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import '@/tiptap/styles/tiptap.css';
 
-import TiptapViewer from '@/tiptap/components/tiptap-viewer';
-import { JSONContent } from '@tiptap/react';
+import { tiptapConfig } from '@/tiptap/config';
+import { generateHTML, JSONContent } from '@tiptap/react';
 import clsx from 'clsx';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   content: JSONContent;
@@ -13,6 +14,8 @@ interface Props {
 export default function IntroduceViewer({ content }: Props) {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const html = generateHTML(content, tiptapConfig.extensions);
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -33,7 +36,10 @@ export default function IntroduceViewer({ content }: Props) {
         className="relative overflow-y-hidden transition-all duration-200"
         style={{ maxHeight: '400px' }}
       >
-        <TiptapViewer content={content} />
+        <div
+          className="tiptap prose max-w-none select-text focus:outline-none"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
         {!open && (
           <div
             className={clsx(

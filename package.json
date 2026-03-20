@@ -35,6 +35,7 @@
     "react-dom": "19.1.0",
     "shadcn": "^4.0.2",
     "shiki": "^3.23.0",
+    "shiki-transformer-copy-button": "^0.0.6",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.5.0",
     "tailwind-scrollbar-hide": "^4.0.0",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@rudeigerc/shiki-transformer-title": "^0.2.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/prismjs": "^1.26.6",
