@@ -45,7 +45,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@rudeigerc/shiki-transformer-title": "^0.2.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/prismjs": "^1.26.6",
