@@ -1,15 +1,21 @@
 'use client';
 
 import scrollToTop from '@/utils/scroll-to-top';
-import { MoveUp } from 'lucide-react';
+import clsx from 'clsx';
+import { ChevronUp } from 'lucide-react';
 
 export default function TopButton() {
   return (
     <button
-      className="fixed right-3 bottom-3 flex h-10 w-10 cursor-pointer items-center justify-center rounded-sm border-2 border-[#0099ff]"
+      className={clsx(
+        'fixed right-3 bottom-3 h-10 w-10 cursor-pointer',
+        'flex items-center justify-center',
+        'rounded-sm bg-white dark:bg-slate-900',
+        'hover:bg-gray-300 dark:hover:bg-slate-700'
+      )}
       onClick={() => scrollToTop('smooth')}
     >
-      <MoveUp size={28} color="#0099ff" />
+      <ChevronUp size={28} color="#0099ff" />
     </button>
   );
 }
