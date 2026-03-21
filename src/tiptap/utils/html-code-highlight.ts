@@ -8,9 +8,10 @@ import { addCopyButton } from 'shiki-transformer-copy-button';
 import { fromHtml } from 'hast-util-from-html';
 import { selectAll } from 'hast-util-select';
 import { toHtml } from 'hast-util-to-html';
+import { toString } from 'hast-util-to-string';
 import { codeToHtml } from 'shiki';
 
-import type { Element, Text } from 'hast';
+import type { Element } from 'hast';
 
 export async function htmlCodeHighlight(html: string): Promise<string> {
   const tree = fromHtml(html, { fragment: true });
@@ -32,17 +33,28 @@ export async function htmlCodeHighlight(html: string): Promise<string> {
       ) ?? 'language-tsx';
 
     const language = languageClass.replace('language-', '');
-    const text =
-      code.children
-        ?.filter((child): child is Text => child.type === 'text')
-        .map(child => child.value ?? '')
-        .join('') ?? '';
+
+    const text = toString(code);
+
+    const lines = text.split('\n');
+    const headerLine = lines[0]?.trim();
+
+    const headerMatch = headerLine?.match(/^\/\/\s*\[([^\]]+)\]$/);
+
+    let fileName: string = '';
+    let codeText: string = '';
+
+    if (headerMatch) {
+      fileName = headerMatch[1];
+      codeText = lines.slice(1).join('\n');
+    } else {
+      codeText = text;
+    }
 
     try {
-      const highlightedHtml = await codeToHtml(text, {
+      const highlightedHtml = await codeToHtml(codeText, {
         lang: language,
         theme: 'dark-plus',
-        meta: { __raw: `fileType="${language.toUpperCase()}"` },
         transformers: [
           transformerNotationDiff(),
           transformerNotationFocus(),
@@ -51,22 +63,20 @@ export async function htmlCodeHighlight(html: string): Promise<string> {
             toggle: 3000
           }),
           {
-            name: 'add-file-type',
+            name: 'add-header',
             pre(node) {
-              const match =
-                this.options.meta?.__raw?.match(/fileType="([^"]+)"/);
-
-              if (match) {
-                node.properties ??= {};
-                node.properties['data-title'] = match[1];
-              }
+              if (fileName) node.properties['data-file-name'] = fileName;
+              node.properties['data-language'] = language;
             }
           }
         ]
       });
 
       const highlightedTree = fromHtml(highlightedHtml, { fragment: true });
-      const newPre = highlightedTree.children?.[0];
+      const newPre = highlightedTree.children.find(
+        (child): child is Element =>
+          child.type === 'element' && child.tagName === 'pre'
+      );
 
       if (newPre && newPre.type === 'element') {
         pre.tagName = newPre.tagName;
