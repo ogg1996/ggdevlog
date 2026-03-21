@@ -7,41 +7,58 @@
   overflow-x: auto;
 }
 
-.tiptap pre.shiki[data-title]::before {
+pre.shiki[data-file-name]::before {
   font-family: 'pretendard';
-  content: attr(data-title);
+  content: attr(data-file-name);
   position: absolute;
   top: 1rem;
   left: 1rem;
   font-size: 1rem;
   font-weight: 600;
-  color: white;
+  color: #ffffffaa;
   line-height: 1;
 }
 
-.shiki .line {
+pre.shiki[data-language]::after {
+  display: block;
+  font-family: 'pretendard';
+  content: attr(data-language);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffffaa;
+  line-height: 1;
+}
+
+pre.shiki[data-language]:hover::after {
+  display: none;
+}
+
+pre.shiki .line {
   display: inline-block;
   width: 100%;
 }
 
-.shiki .line.diff.add {
+pre.shiki .line.diff.add {
   background-color: rgba(16, 185, 129, 0.16);
 }
 
-.shiki .line.diff.remove {
+pre.shiki .line.diff.remove {
   background-color: rgba(239, 68, 68, 0.16);
 }
 
-.shiki .line.focused {
+pre.shiki .line.focused {
   background-color: rgba(255, 255, 255, 0.06);
 }
 
-code {
+pre.shiki code {
   counter-reset: step;
   counter-increment: step 0;
 }
 
-.shiki code .line::before {
+pre.shiki code .line::before {
   content: counter(step);
   counter-increment: step;
   width: 1.5rem;
@@ -51,11 +68,12 @@ code {
   color: rgba(115, 138, 148, 0.4);
 }
 
-pre:has(code) {
+pre.shiki:has(code) {
   position: relative;
 }
 
-pre button.copy {
+pre.shiki button.copy {
+  display: none;
   user-select: none;
   cursor: pointer;
   position: absolute;
@@ -64,38 +82,39 @@ pre button.copy {
   height: 2rem;
   width: 2rem;
   padding: 0.25rem;
-  display: flex;
   border-radius: 0.25rem;
   overflow: visible;
-
-  & span {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-  }
-
-  & .ready {
-    background-image: url('/copy.svg');
-  }
-
-  & .success {
-    display: none;
-    background-image: url('/check.svg');
-  }
-
-  &.copied {
-    & .success {
-      display: block;
-    }
-
-    & .ready {
-      display: none;
-    }
-  }
 }
 
-pre button.copy:hover {
+pre.shiki button.copy:hover {
   background-color: #45556c;
+}
+
+pre.shiki:hover button.copy {
+  display: flex;
+}
+
+pre.shiki button.copy span {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+pre.shiki button.copy .ready {
+  background-image: url('/copy.svg');
+}
+
+pre.shiki button.copy .success {
+  display: none;
+  background-image: url('/check.svg');
+}
+
+pre.shiki button.copy.copied .success {
+  display: block;
+}
+
+pre.shiki button.copy.copied .ready {
+  display: none;
 }
