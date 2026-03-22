@@ -39,7 +39,7 @@ export async function htmlCodeHighlight(html: string): Promise<string> {
     const lines = text.split('\n');
     const headerLine = lines[0]?.trim();
 
-    const headerMatch = headerLine?.match(/^\/\/\s*\[([^\]]+)\]$/);
+    const headerMatch = headerLine?.match(/^\/\/\s*'([^']+)'$/);
 
     let fileName: string = '';
     let codeText: string = '';
